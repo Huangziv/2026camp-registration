@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 科技夏令營報名系統</title>
-    <!-- 引入高品質字體 -->
+    <!-- 引入高品質科技感字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -93,7 +93,8 @@
         }
         .notice-text { font-size: 0.95em; color: #ced6e0; text-align: center; margin-bottom: 12px; }
         .scam-warning { color: var(--error); font-weight: bold; font-size: 0.9em; border-top: 1px solid rgba(255, 71, 87, 0.3); padding-top: 15px; margin-top: 15px; line-height: 1.6; text-align: center; }
-        .camp-time { display: flex; justify-content: center; gap: 30px; margin-top: 20px; color: var(--primary); font-weight: bold; font-size: 1.1em; font-family: 'Orbitron', sans-serif; }
+        .location-info { text-align: center; color: var(--primary); font-weight: bold; margin-top: 15px; font-size: 1.1em; }
+        .camp-time { display: flex; justify-content: center; gap: 30px; margin-top: 10px; color: var(--primary); font-weight: bold; font-size: 1.1em; font-family: 'Orbitron', sans-serif; }
 
         /* 課程亮點 */
         .course-grid {
@@ -133,7 +134,6 @@
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* 科技感資訊框 */
         input, select, textarea {
             width: 100%; padding: 16px;
             background: var(--input-bg) !important;
@@ -168,8 +168,7 @@
             background: rgba(0, 229, 255, 0.05);
             border-radius: 16px;
             border: 1px solid rgba(0, 229, 255, 0.2);
-            padding: 20px;
-            margin-top: 15px;
+            padding: 20px; margin-top: 15px;
         }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -185,79 +184,79 @@
             transform: scale(1.01) translateY(-2px);
             box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
         }
-        .submit-btn:disabled { background: #334155; opacity: 0.6; cursor: not-allowed; }
 
-        /* ✅ 自定義彈窗樣式 (Modal) */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             display: none; justify-content: center; align-items: center;
-            z-index: 9999;
+            z-index: 10000;
         }
         .modal-content {
-            background: var(--bg-dark);
+            background: #0e1a3a;
             border: 2px solid var(--primary);
             border-radius: 24px;
             padding: 40px;
-            max-width: 450px;
-            width: 90%;
+            max-width: 400px;
+            width: 85%;
             text-align: center;
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
-            animation: modal-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.6);
+            animation: modal-zoom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes modal-pop {
-            from { transform: scale(0.8); opacity: 0; }
+        @keyframes modal-zoom {
+            from { transform: scale(0.7); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
         .modal-icon { font-size: 4em; margin-bottom: 20px; display: block; }
         .modal-title { font-size: 1.8em; color: var(--primary); font-weight: bold; margin-bottom: 15px; }
-        .modal-text { color: #ced6e0; margin-bottom: 30px; font-size: 1.1em; }
-        .modal-btn {
+        .modal-text { color: #b0b8c1; margin-bottom: 30px; }
+        .modal-close-btn {
             background: var(--primary); color: #050a18;
-            padding: 15px 40px; border: none; border-radius: 12px;
-            font-weight: bold; cursor: pointer; transition: 0.3s;
+            padding: 12px 40px; border: none; border-radius: 12px;
+            font-weight: 800; cursor: pointer; transition: 0.3s;
         }
-        .modal-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--primary); }
+        .modal-close-btn:hover { box-shadow: 0 0 20px var(--primary); transform: scale(1.05); }
 
         @media (max-width: 650px) {
-            .container { padding: 30px 20px; }
+            .container { padding: 30px 20px; margin: 20px 10px; }
             .flex-row, .grid-2 { flex-direction: column; grid-template-columns: 1fr; gap: 15px; }
             h2 { font-size: 1.8em; }
             .course-grid { grid-template-columns: 1fr; }
+            .camp-time { flex-direction: column; align-items: center; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 報名結果彈窗 -->
 <div class="modal-overlay" id="resultModal">
     <div class="modal-content">
-        <span class="modal-icon">🚀</span>
-        <div class="modal-title" id="modalTitle">報名提交成功</div>
-        <div class="modal-text" id="modalText">感謝您的參與！資料已寫入雲端系統。</div>
-        <button class="modal-btn" onclick="closeModal()">確認</button>
+        <span class="modal-icon" id="modalIcon">✅</span>
+        <div class="modal-title" id="modalTitle">提交成功</div>
+        <div class="modal-text" id="modalText">感謝報名！確認信已發送。</div>
+        <button class="modal-close-btn" onclick="closeModal()">確認</button>
     </div>
 </div>
 
 <div class="container">
     <div class="banner-container">
-        <img src="banner.jpg" alt="[2026 夏令營科技橫幅]" class="banner-img" onerror="this.style.display='none'">
+        <img src="banner.jpg" alt="[2026 夏令營橫幅]" class="banner-img" onerror="this.style.display='none'">
     </div>
 
     <h2>2026 FUTURE LIGHT</h2>
 
     <div class="fanpage-box">
-        🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>
-        活動消息與最新動態都將在此同步發佈！
+        🚀 <b>追蹤「三重慈少」粉絲專頁</b><br>
+        活動照片與最新動態都將在此同步發佈！
     </div>
     
     <div class="official-notice">
-        <div class="notice-text">本資料僅提供 2026 年慈濟三重園區 未來之光：探索&科技營報名使用</div>
+        <div class="notice-text">本資料僅供 2026 年慈濟三重園區 未來之光：探索&科技營報名使用</div>
         <div class="scam-warning">
             🛡️ <b>安全性警示</b><br>
-            營隊不會更改付款方式或要求 ATM 操作！撥 165 或聯繫我們：(02)2981-0310
+            營隊不會要求 ATM 操作！撥 165 或聯繫我們：(02)2981-0310
         </div>
+        <!-- ✅ 依照要求：新增地點標示在時間上方 -->
+        <div class="location-info">📍 活動地點：慈濟三重園區 (新北市三重區中正北路472號)</div>
         <div class="camp-time">
             <span>📅 7/17 (五) 07:30 - 17:00</span>
             <span>📅 7/18 (六) 07:30 - 20:15</span>
@@ -268,27 +267,27 @@
         <div class="course-card">
             <span class="course-icon">🚀</span>
             <span class="course-name">創客科技探索</span>
-            <span class="course-detail">探索 AI 與未來趨勢，啟發學員創造力。</span>
+            <span class="course-detail">探索 AI 與未來創客趨勢，啟發學員無限創造力。</span>
         </div>
         <div class="course-card">
             <span class="course-icon">🌿</span>
             <span class="course-name">戶外探索體驗</span>
-            <span class="course-detail">走進自然，學習互助並突破挑戰。</span>
+            <span class="course-detail">走進大自然，學習互助合作並勇敢突破個人極限。</span>
         </div>
         <div class="course-card">
             <span class="course-icon">📖</span>
             <span class="course-name">心靈靜思語</span>
-            <span class="course-detail">在靜心中體悟智慧，建立正確價值觀。</span>
+            <span class="course-detail">教聯會導師群帶領，在靜心中體悟正向價值觀。</span>
         </div>
         <div class="course-card">
             <span class="course-icon">⚖️</span>
             <span class="course-name">法律與防毒</span>
-            <span class="course-detail">提升法規意識，教育學員拒絕誘惑。</span>
+            <span class="course-detail">律師專業講座，建立學員正確法規意識。</span>
         </div>
         <div class="course-card starry-night">
             <span class="course-icon">🌟</span>
             <span class="course-name">星光人文之夜</span>
-            <span style="display:block; text-align:center; font-size:0.95em; color:#ced6e0;">震撼演藝、音樂輔療與親子共樂。</span>
+            <span style="display:block; text-align:center; font-size:0.95em; color:#ced6e0;">包含舞龍演繹、音樂輔療及親子共樂競賽。</span>
         </div>
     </div>
 
@@ -304,7 +303,7 @@
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="msa.hinet.net">msa.hinet.net</option>
                     <option value="icloud.com">icloud.com</option>
-                    <option value="custom">其他</option>
+                    <option value="custom">其他手動輸入</option>
                 </select>
             </div>
             <input type="text" id="customEmailDomain" placeholder="例如: abc.com" style="display:none; margin-top:12px;">
@@ -317,15 +316,11 @@
         <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
         <div class="form-group">
             <label>學員性別<span class="required">*</span></label>
-            <select name="gender" required>
-                <option value="" disabled selected>請選擇</option>
-                <option value="男">男</option>
-                <option value="女">女</option>
-            </select>
+            <select name="gender" required><option value="" disabled selected>請選擇</option><option value="男">男</option><option value="女">女</option></select>
         </div>
-        <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例如：三重國小"></div>
+        <div class="form-group"><label>就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例如：三重國小"></div>
         <div class="form-group">
-            <label>暑假過後就讀幾年級<span class="required">*</span></label>
+            <label>暑假過後年級<span class="required">*</span></label>
             <select name="grade" required>
                 <option value="" disabled selected>請選擇</option>
                 <optgroup label="國小"><option value="一年級">國小一年級</option><option value="二年級">國小二年級</option><option value="三年級">國小三年級</option><option value="四年級">國小四年級</option><option value="五年級">國小五年級</option><option value="六年級">國小六年級</option></optgroup>
@@ -335,7 +330,7 @@
 
         <div class="form-group">
             <label>學員身分證字號 (辦理平安保險使用)<span class="required">*</span></label>
-            <input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="格式：A123456789" style="text-transform: uppercase;">
+            <input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="首位大寫字母+九位數字" style="text-transform: uppercase;">
         </div>
         
         <div class="form-group">
@@ -350,42 +345,35 @@
         <div class="form-group"><label>學員健康狀況<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="無則填無"></textarea></div>
         <div class="form-group">
             <label>報名次數</label>
-            <select name="frequency">
-                <option value="" disabled selected>請選擇</option>
-                <option value="第一次">第一次</option><option value="第二次">第二次</option><option value="第三次">第三次</option>
-            </select>
+            <select name="frequency"><option value="" disabled selected>請選擇</option><option value="第一次">第一次</option><option value="第二次">第二次</option><option value="第三次">第三次</option></select>
         </div>
 
         <h3>二、 家長聯繫與地址</h3>
         <div class="form-group"><label>家長姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
         <div class="form-group">
-            <label>與學員關係<span class="required">*</span></label>
-            <select name="relationship" required>
-                <option value="" disabled selected>請選擇</option>
-                <option value="父">父</option><option value="母">母</option><option value="祖父母">祖父母</option><option value="其他">其他</option>
-            </select>
+            <label>關係<span class="required">*</span></label>
+            <select name="relationship" required><option value="" disabled selected>請選擇</option><option value="父">父</option><option value="母">母</option><option value="祖父母">祖父母</option><option value="其他">其他</option></select>
         </div>
-        <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" id="telInput" name="tel" placeholder="例: 02-2981-0310"></div>
-        <div class="form-group"><label>緊急連絡手機<span class="required">*</span></label><input type="tel" id="mobileInput" name="mobile" required placeholder="例: 0912-345-678"></div>
+        <div class="form-group"><label>市話</label><input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX"></div>
+        <div class="form-group"><label>緊急手機<span class="required">*</span></label><input type="tel" id="mobileInput" name="mobile" required placeholder="09XX-XXX-XXX"></div>
         
         <div class="form-group">
-            <label>聯絡地址<span class="required">*</span></label>
+            <label>地址<span class="required">*</span></label>
             <div class="flex-row" style="margin-bottom: 12px;">
                 <select id="citySelect" required><option value="" disabled selected>縣市</option></select>
                 <select id="districtSelect" required><option value="" disabled selected>區域</option></select>
             </div>
-            <input type="text" id="addressDetail" placeholder="街道門牌" required>
+            <input type="text" id="addressDetail" placeholder="街道巷弄" required>
             <input type="hidden" name="address" id="finalAddress">
         </div>
 
         <h3>三、 推薦來源與繳費</h3>
         <div class="form-group">
-            <label>推薦報名來源 (可複選)<span class="required">*</span></label>
+            <label>推薦來源 (可複選)<span class="required">*</span></label>
             <div class="checkbox-group" id="referralGroup">
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="慈誠">慈誠</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="榮董">榮董</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook">FB</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="Line">Line</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="其他">其他</label>
@@ -393,7 +381,7 @@
         </div>
 
         <div class="bank-info">
-            <strong>💎 繳費資訊：一銀泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499</strong>
+            <strong>💎 繳費：一銀泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499</strong>
         </div>
 
         <div class="form-group">
@@ -407,20 +395,11 @@
         </div>
         
         <div id="bankDetailFields" class="sub-field-box" style="display:none;">
-            <div class="form-group">
-                <label>轉帳帳號末五碼<span class="required">*</span></label>
-                <input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="5位數字">
-            </div>
+            <div class="form-group"><label>末五碼<span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5"></div>
             <label>轉帳日期時間<span class="required">*</span></label>
             <div class="grid-2">
-                <div class="flex-row">
-                    <select id="transMonth"><option value="" disabled selected>月</option></select>
-                    <select id="transDay"><option value="" disabled selected>日</option></select>
-                </div>
-                <div class="flex-row">
-                    <select id="transHour"><option value="" disabled selected>時</option></select>
-                    <select id="transMin"><option value="" disabled selected>分</option></select>
-                </div>
+                <div class="flex-row"><select id="transMonth"><option value="" disabled selected>月</option></select><select id="transDay"><option value="" disabled selected>日</option></select></div>
+                <div class="flex-row"><select id="transHour"><option value="" disabled selected>時</option></select><select id="transMin"><option value="" disabled selected>分</option></select></div>
             </div>
             <input type="hidden" name="bankDateTime" id="finalBankDateTime">
         </div>
@@ -432,11 +411,8 @@
             </div>
         </div>
 
-        <div id="otherPaymentBlock" style="display:none; margin-top: 15px;">
-            <label>繳費詳情<span class="required">*</span></label><input type="text" id="otherPaymentDetail" name="otherPaymentDetail">
-        </div>
-        
-        <div class="form-group" style="margin-top: 30px;"><label>備註事項</label><textarea name="remark" rows="2"></textarea></div>
+        <div id="otherPaymentBlock" style="display:none; margin-top: 15px;"><label>詳情<span class="required">*</span></label><input type="text" id="otherPaymentDetail" name="otherPaymentDetail"></div>
+        <div class="form-group" style="margin-top: 30px;"><label>備註</label><textarea name="remark" rows="2"></textarea></div>
 
         <button type="submit" id="submitBtn" class="submit-btn">立即傳送報名資料</button>
     </form>
@@ -457,7 +433,7 @@
         return sum % 10 === 0;
     }
 
-    const taiwanDistricts = { "新北市": ["板橋區", "三重區", "新莊區", "中和區", "永和區", "新店區", "土城區", "蘆洲區", "樹林區", "汐止區", "三峽區", "淡水區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區", "瑞芳區", "鶯歌區"], "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"] };
+    const taiwanDistricts = { "新北市": ["板橋區", "三重區", "新莊區", "中和區", "永和區", "新店區", "土城區", "蘆洲區", "樹林區", "汐止區", "三峽區", "淡水區", "五股區", "泰山區", "林口區", "瑞芳區", "鶯歌區"], "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"] };
 
     (function init() {
         const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
@@ -519,6 +495,8 @@
         document.getElementById('otherPaymentBlock').style.display = (this.value === '其他') ? 'block' : 'none';
 
         document.getElementById('bankLast5').required = (this.value === '轉帳繳費');
+        document.getElementById('transMonth').required = (this.value === '轉帳繳費');
+        document.getElementById('transDay').required = (this.value === '轉帳繳費');
         document.getElementById('referralName').required = (this.value === '轉交介紹人');
         document.getElementById('referralPhone').required = (this.value === '轉交介紹人');
     };
@@ -526,36 +504,27 @@
     function showModal(title, text, icon) {
         document.getElementById('modalTitle').innerText = title;
         document.getElementById('modalText').innerText = text;
-        document.querySelector('.modal-icon').innerText = icon;
+        document.getElementById('modalIcon').innerText = icon;
         document.getElementById('resultModal').style.display = 'flex';
     }
 
-    function closeModal() {
-        document.getElementById('resultModal').style.display = 'none';
-    }
+    function closeModal() { document.getElementById('resultModal').style.display = 'none'; }
 
     document.getElementById('enrollmentForm').onsubmit = async function(e) {
         e.preventDefault();
-        
         const idVal = document.getElementById('idInput').value;
-        if (!validateTaiwanID(idVal)) {
-            showModal('校驗失敗', '身分證字號格式錯誤，請重新確認。', '❌');
-            return;
-        }
+        if (!validateTaiwanID(idVal)) { showModal('校驗失敗', '身分證字號格式錯誤。', '❌'); return; }
 
         const refs = []; 
         document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
-        if(refs.length === 0) {
-            showModal('填寫未完成', '請勾選推薦來源。', '⚠️');
-            return;
-        }
+        if(refs.length === 0) { showModal('提醒', '請勾選推薦來源。', '⚠️'); return; }
 
         const btn = document.getElementById('submitBtn');
-        btn.disabled = true; btn.innerText = '正在傳輸中...';
+        btn.disabled = true; btn.innerText = '傳輸中...';
 
         let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
-        document.getElementById('finalBirthday').value = document.getElementById('birthYear').value + "/" + document.getElementById('birthMonth').value + "/" + document.getElementById('birthDay').value;
+        document.getElementById('finalBirthday').value = (document.getElementById('birthYear').value - 1911) + "/" + document.getElementById('birthMonth').value + "/" + document.getElementById('birthDay').value;
         document.getElementById('finalAddress').value = document.getElementById('citySelect').value + document.getElementById('districtSelect').value + document.getElementById('addressDetail').value;
         
         if(document.getElementById('paymentMethodSelect').value === '轉帳繳費') {
@@ -568,17 +537,17 @@
 
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
-            if(await res.text() === 'Success') {
-                showModal('報名提交成功', '感謝您的參與！確認信已發送至您的信箱。', '✅');
+            const result = await res.text();
+            if(result === 'Success') {
+                showModal('報名提交成功', '感謝您的參與！資料已寫入系統，請查收確認信。', '✅');
                 this.reset(); window.scrollTo({ top: 0, behavior: 'smooth' });
                 document.getElementById('bankDetailFields').style.display = 'none';
                 document.getElementById('referralDetailFields').style.display = 'none';
+            } else {
+                showModal('提交失敗', '後台錯誤，請聯繫營隊。', '❌');
             }
-        } catch (error) { 
-            showModal('提交失敗', '通訊異常，請檢查網路連線。', '❌');
-        } finally {
-            btn.disabled = false; btn.innerText = '立即傳送報名資料';
-        }
+        } catch (error) { showModal('網路異常', '連線失敗，請檢查網路。', '📡'); } 
+        finally { btn.disabled = false; btn.innerText = '立即傳送報名資料'; }
     };
 </script>
 </body>
