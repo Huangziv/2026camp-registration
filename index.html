@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 科技夏令營報名系統</title>
-    <!-- 引入高品質科技感字體 -->
+    <!-- 引入高品質字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00e5ff;
             --secondary: #007cf0;
             --bg-dark: #050a18;
-            --glass: rgba(16, 26, 53, 0.9);
+            --glass: rgba(11, 20, 45, 0.9);
             --input-bg: rgba(255, 255, 255, 0.08);
             --accent: #ff9f43;
             --success: #00f2fe;
             --error: #ff4757;
-            --neon-glow: 0 0 15px rgba(0, 229, 255, 0.4);
+            --neon-glow: 0 0 20px rgba(0, 229, 255, 0.4);
         }
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background: radial-gradient(circle at center, #101a35 0%, #050a18 100%);
+            background: radial-gradient(circle at center, #0e1a3a 0%, #050a18 100%);
             background-attachment: fixed;
             color: #e0e6ed;
             margin: 0; padding: 0;
@@ -29,14 +29,14 @@
             line-height: 1.6;
         }
 
-        /* 科技網格背景 */
+        /* 數位網格背景 */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-size: 50px 50px;
             z-index: -1;
         }
 
@@ -44,17 +44,17 @@
             max-width: 850px;
             margin: 40px auto;
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             padding: 40px;
-            border-radius: 24px;
+            border-radius: 28px;
             border: 1px solid rgba(0, 229, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 229, 255, 0.05);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(0, 229, 255, 0.05);
         }
 
-        .banner-container { width: 100%; margin-bottom: 30px; text-align: center; }
+        .banner-container { width: 100%; margin-bottom: 35px; text-align: center; }
         .banner-img {
-            width: 100%; border-radius: 16px;
+            width: 100%; border-radius: 20px;
             box-shadow: var(--neon-glow);
             border: 1px solid var(--primary);
             display: block;
@@ -63,39 +63,40 @@
         h2 {
             font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
             text-align: center; color: var(--primary);
-            font-size: 2.2em; letter-spacing: 3px;
+            font-size: 2.3em; letter-spacing: 4px;
             margin: 20px 0 10px;
-            text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.7);
         }
 
-        /* 公告與追蹤區塊 */
-        .official-notice {
-            background: rgba(0, 229, 255, 0.05);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 229, 255, 0.2);
-        }
+        /* 追蹤區塊 */
         .fanpage-box {
             background: linear-gradient(90deg, rgba(0, 124, 240, 0.2), rgba(0, 229, 255, 0.1));
             border: 1px solid var(--primary);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 14px;
+            padding: 18px;
             text-align: center;
-            margin-bottom: 25px;
-            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+            box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.2);
+            animation: pulse-glow 2.5s infinite;
         }
-        @keyframes pulse {
+        @keyframes pulse-glow {
             0% { box-shadow: 0 0 5px rgba(0, 229, 255, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(0, 229, 255, 0.6); }
             100% { box-shadow: 0 0 5px rgba(0, 229, 255, 0.3); }
         }
 
-        .notice-text { font-size: 0.95em; color: #ced6e0; text-align: center; margin-bottom: 10px; }
+        .official-notice {
+            background: rgba(0, 229, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 229, 255, 0.15);
+        }
+        .notice-text { font-size: 0.95em; color: #ced6e0; text-align: center; margin-bottom: 12px; }
         .scam-warning { color: var(--error); font-weight: bold; font-size: 0.9em; border-top: 1px solid rgba(255, 71, 87, 0.3); padding-top: 15px; margin-top: 15px; line-height: 1.6; text-align: center; }
-        .camp-time { display: flex; justify-content: center; gap: 30px; margin-top: 15px; color: var(--primary); font-weight: bold; font-size: 1.1em; font-family: 'Orbitron', sans-serif; }
+        .camp-time { display: flex; justify-content: center; gap: 30px; margin-top: 20px; color: var(--primary); font-weight: bold; font-size: 1.1em; font-family: 'Orbitron', sans-serif; }
 
-        /* 課程亮點卡片 */
+        /* 創客亮點卡片 */
         .course-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -103,58 +104,59 @@
             margin-bottom: 40px;
         }
         .course-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             padding: 25px; border-radius: 20px;
-            text-align: center; border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center; border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.4s ease;
         }
         .course-card:hover {
             transform: translateY(-10px);
             border-color: var(--primary);
-            background: rgba(0, 229, 255, 0.08);
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+            background: rgba(0, 229, 255, 0.06);
+            box-shadow: 0 15px 35px rgba(0, 229, 255, 0.2);
         }
         .course-icon { font-size: 3em; margin-bottom: 15px; display: block; filter: drop-shadow(0 0 10px var(--primary)); }
         .course-name { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-bottom: 10px; display: block; }
         .course-detail { font-size: 0.85em; color: #b0b8c1; text-align: left; }
         
-        .starry-night { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1)); border-color: var(--accent); }
+        .starry-night { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 159, 67, 0.08), rgba(0, 229, 255, 0.08)); border-color: var(--accent); }
 
         h3 {
             border-left: 8px solid var(--primary);
-            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent);
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.1), transparent);
             padding: 15px 20px;
             margin: 50px 0 25px;
             color: var(--primary);
             border-radius: 0 12px 12px 0;
             font-size: 1.4em;
+            letter-spacing: 1px;
         }
 
         .form-group { margin-bottom: 30px; }
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* ✅ 資訊填入框視覺優化：科技深色感 */
+        /* 科技感填寫框：深色背底、白色文字、霓虹外框 */
         input, select, textarea {
             width: 100%; padding: 16px;
             background: var(--input-bg) !important;
             color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        input::placeholder { color: rgba(255, 255, 255, 0.4); }
+        input::placeholder { color: rgba(255, 255, 255, 0.3); }
         input:focus, select:focus, textarea:focus {
             border-color: var(--primary);
-            background: rgba(0, 229, 255, 0.1) !important;
+            background: rgba(0, 229, 255, 0.08) !important;
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
             outline: none;
+            transform: scale(1.005);
         }
         
-        /* 修正下拉選單在深色下的樣式 */
-        select option { background: #1a2642; color: white; }
+        select option { background: #0e1a3a; color: white; }
 
         select {
             cursor: pointer; -webkit-appearance: none; appearance: none;
@@ -172,10 +174,11 @@
 
         .checkbox-group {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px; padding: 25px; background: rgba(255, 255, 255, 0.05);
+            gap: 15px; padding: 25px; background: rgba(255, 255, 255, 0.03);
             border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .checkbox-item { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 0.95em; }
+        .checkbox-item { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 0.95em; transition: 0.2s; }
+        .checkbox-item:hover { color: var(--primary); }
         input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--primary); cursor: pointer; }
 
         .bank-info {
@@ -184,6 +187,18 @@
             padding: 25px; border-radius: 16px;
             color: var(--primary);
             font-size: 1.1em; margin-bottom: 40px;
+            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.1);
+        }
+
+        .payment-sub-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+            padding: 20px;
+            background: rgba(0, 229, 255, 0.05);
+            border-radius: 14px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
         }
 
         .status-msg { display: none; padding: 20px; border-radius: 12px; margin: 30px 0; text-align: center; font-weight: bold; }
@@ -192,21 +207,21 @@
 
         .submit-btn {
             background: linear-gradient(45deg, var(--secondary), var(--primary));
-            color: #050a18; padding: 20px; border: none; border-radius: 16px;
-            cursor: pointer; width: 100%; font-size: 1.4em; font-weight: bold;
+            color: #050a18; padding: 22px; border: none; border-radius: 16px;
+            cursor: pointer; width: 100%; font-size: 1.4em; font-weight: 800;
             transition: all 0.4s; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
             margin-top: 30px; letter-spacing: 2px;
         }
         .submit-btn:hover:not(:disabled) {
             transform: scale(1.01) translateY(-2px);
-            box-shadow: 0 0 35px rgba(0, 229, 255, 0.6);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
             filter: brightness(1.1);
         }
         .submit-btn:disabled { background: #334155; opacity: 0.6; cursor: not-allowed; }
 
         @media (max-width: 650px) {
             .container { padding: 30px 20px; margin: 20px 10px; }
-            .flex-row { flex-direction: column; gap: 20px; }
+            .flex-row, .payment-sub-fields { grid-template-columns: 1fr; flex-direction: column; gap: 15px; }
             h2 { font-size: 1.8em; }
             .course-grid { grid-template-columns: 1fr; }
             .camp-time { flex-direction: column; align-items: center; gap: 8px; }
@@ -217,15 +232,16 @@
 
 <div class="container">
     <div class="banner-container">
+        <!-- 圖片橫幅 -->
         <img src="banner.jpg" alt="[2026 夏令營科技橫幅]" class="banner-img" onerror="this.style.display='none'">
     </div>
 
     <h2>2026 未來之光：探索&科技營</h2>
 
-    <!-- 追蹤提醒區塊 -->
+    <!-- 追蹤區塊 -->
     <div class="fanpage-box">
         🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>
-        活動最新消息、營隊照片都將在專頁同步更新！
+        營隊最新消息、活動照片都將在此同步發佈！
     </div>
     
     <div class="official-notice">
@@ -288,7 +304,7 @@
             <input type="hidden" name="email" id="finalEmail">
         </div>
 
-        <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請輸入填表人真實全名"></div>
+        <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請輸入填表人姓名"></div>
 
         <h3>一、 學員基本資料</h3>
         <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
@@ -318,7 +334,7 @@
 
         <div class="form-group">
             <label>學員身分證字號 (辦理平安保險使用)<span class="required">*</span></label>
-            <input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="格式：A123456789" style="text-transform: uppercase;">
+            <input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="首位大寫字母+九位數字" style="text-transform: uppercase;">
         </div>
         
         <div class="form-group">
@@ -330,7 +346,7 @@
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
-        <div class="form-group"><label>學員健康狀況 (無則填「無」)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="藥物過敏、特殊病史..."></textarea></div>
+        <div class="form-group"><label>學員健康狀況 (無則填「無」)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="藥物過敏、病史..."></textarea></div>
         <div class="form-group">
             <label>報名次數</label>
             <select name="frequency">
@@ -360,8 +376,8 @@
         <div class="form-group">
             <label>聯絡地址<span class="required">*</span></label>
             <div class="flex-row" style="margin-bottom: 12px;">
-                <select id="citySelect" required><option value="" disabled selected>縣市</option></select>
-                <select id="districtSelect" required><option value="" disabled selected>區域</option></select>
+                <select id="citySelect" required><option value="" disabled selected>請選擇縣市</option></select>
+                <select id="districtSelect" required><option value="" disabled selected>請選擇區域</option></select>
             </div>
             <input type="text" id="addressDetail" placeholder="街道、門牌、樓層" required>
             <input type="hidden" name="address" id="finalAddress">
@@ -383,9 +399,8 @@
         </div>
 
         <div class="bank-info">
-            <strong>💎 繳費帳戶資訊</strong><br>
-            銀行：第一銀行泰山分行 (007)<br>
-            戶名：吳麗玉 / 帳號：230-50-594499
+            <strong>💎 繳費帳戶資訊 (OFFICIAL)</strong><br>
+            銀行：第一銀行泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499
         </div>
 
         <div class="form-group">
@@ -398,12 +413,37 @@
             </select>
         </div>
         
-        <div id="paymentDetailBlock" style="display:none; margin-bottom: 25px;">
-            <label id="paymentDetailLabel">資訊備註<span class="required">*</span></label>
-            <input type="text" id="paymentDetailInput" name="paymentDetail" placeholder="請填寫資訊">
+        <!-- ✅ 依照要求：拆分為末五碼與日期時間 -->
+        <div id="bankDetailFields" class="payment-sub-fields" style="display:none;">
+            <div>
+                <label>轉帳帳號末五碼<span class="required">*</span></label>
+                <input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="請輸入 5 位數字">
+            </div>
+            <div>
+                <label>轉帳日期與時間<span class="required">*</span></label>
+                <input type="text" id="bankDateTime" name="bankDateTime" placeholder="例: 4/25 14:30">
+            </div>
+        </div>
+
+        <!-- ✅ 依照要求：拆分為介紹人姓名與電話 -->
+        <div id="referralDetailFields" class="payment-sub-fields" style="display:none;">
+            <div>
+                <label>介紹人姓名<span class="required">*</span></label>
+                <input type="text" id="referralName" name="referralName" placeholder="請輸入姓名">
+            </div>
+            <div>
+                <label>介紹人電話<span class="required">*</span></label>
+                <input type="tel" id="referralPhone" name="referralPhone" placeholder="請輸入電話">
+            </div>
+        </div>
+
+        <!-- 通用備註詳情 (針對繳費方式為其他) -->
+        <div id="otherPaymentBlock" style="display:none; margin-top: 15px;">
+            <label>繳費詳情說明<span class="required">*</span></label>
+            <input type="text" id="otherPaymentDetail" name="otherPaymentDetail" placeholder="請說明繳費情形">
         </div>
         
-        <div class="form-group"><label>備註事項</label><textarea name="remark" rows="2" placeholder="特殊需求或建議..."></textarea></div>
+        <div class="form-group" style="margin-top: 30px;"><label>其他備註事項</label><textarea name="remark" rows="2" placeholder="特殊需求或給營隊的建議..."></textarea></div>
 
         <div id="statusMsg" class="status-msg"></div>
         <button type="submit" id="submitBtn" class="submit-btn">立即傳送報名資料</button>
@@ -413,7 +453,7 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
-    // ✅ 台灣身分證驗證邏輯
+    // 台灣身分證驗證邏輯
     function validateTaiwanID(id) {
         id = id.toUpperCase();
         if (!/^[A-Z][12]\d{8}$/.test(id)) return false;
@@ -430,7 +470,7 @@
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
         "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
         "新北市": ["板橋區", "三重區", "新莊區", "中和區", "永和區", "新店區", "土城區", "蘆洲區", "樹林區", "汐止區", "三峽區", "淡水區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區", "瑞芳區", "鶯歌區"],
-        "桃園市": ["桃園區", "中壢區", "平鎮區", "八德區", "楊梅區", "蘆竹區", "大溪區", "龍潭區", "龜山區", "大園區", "觀音區", "新屋區", "觀音區", "復興區"],
+        "桃園市": ["桃園區", "中壢區", "平鎮區", "八德區", "楊梅區", "蘆竹區", "大溪區", "龍潭區", "龜山區", "大園區", "觀音區", "新屋區", "復興區"],
         "新竹市": ["東區", "北區", "香山區"],
         "新竹縣": ["竹北市", "竹東鎮", "新埔鎮", "關西鎮", "湖口鄉", "新豐鄉", "芎林鄉", "橫山鄉", "北埔鄉", "寶山鄉", "峨眉鄉", "尖石鄉", "五峰鄉"],
         "苗栗縣": ["苗栗市", "頭份市", "竹南鎮", "後龍鎮", "通霄鎮", "苑裡鎮", "造橋鄉", "頭屋鄉", "公館鄉", "大湖鄉", "泰安鄉", "銅鑼鄉", "三義鄉", "西湖鄉", "卓蘭鎮", "三灣鄉", "獅潭鄉", "南庄鄉"],
@@ -438,14 +478,9 @@
         "彰化縣": ["彰化市", "鹿港鎮", "和美鎮", "線西鄉", "伸港鄉", "福興鄉", "秀水鄉", "花壇鄉", "芬園鄉", "員林市", "溪湖鎮", "田中鎮", "大村鄉", "埔鹽鄉", "埔心鄉", "永靖鄉", "社頭鄉", "二水鄉", "田尾鄉", "埤頭鄉", "芳苑鄉", "二林鎮", "大城鄉", "竹塘鄉", "溪州鄉", "北斗鎮"],
         "宜蘭縣": ["宜蘭市", "羅東鎮", "蘇澳鎮", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "冬山鄉", "五結鄉", "三星鄉", "大同鄉", "南澳鄉"],
         "花蓮縣": ["花蓮市", "鳳林鎮", "玉里鎮", "新城鄉", "吉安鄉", "壽豐鄉", "光復鄉", "豐濱鄉", "瑞穗鄉", "富里鄉", "秀林鄉", "萬榮鄉", "卓溪鄉"],
-        "臺東縣": ["臺東市", "成功鎮", "關山鎮", "卑南鄉", "鹿野鄉", "池上鄉", "東河鄉", "長濱鄉", "太麻里鄉", "大武鄉", "綠島鄉", "海端鄉", "延平鄉", "金峰鄉", "達仁鄉", "蘭嶼鄉"],
+        "臺東縣": ["臺東市", "成功鎮", "關山鎮", "卑名鄉", "鹿野鄉", "池上鄉", "東河鄉", "長濱鄉", "太麻里鄉", "大武鄉", "綠島鄉", "海端鄉", "延平鄉", "金峰鄉", "達仁鄉", "蘭嶼鄉"],
         "高雄市": ["新興區", "前金區", "苓雅區", "鹽埕區", "鼓山區", "旗津區", "前鎮區", "三民區", "楠梓區", "小港區", "左營區", "仁武區", "大社區", "岡山區", "路竹區", "阿蓮區", "田寮區", "燕巢區", "橋頭區", "梓官區", "彌陀區", "永安區", "湖內區", "鳳山區", "大寮區", "林園區", "鳥松區", "大樹區", "旗山區", "美濃區", "六龜區", "內門區", "杉林區", "甲仙區", "桃源區", "那瑪夏區", "茂林區"],
         "屏東縣": ["屏東市", "三地門鄉", "霧臺鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"],
-        "南投縣": ["南投市", "埔里鎮", "草屯鎮", "竹山鎮", "集集鎮", "名間鄉", "鹿谷鄉", "中寮鄉", "魚池鄉", "國姓鄉", "水里鄉", "信義鄉", "仁愛鄉"],
-        "雲林縣": ["斗六市", "斗南鎮", "虎尾鎮", "西螺鎮", "土庫鎮", "北港鎮", "古坑鄉", "大埤鄉", "迓桐鄉", "林內鄉", "二崙鄉", "崙背鄉", "麥寮鄉", "東勢鄉", "褒忠鄉", "臺西鄉", "元長鄉", "四湖鄉", "口湖鄉", "水林鄉"],
-        "嘉義市": ["東區", "西區"],
-        "嘉義縣": ["太保市", "朴子市", "布袋鎮", "大林鎮", "民雄鄉", "溪口鄉", "新港鄉", "六腳鄉", "東石鄉", "義竹鄉", "鹿草鄉", "水上鄉", "中埔鄉", "竹崎鄉", "梅山鄉", "番路鄉", "大埔鄉", "阿里山鄉"],
-        "臺南市": ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
         "澎湖縣": ["馬公市", "湖西鄉", "白沙鄉", "西嶼鄉", "望安鄉", "七美鄉"],
         "金門縣": ["金城鎮", "金湖鎮", "金沙鎮", "金寧鄉", "烈嶼鄉", "烏坵鄉"],
         "連江縣": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
@@ -460,12 +495,13 @@
         const cs = document.getElementById('citySelect'), ds = document.getElementById('districtSelect');
         Object.keys(taiwanDistricts).forEach(c => cs.add(new Option(c, c)));
         cs.onchange = () => {
-            ds.innerHTML = '<option value="" disabled selected>請選擇區域</option>';
+            ds.innerHTML = '<option value="" disabled selected>區域</option>';
             if(taiwanDistricts[cs.value]) taiwanDistricts[cs.value].forEach(d => ds.add(new Option(d, d)));
         };
 
         setupPhoneFormatting(document.getElementById('mobileInput'), 'mobile');
         setupPhoneFormatting(document.getElementById('telInput'), 'landline');
+        setupPhoneFormatting(document.getElementById('referralPhone'), 'mobile');
     })();
 
     function setupPhoneFormatting(input, type) {
@@ -499,22 +535,35 @@
     };
 
     document.getElementById('paymentMethodSelect').onchange = function() {
-        const block = document.getElementById('paymentDetailBlock');
-        const label = document.getElementById('paymentDetailLabel');
-        const input = document.getElementById('paymentDetailInput');
-        block.style.display = 'block';
-        if(this.value === '轉交介紹人') {
-            label.innerHTML = '介紹人姓名與電話 <span class="required">*</span>';
-            input.placeholder = '必填：介紹人姓名與連絡方式';
-            input.required = true;
-        } else if(this.value === '轉帳繳費') {
-            label.innerHTML = '轉帳末五碼 <span class="required">*</span>';
-            input.placeholder = '必填：銀行轉帳末五碼';
-            input.required = true;
-        } else {
-            label.innerHTML = '付款詳情備註';
-            input.placeholder = '請輸入內容';
-            input.required = false;
+        const bankBlock = document.getElementById('bankDetailFields');
+        const refBlock = document.getElementById('referralDetailFields');
+        const otherBlock = document.getElementById('otherPaymentBlock');
+        
+        // 重置所有子欄位的必填狀態
+        const inputs = [
+            document.getElementById('bankLast5'), document.getElementById('bankDateTime'),
+            document.getElementById('referralName'), document.getElementById('referralPhone'),
+            document.getElementById('otherPaymentDetail')
+        ];
+        inputs.forEach(i => { i.required = false; });
+
+        // 隱藏所有區塊
+        bankBlock.style.display = 'none';
+        refBlock.style.display = 'none';
+        otherBlock.style.display = 'none';
+
+        // 根據選擇顯示對應區塊並設為必填
+        if(this.value === '轉帳繳費') {
+            bankBlock.style.display = 'grid';
+            document.getElementById('bankLast5').required = true;
+            document.getElementById('bankDateTime').required = true;
+        } else if(this.value === '轉交介紹人') {
+            refBlock.style.display = 'grid';
+            document.getElementById('referralName').required = true;
+            document.getElementById('referralPhone').required = true;
+        } else if(this.value === '其他') {
+            otherBlock.style.display = 'block';
+            document.getElementById('otherPaymentDetail').required = true;
         }
     };
 
@@ -522,15 +571,15 @@
         e.preventDefault();
         const btn = document.getElementById('submitBtn'), msg = document.getElementById('statusMsg');
         
-        // 1. 身分證字號驗證
+        // 身分證驗證
         const idVal = document.getElementById('idInput').value;
         if (!validateTaiwanID(idVal)) {
-            alert('❌ 身分證字號格式錯誤，請重新確認填寫 (首位大寫字母+九位數字)。');
+            alert('❌ 身分證字號邏輯校驗失敗，請確認是否填寫正確 (第一位大寫字母+九位數字)。');
             document.getElementById('idInput').focus();
             return;
         }
 
-        // 2. 推薦來源驗證
+        // 推薦來源驗證
         const refs = []; 
         document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
         if(refs.length === 0) {
@@ -538,8 +587,8 @@
             return;
         }
 
-        btn.disabled = true; btn.innerText = '傳送中...';
-        msg.style.display = 'block'; msg.innerText = '正在連結雲端資料庫，請稍候...'; msg.className = 'status-msg success';
+        btn.disabled = true; btn.innerText = '正在處理中...';
+        msg.style.display = 'block'; msg.innerText = '正在進行加密通訊並同步數據，請稍候...'; msg.className = 'status-msg success';
 
         let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
@@ -553,12 +602,15 @@
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             if(await res.text() === 'Success') {
-                msg.innerText = '✅ 報名成功！資料已同步備份，請查收電子郵件信箱。';
+                msg.innerText = '✅ 報名資料提交成功！感謝您的參與，確認信已發送至您的信箱。';
                 this.reset(); window.scrollTo({ top: 0, behavior: 'smooth' });
-                document.getElementById('paymentDetailBlock').style.display = 'none';
+                // 隱藏動態顯示的欄位
+                document.getElementById('bankDetailFields').style.display = 'none';
+                document.getElementById('referralDetailFields').style.display = 'none';
+                document.getElementById('otherPaymentBlock').style.display = 'none';
             }
         } catch (error) { 
-            msg.innerText = '❌ 網路提交失敗，請檢查網路狀態。'; 
+            msg.innerText = '❌ 資料送出失敗，請檢查網路連線後再試。'; 
             msg.className = 'status-msg error'; 
         } finally {
             btn.disabled = false; btn.innerText = '立即傳送報名資料';
