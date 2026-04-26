@@ -3,47 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 夏令營報名系統</title>
+    <title>2026 科技夏令營報名系統</title>
     <style>
-        body { font-family: "Microsoft JhengHei", sans-serif; background-color: #f0f4f8; padding: 20px; color: #333; line-height: 1.6; }
-        .container { max-width: 750px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .banner-img { width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: block; }
-        h2 { text-align: center; color: #1a5276; margin-bottom: 5px; }
-        .notice-box { background-color: #fff4f4; border: 1px solid #ffcccc; padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 0.9em; }
-        .warning-text { color: #d9534f; font-weight: bold; }
-        .info-text { color: #0277bd; font-weight: bold; margin-top: 10px; }
-        .bank-box { background-color: #e3f2fd; border: 1px solid #90caf9; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 1em; color: #0d47a1; }
-        h3 { background: #d5f5e3; padding: 10px; border-left: 5px solid #27ae60; font-size: 1.1em; margin-top: 30px; color: #1e8449; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 6px; font-weight: bold; }
-        input[type="text"], input[type="email"], select, textarea { width: 100%; padding: 12px; border: 1px solid #d1d8e0; border-radius: 6px; box-sizing: border-box; font-size: 1em; }
-        input:focus, select:focus { outline: none; border-color: #27ae60; box-shadow: 0 0 5px rgba(39, 174, 96, 0.3); }
-        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; background: #f9f9f9; padding: 15px; border-radius: 6px; }
-        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.95em; cursor: pointer; }
+        /* 科技風背景與全局設定 */
+        body { 
+            font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; 
+            background: linear-gradient(135deg, #0b132b, #1c2541, #0a1128); 
+            color: #e0e6ed; 
+            line-height: 1.6; 
+            padding: 20px; 
+            min-height: 100vh;
+        }
+        
+        /* 毛玻璃透明容器 */
+        .container { 
+            max-width: 750px; 
+            margin: auto; 
+            background: rgba(11, 19, 43, 0.7); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1); 
+        }
+
+        .banner-img { 
+            width: 100%; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); 
+            display: block; 
+            border: 1px solid rgba(0, 229, 255, 0.5);
+        }
+
+        h2 { 
+            text-align: center; 
+            color: #00e5ff; 
+            margin-bottom: 5px; 
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        h3 { 
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent); 
+            padding: 10px 15px; 
+            border-left: 4px solid #00e5ff; 
+            font-size: 1.1em; 
+            margin-top: 35px; 
+            color: #00e5ff; 
+            border-radius: 0 8px 8px 0;
+            text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+        }
+
+        /* 警告與資訊區塊 */
+        .notice-box { 
+            background-color: rgba(255, 71, 87, 0.05); 
+            border: 1px solid rgba(255, 71, 87, 0.3); 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 25px; 
+            font-size: 0.95em; 
+        }
+        .warning-text { color: #ff4757; font-weight: bold; text-shadow: 0 0 5px rgba(255, 71, 87, 0.4); }
+        .info-text { color: #48dbfb; font-weight: bold; margin-top: 10px; }
+        
+        .bank-box { 
+            background-color: rgba(46, 213, 115, 0.05); 
+            border: 1px solid rgba(46, 213, 115, 0.3); 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+            font-size: 1em; 
+            color: #2ed573; 
+        }
+
+        /* 表單元素科技化 */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #a4b0be; letter-spacing: 0.5px; }
+        .required-star { color: #ff4757; text-shadow: 0 0 5px #ff4757; }
+        
+        input[type="text"], input[type="email"], select, textarea { 
+            width: 100%; 
+            padding: 12px 15px; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(0, 229, 255, 0.3); 
+            border-radius: 6px; 
+            box-sizing: border-box; 
+            font-size: 1em; 
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
+        select option { background: #1c2541; color: #fff; } /* 修正下拉選單在暗黑模式的顯示 */
+        
+        input:focus, select:focus, textarea:focus { 
+            outline: none; 
+            border-color: #00e5ff; 
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.5); 
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        /* 複選框美化 */
+        .checkbox-group { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+            gap: 12px; 
+            background: rgba(255, 255, 255, 0.02); 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.95em; cursor: pointer; color: #dfe4ea; }
+        input[type="checkbox"] { accent-color: #00e5ff; width: 18px; height: 18px; cursor: pointer; }
+
         .flex-row { display: flex; gap: 10px; }
         .flex-row > * { flex: 1; }
-        .email-shortcuts { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-        .email-btn { background: #e0f2f1; border: 1px solid #b2dfdb; padding: 4px 10px; border-radius: 15px; font-size: 0.85em; color: #00695c; cursor: pointer; transition: 0.2s; }
-        .email-btn:hover { background: #b2dfdb; }
-        .error-msg { color: #e74c3c; font-size: 0.85em; margin-top: 5px; display: none; }
-        button.submit-btn { background-color: #27ae60; color: white; padding: 16px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.2em; font-weight: bold; margin-top: 25px; transition: 0.3s; }
-        button.submit-btn:hover { background-color: #219150; }
-        button.submit-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
         
-        /* 動態隱藏區塊用 */
-        .hidden-group { display: none; background: #fafafa; padding: 15px; border-radius: 6px; border: 1px dashed #ccc; margin-top: 10px; }
+        /* 快捷按鈕 */
+        .email-shortcuts { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+        .email-btn { 
+            background: rgba(0, 229, 255, 0.1); 
+            border: 1px solid rgba(0, 229, 255, 0.4); 
+            padding: 5px 12px; 
+            border-radius: 20px; 
+            font-size: 0.85em; 
+            color: #00e5ff; 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        .email-btn:hover { background: #00e5ff; color: #0b132b; box-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
+        
+        .error-msg { color: #ff4757; font-size: 0.85em; margin-top: 5px; display: none; text-shadow: 0 0 5px rgba(255,71,87,0.5); }
+        
+        /* 送出按鈕特效 */
+        button.submit-btn { 
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5); 
+            color: white; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            margin-top: 30px; 
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+        }
+        button.submit-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6); 
+            background: linear-gradient(45deg, #3a7bd5, #00d2ff);
+        }
+        button.submit-btn:disabled { 
+            background: #576574; 
+            box-shadow: none;
+            cursor: not-allowed; 
+            transform: none;
+        }
+        
+        .hidden-group { 
+            display: none; 
+            background: rgba(255, 255, 255, 0.02); 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px dashed rgba(0, 229, 255, 0.4); 
+            margin-top: 15px; 
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- 營隊 Banner 圖片 (請確保圖片上傳到 GitHub 並命名為 banner.jpg) -->
+    <!-- 營隊 Banner 圖片 -->
     <img src="banner.jpg" alt="2026 未來之光：探索&科技營" class="banner-img" onerror="this.style.display='none'">
 
     <h2>2026 未來之光：探索&科技營</h2>
     
     <div class="notice-box">
-        <p>本資料僅提供2026佛教慈濟基金會三重園區未來之光：探索&科技營使用。</p>
+        <p style="color: #ced6e0;">本資料僅提供 2026 佛教慈濟基金會三重園區未來之光：探索&科技營使用。</p>
         <p class="info-text">
             📍 營隊時間：<br>
             7/17 (五) 07:30 ~ 16:50<br>
@@ -54,26 +195,26 @@
 
     <form id="enrollmentForm">
         <div class="form-group">
-            <label>電子郵件 (Email) <span style="color:#e74c3c">*</span></label>
-            <input type="email" id="emailInput" name="email" required>
+            <label>電子郵件 (Email) <span class="required-star">*</span></label>
+            <input type="email" id="emailInput" name="email" required placeholder="example@email.com">
             <div class="email-shortcuts">
                 <span class="email-btn" onclick="appendEmail('@msa.hinet.net')">+ @msa.hinet.net</span>
                 <span class="email-btn" onclick="appendEmail('@gmail.com')">+ @gmail.com</span>
                 <span class="email-btn" onclick="appendEmail('@yahoo.com.tw')">+ @yahoo.com.tw</span>
             </div>
         </div>
-        <div class="form-group"><label>填表人姓名 <span style="color:#e74c3c">*</span></label><input type="text" name="submitter" required></div>
+        <div class="form-group"><label>填表人姓名 <span class="required-star">*</span></label><input type="text" name="submitter" required placeholder="請輸入填表人姓名"></div>
 
         <h3>一、 學員基本資料</h3>
-        <div class="form-group"><label>學員姓名 <span style="color:#e74c3c">*</span></label><input type="text" name="studentName" required></div>
+        <div class="form-group"><label>學員姓名 <span class="required-star">*</span></label><input type="text" name="studentName" required placeholder="請輸入學員姓名"></div>
         <div class="form-group">
-            <label>性別 <span style="color:#e74c3c">*</span></label>
+            <label>性別 <span class="required-star">*</span></label>
             <select name="gender" required><option value="">請選擇</option><option value="男">男</option><option value="女">女</option></select>
         </div>
-        <div class="form-group"><label>目前就讀學校 (例如: 三重國小) <span style="color:#e74c3c">*</span></label><input type="text" name="school" required></div>
+        <div class="form-group"><label>目前就讀學校 (例如: 三重國小) <span class="required-star">*</span></label><input type="text" name="school" required placeholder="請輸入學校名稱"></div>
         
         <div class="form-group">
-            <label>暑假過後就讀幾年級 <span style="color:#e74c3c">*</span></label>
+            <label>暑假過後就讀幾年級 <span class="required-star">*</span></label>
             <select name="grade" required>
                 <option value="">請選擇年級</option>
                 <optgroup label="國小">
@@ -88,13 +229,13 @@
         </div>
 
         <div class="form-group">
-            <label>學員身分證字號 (辦理保險用) <span style="color:#e74c3c">*</span></label>
+            <label>學員身分證字號 (辦理保險用) <span class="required-star">*</span></label>
             <input type="text" id="idInput" name="idNumber" maxlength="10" placeholder="例如: F123456789" required style="text-transform: uppercase;">
             <div id="idError" class="error-msg">⚠️ 身分證字號格式錯誤，請重新檢查</div>
         </div>
 
         <div class="form-group">
-            <label>出生年月日 (民國年) <span style="color:#e74c3c">*</span></label>
+            <label>出生年月日 (民國年) <span class="required-star">*</span></label>
             <div class="flex-row">
                 <select id="birthYear" required><option value="">年份</option></select>
                 <select id="birthMonth" required><option value="">月份</option></select>
@@ -103,7 +244,7 @@
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
 
-        <div class="form-group"><label>學員健康狀況 (如過敏...，如無請選填「無」) <span style="color:#e74c3c">*</span></label><textarea name="healthStatus" rows="2" required></textarea></div>
+        <div class="form-group"><label>學員健康狀況 (如過敏...，如無請選填「無」) <span class="required-star">*</span></label><textarea name="healthStatus" rows="2" required placeholder="請詳述健康狀況或填寫無"></textarea></div>
         
         <div class="form-group">
             <label>第幾次報名</label>
@@ -114,10 +255,10 @@
         </div>
 
         <h3>二、 家長聯繫資訊</h3>
-        <div class="form-group"><label>家長姓名 <span style="color:#e74c3c">*</span></label><input type="text" name="parentName" required></div>
+        <div class="form-group"><label>家長姓名 <span class="required-star">*</span></label><input type="text" name="parentName" required placeholder="請輸入家長姓名"></div>
         
         <div class="form-group">
-            <label>與學員關係 <span style="color:#e74c3c">*</span></label>
+            <label>與學員關係 <span class="required-star">*</span></label>
             <input type="text" name="relationship" list="relationList" placeholder="點擊選擇或自行輸入" required>
             <datalist id="relationList">
                 <option value="父子"></option><option value="父女"></option>
@@ -132,12 +273,12 @@
         </div>
         
         <div class="form-group">
-            <label>緊急連絡電話 (手機) <span style="color:#e74c3c">*</span></label>
+            <label>緊急連絡電話 (手機) <span class="required-star">*</span></label>
             <input type="text" id="mobileInput" name="mobile" placeholder="09XX-XXX-XXX" maxlength="12" required>
         </div>
         
         <div class="form-group">
-            <label>聯絡地址 <span style="color:#e74c3c">*</span></label>
+            <label>聯絡地址 <span class="required-star">*</span></label>
             <div class="flex-row" style="margin-bottom:10px;">
                 <select id="citySelect" required><option value="">選擇縣市</option></select>
                 <select id="districtSelect" required><option value="">選擇鄉鎮市區</option></select>
@@ -160,7 +301,6 @@
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="其他">其他</label>
             </div>
         </div>
-        <!-- 刪除原本的推薦人欄位 -->
 
         <h3>四、 繳費資訊確認</h3>
         <div class="bank-box">
@@ -171,7 +311,7 @@
         </div>
 
         <div class="form-group">
-            <label>繳費方式 <span style="color:#e74c3c">*</span></label>
+            <label>繳費方式 <span class="required-star">*</span></label>
             <select id="paymentMethodSelect" name="paymentStatus" required>
                 <option value="">請選擇繳費方式</option>
                 <option value="現場繳費">現場繳費</option>
@@ -180,27 +320,25 @@
             </select>
         </div>
 
-        <!-- 選擇轉帳繳費時顯示 -->
         <div id="transferBlock" class="hidden-group">
-            <label>轉帳後五碼及時間日期 <span style="color:#e74c3c">*</span></label>
+            <label>轉帳後五碼及時間日期 <span class="required-star">*</span></label>
             <input type="text" id="paymentDetailInput" name="paymentDetail" placeholder="例如：12345 (7/1 14:00)">
         </div>
 
-        <!-- 選擇轉交介紹人時顯示 (沿用 GAS 試算表原本的 referrer 欄位) -->
         <div id="introducerBlock" class="hidden-group">
             <div class="form-group" style="margin-bottom:10px;">
-                <label>介紹人姓名 <span style="color:#e74c3c">*</span></label>
+                <label>介紹人姓名 <span class="required-star">*</span></label>
                 <input type="text" id="referrerNameInput" name="referrerName" placeholder="請輸入介紹人姓名">
             </div>
             <div class="form-group" style="margin-bottom:0;">
-                <label>介紹人電話 <span style="color:#e74c3c">*</span></label>
+                <label>介紹人電話 <span class="required-star">*</span></label>
                 <input type="text" id="referrerTelInput" name="referrerTel" placeholder="請輸入介紹人電話">
             </div>
         </div>
 
-        <div class="form-group" style="margin-top: 18px;"><label>備註</label><textarea name="remark" rows="3"></textarea></div>
+        <div class="form-group" style="margin-top: 18px;"><label>備註</label><textarea name="remark" rows="3" placeholder="如有其他需求請填寫於此"></textarea></div>
 
-        <button type="submit" id="submitBtn" class="submit-btn">確認送出報名表</button>
+        <button type="submit" id="submitBtn" class="submit-btn">確認傳送資料</button>
     </form>
 </div>
 
@@ -215,7 +353,6 @@
         const refName = document.getElementById('referrerNameInput');
         const refTel = document.getElementById('referrerTelInput');
 
-        // 重置必填與隱藏
         transferBlock.style.display = 'none';
         introducerBlock.style.display = 'none';
         paymentDetail.required = false;
@@ -374,7 +511,7 @@
 
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
-        btn.innerText = '正在安全傳送報名資料...';
+        btn.innerText = '🔄 系統處理中，請稍候...';
 
         const by = document.getElementById('birthYear').value;
         const bm = document.getElementById('birthMonth').value;
@@ -399,7 +536,7 @@
             body: JSON.stringify(data)
         })
         .then(() => {
-            alert('報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
+            alert('✅ 報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
             form.reset();
             distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
             document.getElementById('transferBlock').style.display = 'none';
@@ -407,13 +544,13 @@
             document.getElementById('idError').style.display = 'none';
             isIdValid = false;
             btn.disabled = false;
-            btn.innerText = '確認送出報名表';
+            btn.innerText = '確認傳送資料';
             window.scrollTo(0, 0);
         })
         .catch(error => {
-            alert('傳送失敗，請檢查網路連線。');
+            alert('❌ 傳送失敗，請檢查網路連線。');
             btn.disabled = false;
-            btn.innerText = '確認送出報名表';
+            btn.innerText = '確認傳送資料';
         });
     });
 </script>
