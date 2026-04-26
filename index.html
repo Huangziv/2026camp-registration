@@ -68,7 +68,7 @@
         .warning-text { color: #ff4757; font-weight: bold; text-shadow: 0 0 5px rgba(255, 71, 87, 0.4); }
         .info-text { color: #48dbfb; font-weight: bold; margin-top: 10px; }
         
-        /* 精彩課程卡片設計 (圖標統一化) */
+        /* 精彩課程卡片設計 */
         .course-highlights {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 159, 67, 0.3);
@@ -313,7 +313,6 @@
         </div>
 
         <div class="form-group">
-            <!-- 更改為：西元(民國年) -->
             <label>出生年月日 (西元 / 民國年) <span class="required-star">*</span></label>
             <div class="flex-row">
                 <select id="birthYear" required><option value="">年份</option></select>
@@ -561,23 +560,19 @@
         }
     });
 
-    // --- 4 & 5. 確保網頁完全載入後，才產生選單 (解決無法下拉的問題) ---
+    // --- 4 & 5. 確保網頁完全載入後，才產生選單 ---
     document.addEventListener('DOMContentLoaded', function() {
-        // --- 產生出生年月日 (西元/民國) 下拉選單 ---
         const ySelect = document.getElementById('birthYear');
         const mSelect = document.getElementById('birthMonth');
         const dSelect = document.getElementById('birthDay');
         
-        // 產生從西元 2001 到 2021 的年份 (包含對應的民國年)
         for (let i = 2001; i <= 2021; i++) {
             let minguo = i - 1911;
-            // 寫入的值會是西元年 (例如: 2015)
             ySelect.add(new Option(`西元 ${i} 年 (民國 ${minguo} 年)`, i));
         }
         for (let i = 1; i <= 12; i++) mSelect.add(new Option(i + ' 月', String(i).padStart(2, '0')));
         for (let i = 1; i <= 31; i++) dSelect.add(new Option(i + ' 日', String(i).padStart(2, '0')));
 
-        // --- 台灣所有縣市與行政區聯動下拉選單 ---
         const cityData = {
             "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
             "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
@@ -620,12 +615,12 @@
         });
     });
 
-    // --- 6. 表單送出處理 (資料組合與發送) ---
-    // ✅ 已更新為最新的 Apps Script 網址
+    // --- 6. 表單送出處理 (大聲除錯版) ---
+    // 這裡已綁定您最新的 GAS 網址
     const scriptURL = 'https://script.google.com/macros/s/AKfycbw_CN5VTefoZzAUvsYpf484oAc1JqmCMGW9DvmlHIG6InVGvIoha7p7EV1p8OKqUTu8/exec';
     const form = document.getElementById('enrollmentForm');
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
         e.preventDefault();
         
         if (!isIdValid) {
@@ -655,28 +650,31 @@
         const data = Object.fromEntries(formData.entries());
         data.referral = referrals.join(', '); 
 
-        fetch(scriptURL, { 
-            method: 'POST', 
-            mode: 'no-cors', 
-            body: JSON.stringify(data)
-        })
-        .then(() => {
-            alert('✅ 報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
-            form.reset();
-            document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
-            document.getElementById('transferBlock').style.display = 'none';
-            document.getElementById('introducerBlock').style.display = 'none';
-            document.getElementById('idError').style.display = 'none';
-            isIdValid = false;
+        try {
+            // 嘗試傳送資料
+            const response = await fetch(scriptURL, { 
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+
+            if(response.ok) {
+                alert('✅ 報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
+                form.reset();
+                document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
+                document.getElementById('transferBlock').style.display = 'none';
+                document.getElementById('introducerBlock').style.display = 'none';
+                document.getElementById('idError').style.display = 'none';
+                isIdValid = false;
+            } else {
+                alert('❌ Google 伺服器拒絕了請求。\n狀態碼: ' + response.status);
+            }
+        } catch (error) {
+            // 如果遇到跨域阻擋 (CORS) 或網路問題，會跳出真實錯誤原因
+            alert('🚨 嚴重錯誤！資料傳送被擋下。\n這通常是因為 Apps Script 沒有設定為「所有人皆可存取」或遭遇到 CORS 跨域阻擋。\n\n錯誤詳情：\n' + error.message);
+        } finally {
             btn.disabled = false;
             btn.innerText = '確認傳送資料';
-            window.scrollTo(0, 0);
-        })
-        .catch(error => {
-            alert('❌ 傳送失敗，請檢查網路連線。');
-            btn.disabled = false;
-            btn.innerText = '確認傳送資料';
-        });
+        }
     });
 </script>
 
