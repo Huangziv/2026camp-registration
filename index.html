@@ -68,7 +68,7 @@
         .warning-text { color: #ff4757; font-weight: bold; text-shadow: 0 0 5px rgba(255, 71, 87, 0.4); }
         .info-text { color: #48dbfb; font-weight: bold; margin-top: 10px; }
         
-        /* 精彩課程卡片設計 */
+        /* 精彩課程卡片設計 (圖標統一化) */
         .course-highlights {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 159, 67, 0.3);
@@ -103,9 +103,10 @@
             box-shadow: 0 5px 15px rgba(255, 159, 67, 0.2);
             border-color: rgba(255, 159, 67, 0.5);
         }
-        .course-icon { font-size: 2.2em; margin-bottom: 10px; }
-        .course-title { color: #ff9f43; font-weight: bold; margin-bottom: 5px; font-size: 1.05em; }
+        .course-icon { font-size: 2.2em; margin-bottom: 10px; text-align: center; }
+        .course-title { color: #ff9f43; font-weight: bold; margin-bottom: 5px; font-size: 1.05em; text-align: center; }
         .course-desc { font-size: 0.85em; color: #ced6e0; text-align: left; }
+        .course-desc-center { font-size: 0.85em; color: #ced6e0; text-align: center; }
 
         .bank-box { 
             background-color: rgba(46, 213, 115, 0.05); 
@@ -231,7 +232,7 @@
         <p class="warning-text" style="margin-top:15px;">【防詐騙提醒】我們不會以任何名義通知更改付款方式或要求您到ATM進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥165反詐騙專線查詢或與我們聯繫：(02)2981-0310。</p>
     </div>
 
-    <!-- 吸引人的課程資訊區塊 -->
+    <!-- 吸引人的課程資訊區塊 (統一圖標版) -->
     <div class="course-highlights">
         <h3>✨ 營隊亮點與精彩課程 ✨</h3>
         <p style="font-size:0.9em; color:#a4b0be; margin-top:-5px;">精心設計的兩日探索之旅，結合靜態與動態，激發孩子無限潛能！</p>
@@ -252,12 +253,14 @@
                 <div class="course-desc">豐富的才藝分組：勁歌熱舞、傳統戲曲、魔法音樂輔療、旗陣演練，發掘每位孩子專屬天賦！</div>
             </div>
             <div class="course-card">
-                <div class="course-title">⚖️ 生活法律與防毒</div>
+                <div class="course-icon">⚖️</div>
+                <div class="course-title">生活法律與防毒</div>
                 <div class="course-desc">黃川裕律師專業開講，以淺顯易懂的方式建立正確價值觀與校園自我保護意識。</div>
             </div>
             <div class="course-card" style="grid-column: 1 / -1;">
-                <div class="course-title" style="text-align: center;">🌟 星光人文之夜 (7/18 晚間)</div>
-                <div class="course-desc" style="text-align: center;">愛的饗宴、震撼舞龍展演、粉墨登場、親子同樂競賽與各隊創意表演，創造難忘的夏夜回憶。</div>
+                <div class="course-icon">🌟</div>
+                <div class="course-title">星光人文之夜 (7/18 晚間)</div>
+                <div class="course-desc-center">愛的饗宴、震撼舞龍展演、粉墨登場、親子同樂競賽與各隊創意表演，創造難忘的夏夜回憶。</div>
             </div>
         </div>
     </div>
