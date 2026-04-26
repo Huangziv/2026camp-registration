@@ -2,7 +2,352 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, i<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 夏令營報名系統</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; background-color: #f0f4f8; padding: 20px; color: #333; line-height: 1.6; }
+        .container { max-width: 750px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h2 { text-align: center; color: #1a5276; margin-bottom: 5px; }
+        .notice-box { background-color: #fff4f4; border: 1px solid #ffcccc; padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 0.9em; }
+        .warning-text { color: #d9534f; font-weight: bold; }
+        h3 { background: #d5f5e3; padding: 10px; border-left: 5px solid #27ae60; font-size: 1.1em; margin-top: 30px; color: #1e8449; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input[type="text"], input[type="email"], select, textarea { width: 100%; padding: 12px; border: 1px solid #d1d8e0; border-radius: 6px; box-sizing: border-box; font-size: 1em; }
+        input:focus, select:focus { outline: none; border-color: #27ae60; box-shadow: 0 0 5px rgba(39, 174, 96, 0.3); }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; background: #f9f9f9; padding: 15px; border-radius: 6px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.95em; cursor: pointer; }
+        .flex-row { display: flex; gap: 10px; }
+        .flex-row > * { flex: 1; }
+        .email-shortcuts { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .email-btn { background: #e0f2f1; border: 1px solid #b2dfdb; padding: 4px 10px; border-radius: 15px; font-size: 0.85em; color: #00695c; cursor: pointer; transition: 0.2s; }
+        .email-btn:hover { background: #b2dfdb; }
+        .error-msg { color: #e74c3c; font-size: 0.85em; margin-top: 5px; display: none; }
+        button.submit-btn { background-color: #27ae60; color: white; padding: 16px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.2em; font-weight: bold; margin-top: 25px; transition: 0.3s; }
+        button.submit-btn:hover { background-color: #219150; }
+        button.submit-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>2026 未來之光：探索&科技營</h2>
+    
+    <div class="notice-box">
+        <p>本資料僅提供2026佛教慈濟基金會三重園區暑期創意樂活報名使用。</p>
+        <p class="warning-text">【防詐騙提醒】我們不會以任何名義通知更改付款方式或要求您到ATM進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥165反詐騙專線查詢或與我們聯繫：(02)2981-0310。</p>
+    </div>
+
+    <form id="enrollmentForm">
+        <div class="form-group">
+            <label>電子郵件 (Email) <span style="color:#e74c3c">*</span></label>
+            <input type="email" id="emailInput" name="email" required>
+            <div class="email-shortcuts">
+                <span class="email-btn" onclick="appendEmail('@msa.hinet.net')">+ @msa.hinet.net</span>
+                <span class="email-btn" onclick="appendEmail('@gmail.com')">+ @gmail.com</span>
+                <span class="email-btn" onclick="appendEmail('@yahoo.com.tw')">+ @yahoo.com.tw</span>
+            </div>
+        </div>
+        <div class="form-group"><label>填表人姓名 <span style="color:#e74c3c">*</span></label><input type="text" name="submitter" required></div>
+
+        <h3>一、 學員基本資料</h3>
+        <div class="form-group"><label>學員姓名 <span style="color:#e74c3c">*</span></label><input type="text" name="studentName" required></div>
+        <div class="form-group">
+            <label>性別 <span style="color:#e74c3c">*</span></label>
+            <select name="gender" required><option value="">請選擇</option><option value="男">男</option><option value="女">女</option></select>
+        </div>
+        <div class="form-group"><label>目前就讀學校 (例如: 三重國小) <span style="color:#e74c3c">*</span></label><input type="text" name="school" required></div>
+        
+        <div class="form-group">
+            <label>暑假過後就讀幾年級 <span style="color:#e74c3c">*</span></label>
+            <select name="grade" required>
+                <option value="">請選擇年級</option>
+                <optgroup label="國小">
+                    <option value="小一">國小一年級</option><option value="小二">國小二年級</option>
+                    <option value="小三">國小三年級</option><option value="小四">國小四年級</option>
+                    <option value="小五">國小五年級</option><option value="小六">國小六年級</option>
+                </optgroup>
+                <optgroup label="國中">
+                    <option value="國一">國中一年級</option><option value="國二">國中二年級</option><option value="國三">國中三年級</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>學員身分證字號 (辦理保險用) <span style="color:#e74c3c">*</span></label>
+            <input type="text" id="idInput" name="idNumber" maxlength="10" placeholder="例如: F123456789" required style="text-transform: uppercase;">
+            <div id="idError" class="error-msg">⚠️ 身分證字號格式錯誤，請重新檢查</div>
+        </div>
+
+        <div class="form-group">
+            <label>出生年月日 (民國年) <span style="color:#e74c3c">*</span></label>
+            <div class="flex-row">
+                <select id="birthYear" required><option value="">年份</option></select>
+                <select id="birthMonth" required><option value="">月份</option></select>
+                <select id="birthDay" required><option value="">日期</option></select>
+            </div>
+            <input type="hidden" name="birthday" id="finalBirthday">
+        </div>
+
+        <div class="form-group"><label>學員健康狀況 (如過敏...，如無請選填「無」) <span style="color:#e74c3c">*</span></label><textarea name="healthStatus" rows="2" required></textarea></div>
+        
+        <div class="form-group">
+            <label>第幾次報名</label>
+            <select name="frequency">
+                <option value="第一次">第一次</option><option value="第二次">第二次</option>
+                <option value="第三次">第三次</option><option value="四次以上">四次以上</option>
+            </select>
+        </div>
+
+        <h3>二、 家長聯繫資訊</h3>
+        <div class="form-group"><label>家長姓名 <span style="color:#e74c3c">*</span></label><input type="text" name="parentName" required></div>
+        
+        <div class="form-group">
+            <label>與學員關係 <span style="color:#e74c3c">*</span></label>
+            <input type="text" name="relationship" list="relationList" placeholder="點擊選擇或自行輸入" required>
+            <datalist id="relationList">
+                <option value="父子"></option><option value="父女"></option>
+                <option value="母子"></option><option value="母女"></option>
+                <option value="祖孫"></option>
+            </datalist>
+        </div>
+
+        <div class="form-group">
+            <label>連絡電話 (市話)</label>
+            <input type="text" id="telInput" name="tel" placeholder="02-XXXX-XXXX" maxlength="12">
+        </div>
+        
+        <div class="form-group">
+            <label>緊急連絡電話 (手機) <span style="color:#e74c3c">*</span></label>
+            <input type="text" id="mobileInput" name="mobile" placeholder="09XX-XXX-XXX" maxlength="12" required>
+        </div>
+        
+        <div class="form-group">
+            <label>聯絡地址 <span style="color:#e74c3c">*</span></label>
+            <div class="flex-row" style="margin-bottom:10px;">
+                <select id="citySelect" required><option value="">選擇縣市</option></select>
+                <select id="districtSelect" required><option value="">選擇鄉鎮市區</option></select>
+            </div>
+            <input type="text" id="addressDetail" placeholder="請輸入街道巷弄號樓" required>
+            <input type="hidden" name="address" id="finalAddress">
+        </div>
+
+        <h3>三、 推薦來源與推薦人</h3>
+        <div class="form-group">
+            <label>推薦報名來自 (可複選)</label>
+            <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="慈誠">慈誠</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="榮董">榮董</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="非會員">非會員</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook">Facebook</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line">Line</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="其他">其他</label>
+            </div>
+        </div>
+        <div class="form-group"><label>推薦人姓名</label><input type="text" name="referrerName"></div>
+        <div class="form-group"><label>推薦人聯絡電話</label><input type="text" name="referrerTel"></div>
+
+        <h3>四、 繳費確認</h3>
+        <div class="form-group"><label>轉帳後五碼及時間日期 (或向誰繳費)</label><input type="text" name="paymentDetail"></div>
+        <div class="form-group"><label>備註</label><textarea name="remark" rows="3"></textarea></div>
+
+        <button type="submit" id="submitBtn" class="submit-btn">確認送出報名表</button>
+    </form>
+</div>
+
+<script>
+    // --- 1. Email 快捷按鈕邏輯 ---
+    function appendEmail(domain) {
+        const emailInput = document.getElementById('emailInput');
+        let val = emailInput.value;
+        if(val.includes('@')) {
+            val = val.substring(0, val.indexOf('@'));
+        }
+        if(val.trim() !== '') {
+            emailInput.value = val + domain;
+        } else {
+            emailInput.value = domain;
+        }
+        emailInput.focus();
+    }
+
+    // --- 2. 電話號碼自動加入 '-' ---
+    document.getElementById('mobileInput').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '');
+        let match = val.match(/^(\d{0,4})(\d{0,3})(\d{0,3})$/);
+        if (match) {
+            e.target.value = !match[2] ? match[1] : match[1] + '-' + match[2] + (match[3] ? '-' + match[3] : '');
+        }
+    });
+
+    document.getElementById('telInput').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '');
+        if(val.length > 0) {
+            if(val.startsWith('02') || val.startsWith('03') || val.startsWith('04') || val.startsWith('05') || val.startsWith('06') || val.startsWith('07') || val.startsWith('08')) {
+                let match = val.match(/^(\d{0,2})(\d{0,4})(\d{0,4})$/);
+                e.target.value = !match[2] ? match[1] : match[1] + '-' + match[2] + (match[3] ? '-' + match[3] : '');
+            } else {
+                let match = val.match(/^(\d{0,4})(\d{0,4})(\d{0,4})$/);
+                e.target.value = !match[2] ? match[1] : match[1] + '-' + match[2] + (match[3] ? '-' + match[3] : '');
+            }
+        }
+    });
+
+    // --- 3. 身分證字號驗證邏輯 ---
+    let isIdValid = false;
+    document.getElementById('idInput').addEventListener('input', function(e) {
+        let id = e.target.value.toUpperCase();
+        e.target.value = id;
+        const errObj = document.getElementById('idError');
+        
+        if (id.length === 0) { errObj.style.display = 'none'; isIdValid = false; return; }
+        if (id.length < 10) { errObj.style.display = 'block'; isIdValid = false; return; }
+        
+        if (!/^[A-Z][12]\d{8}$/.test(id)) {
+            errObj.style.display = 'block'; isIdValid = false; return;
+        }
+        
+        const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
+        const dict = {};
+        for (let i = 0; i < letters.length; i++) dict[letters[i]] = i + 10;
+        
+        const char0 = dict[id[0]];
+        const n0 = Math.floor(char0 / 10);
+        const n1 = char0 % 10;
+        let sum = n0 * 1 + n1 * 9;
+        
+        for (let i = 1; i < 9; i++) {
+            sum += parseInt(id[i]) * (9 - i);
+        }
+        sum += parseInt(id[9]);
+        
+        if (sum % 10 === 0) {
+            errObj.style.display = 'none';
+            isIdValid = true;
+        } else {
+            errObj.style.display = 'block';
+            isIdValid = false;
+        }
+    });
+
+    // --- 4. 生成出生年月日下拉選單 ---
+    window.onload = function() {
+        const ySelect = document.getElementById('birthYear');
+        const mSelect = document.getElementById('birthMonth');
+        const dSelect = document.getElementById('birthDay');
+        
+        for (let i = 90; i <= 110; i++) ySelect.add(new Option('民國 ' + i + ' 年', i));
+        for (let i = 1; i <= 12; i++) mSelect.add(new Option(i + ' 月', String(i).padStart(2, '0')));
+        for (let i = 1; i <= 31; i++) dSelect.add(new Option(i + ' 日', String(i).padStart(2, '0')));
+    };
+
+    // --- 5. 台灣所有縣市與行政區聯動下拉選單 ---
+    const cityData = {
+        "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
+        "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
+        "新北市": ["萬里區", "金山區", "板橋區", "汐止區", "深坑區", "石碇區", "瑞芳區", "平溪區", "雙溪區", "貢寮區", "新店區", "坪林區", "烏來區", "永和區", "中和區", "土城區", "三峽區", "樹林區", "鶯歌區", "三重區", "新莊區", "泰山區", "林口區", "蘆洲區", "五股區", "八里區", "淡水區", "三芝區", "石門區"],
+        "桃園市": ["中壢區", "平鎮區", "龍潭區", "楊梅區", "新屋區", "觀音區", "桃園區", "龜山區", "八德區", "大溪區", "復興區", "大園區", "蘆竹區"],
+        "新竹市": ["東區", "北區", "香山區"],
+        "新竹縣": ["竹北市", "湖口鄉", "新豐鄉", "新埔鎮", "關西鎮", "芎林鄉", "寶山鄉", "竹東鎮", "五峰鄉", "橫山鄉", "尖石鄉", "北埔鄉", "峨眉鄉"],
+        "苗栗縣": ["竹南鎮", "頭份市", "三灣鄉", "南庄鄉", "獅潭鄉", "後龍鎮", "通霄鎮", "苑裡鎮", "苗栗市", "造橋鄉", "頭屋鄉", "公館鄉", "大湖鄉", "泰安鄉", "銅鑼鄉", "三義鄉", "西湖鄉", "卓蘭鎮"],
+        "臺中市": ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "丰原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
+        "彰化縣": ["彰化市", "芬園鄉", "花壇鄉", "秀水鄉", "鹿港鎮", "福興鄉", "線西鄉", "伸港鄉", "和美鎮", "員林市", "社頭鄉", "二水鄉", "田中鎮", "田尾鄉", "埤頭鄉", "溪州鄉", "竹塘鄉", "二林鎮", "大城鄉", "芳苑鄉", "埔鹽鄉", "埔心鄉", "溪湖鎮", "北斗鎮"],
+        "南投縣": ["南投市", "中寮鄉", "草屯鎮", "國姓鄉", "埔里鎮", "仁愛鄉", "名間鄉", "集集鎮", "水里鄉", "魚池鄉", "信義鄉", "竹山鎮", "鹿谷鄉"],
+        "雲林縣": ["斗南鎮", "大埤鄉", "虎尾鎮", "土庫鎮", "褒忠鄉", "東勢鄉", "臺西鄉", "崙背鄉", "麥寮鄉", "斗六市", "林內鄉", "古坑鄉", "莿桐鄉", "西螺鎮", "二崙鄉", "北港鎮", "水林鄉", "口湖鄉", "四湖鄉", "元長鄉"],
+        "嘉義市": ["東區", "西區"],
+        "嘉義縣": ["番路鄉", "梅山鄉", "竹崎鄉", "阿里山鄉", "中埔鄉", "大埔鄉", "水上鄉", "鹿草鄉", "太保市", "朴子市", "東石鄉", "六腳鄉", "新港鄉", "民雄鄉", "大林鎮", "溪口鄉", "義竹鄉", "布袋鎮"],
+        "臺南市": ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
+        "高雄市": ["新興區", "前金區", "苓雅區", "鹽埕區", "鼓山區", "旗津區", "前鎮區", "三民區", "楠梓區", "小港區", "左營區", "仁武區", "大社區", "東沙群島", "南沙群島", "岡山區", "路竹區", "阿蓮區", "田寮區", "燕巢區", "橋頭區", "梓官區", "彌陀區", "永安區", "湖內區", "鳳山區", "大寮區", "林園區", "鳥松區", "大樹區", "旗山區", "美濃區", "六龜區", "內門區", "杉林區", "甲仙區", "桃源區", "那瑪夏區", "茂林區"],
+        "屏東縣": ["屏東市", "三地門鄉", "霧臺鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"],
+        "宜蘭縣": ["宜蘭市", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "羅東鎮", "三星鄉", "大同鄉", "五結鄉", "冬山鄉", "蘇澳鎮", "南澳鄉"],
+        "花蓮縣": ["花蓮市", "新城鄉", "秀林鄉", "吉安鄉", "壽豐鄉", "鳳林鎮", "光復鄉", "豐濱鄉", "瑞穗鄉", "萬榮鄉", "玉里鎮", "卓溪鄉", "富里鄉"],
+        "臺東縣": ["臺東市", "綠島鄉", "蘭嶼鄉", "延平鄉", "卑南鄉", "鹿野鄉", "關山鎮", "海端鄉", "池上鄉", "東河鄉", "成功鎮", "長濱鄉", "太麻里鄉", "金峰鄉", "大武鄉", "達仁鄉"],
+        "澎湖縣": ["馬公市", "西嶼鄉", "望安鄉", "七美鄉", "白沙鄉", "湖西鄉"],
+        "金門縣": ["金沙鎮", "金湖鎮", "金寧鄉", "金城鎮", "烈嶼鄉", "烏坵鄉"],
+        "連江縣": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
+    };
+    
+    const citySelect = document.getElementById('citySelect');
+    const distSelect = document.getElementById('districtSelect');
+    
+    for (let city in cityData) {
+        citySelect.add(new Option(city, city));
+    }
+    
+    citySelect.addEventListener('change', function() {
+        distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
+        if(this.value && cityData[this.value]) {
+            cityData[this.value].forEach(function(dist) {
+                distSelect.add(new Option(dist, dist));
+            });
+        }
+    });
+
+    // --- 6. 表單送出處理 (資料組合與發送) ---
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzG1_P4ZOEx95B1T2-3XbjEDM3VD0ALuYJbNeNCFlda5Tj3jpUc261eMdS4qr722WGV/exec';
+    const form = document.getElementById('enrollmentForm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        if (!isIdValid) {
+            alert("請檢查學員身分證字號是否填寫正確！");
+            document.getElementById('idInput').focus();
+            return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = '正在安全傳送報名資料...';
+
+        const by = document.getElementById('birthYear').value;
+        const bm = document.getElementById('birthMonth').value;
+        const bd = document.getElementById('birthDay').value;
+        document.getElementById('finalBirthday').value = by + bm + bd;
+
+        const c = document.getElementById('citySelect').value;
+        const d = document.getElementById('districtSelect').value;
+        const detail = document.getElementById('addressDetail').value;
+        document.getElementById('finalAddress').value = c + d + detail;
+
+        const formData = new FormData(form);
+        const referrals = [];
+        document.querySelectorAll('input[name="referral"]:checked').forEach(cb => referrals.push(cb.value));
+        
+        const data = Object.fromEntries(formData.entries());
+        data.referral = referrals.join(', '); 
+
+        fetch(scriptURL, { 
+            method: 'POST', 
+            mode: 'no-cors', 
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            alert('報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
+            form.reset();
+            distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
+            document.getElementById('idError').style.display = 'none';
+            isIdValid = false;
+            btn.disabled = false;
+            btn.innerText = '確認送出報名表';
+            window.scrollTo(0, 0);
+        })
+        .catch(error => {
+            alert('傳送失敗，請檢查網路連線。');
+            btn.disabled = false;
+            btn.innerText = '確認送出報名表';
+        });
+    });
+</script>
+
+</body>
+</html>nitial-scale=1.0">
     <title>2026 夏令營報名系統</title>
     <style>
         body { font-family: "Microsoft JhengHei", sans-serif; background-color: #f0f4f8; padding: 20px; color: #333; line-height: 1.6; }
