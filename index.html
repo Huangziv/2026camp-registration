@@ -7,9 +7,12 @@
     <style>
         body { font-family: "Microsoft JhengHei", sans-serif; background-color: #f0f4f8; padding: 20px; color: #333; line-height: 1.6; }
         .container { max-width: 750px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .banner-img { width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: block; }
         h2 { text-align: center; color: #1a5276; margin-bottom: 5px; }
         .notice-box { background-color: #fff4f4; border: 1px solid #ffcccc; padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 0.9em; }
         .warning-text { color: #d9534f; font-weight: bold; }
+        .info-text { color: #0277bd; font-weight: bold; margin-top: 10px; }
+        .bank-box { background-color: #e3f2fd; border: 1px solid #90caf9; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 1em; color: #0d47a1; }
         h3 { background: #d5f5e3; padding: 10px; border-left: 5px solid #27ae60; font-size: 1.1em; margin-top: 30px; color: #1e8449; }
         .form-group { margin-bottom: 18px; }
         label { display: block; margin-bottom: 6px; font-weight: bold; }
@@ -26,16 +29,27 @@
         button.submit-btn { background-color: #27ae60; color: white; padding: 16px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.2em; font-weight: bold; margin-top: 25px; transition: 0.3s; }
         button.submit-btn:hover { background-color: #219150; }
         button.submit-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+        
+        /* 動態隱藏區塊用 */
+        .hidden-group { display: none; background: #fafafa; padding: 15px; border-radius: 6px; border: 1px dashed #ccc; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- 營隊 Banner 圖片 (請確保圖片上傳到 GitHub 並命名為 banner.jpg) -->
+    <img src="banner.jpg" alt="2026 未來之光：探索&科技營" class="banner-img" onerror="this.style.display='none'">
+
     <h2>2026 未來之光：探索&科技營</h2>
     
     <div class="notice-box">
         <p>本資料僅提供2026佛教慈濟基金會三重園區未來之光：探索&科技營使用。</p>
-        <p class="warning-text">【防詐騙提醒】我們不會以任何名義通知更改付款方式或要求您到ATM進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥165反詐騙專線查詢或與我們聯繫：(02)2981-0310。</p>
+        <p class="info-text">
+            📍 營隊時間：<br>
+            7/17 (五) 07:30 ~ 16:50<br>
+            7/18 (六) 07:30 ~ 20:15
+        </p>
+        <p class="warning-text" style="margin-top:15px;">【防詐騙提醒】我們不會以任何名義通知更改付款方式或要求您到ATM進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥165反詐騙專線查詢或與我們聯繫：(02)2981-0310。</p>
     </div>
 
     <form id="enrollmentForm">
@@ -132,7 +146,7 @@
             <input type="hidden" name="address" id="finalAddress">
         </div>
 
-        <h3>三、 推薦來源與推薦人</h3>
+        <h3>三、 推薦來源</h3>
         <div class="form-group">
             <label>推薦報名來自 (可複選)</label>
             <div class="checkbox-group">
@@ -146,18 +160,78 @@
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="其他">其他</label>
             </div>
         </div>
-        <div class="form-group"><label>推薦人姓名</label><input type="text" name="referrerName"></div>
-        <div class="form-group"><label>推薦人聯絡電話</label><input type="text" name="referrerTel"></div>
+        <!-- 刪除原本的推薦人欄位 -->
 
-        <h3>四、 繳費確認</h3>
-        <div class="form-group"><label>轉帳後五碼及時間日期 (或向誰繳費)</label><input type="text" name="paymentDetail"></div>
-        <div class="form-group"><label>備註</label><textarea name="remark" rows="3"></textarea></div>
+        <h3>四、 繳費資訊確認</h3>
+        <div class="bank-box">
+            <strong>匯款帳戶資訊：</strong><br>
+            入帳行：第一銀行泰山分行<br>
+            戶名：吳麗玉<br>
+            帳號：230-50-594499
+        </div>
+
+        <div class="form-group">
+            <label>繳費方式 <span style="color:#e74c3c">*</span></label>
+            <select id="paymentMethodSelect" name="paymentStatus" required>
+                <option value="">請選擇繳費方式</option>
+                <option value="現場繳費">現場繳費</option>
+                <option value="轉帳繳費">轉帳繳費</option>
+                <option value="轉交介紹人">轉交介紹人</option>
+            </select>
+        </div>
+
+        <!-- 選擇轉帳繳費時顯示 -->
+        <div id="transferBlock" class="hidden-group">
+            <label>轉帳後五碼及時間日期 <span style="color:#e74c3c">*</span></label>
+            <input type="text" id="paymentDetailInput" name="paymentDetail" placeholder="例如：12345 (7/1 14:00)">
+        </div>
+
+        <!-- 選擇轉交介紹人時顯示 (沿用 GAS 試算表原本的 referrer 欄位) -->
+        <div id="introducerBlock" class="hidden-group">
+            <div class="form-group" style="margin-bottom:10px;">
+                <label>介紹人姓名 <span style="color:#e74c3c">*</span></label>
+                <input type="text" id="referrerNameInput" name="referrerName" placeholder="請輸入介紹人姓名">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+                <label>介紹人電話 <span style="color:#e74c3c">*</span></label>
+                <input type="text" id="referrerTelInput" name="referrerTel" placeholder="請輸入介紹人電話">
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 18px;"><label>備註</label><textarea name="remark" rows="3"></textarea></div>
 
         <button type="submit" id="submitBtn" class="submit-btn">確認送出報名表</button>
     </form>
 </div>
 
 <script>
+    // --- 0. 繳費方式動態切換 ---
+    document.getElementById('paymentMethodSelect').addEventListener('change', function() {
+        const val = this.value;
+        const transferBlock = document.getElementById('transferBlock');
+        const introducerBlock = document.getElementById('introducerBlock');
+        
+        const paymentDetail = document.getElementById('paymentDetailInput');
+        const refName = document.getElementById('referrerNameInput');
+        const refTel = document.getElementById('referrerTelInput');
+
+        // 重置必填與隱藏
+        transferBlock.style.display = 'none';
+        introducerBlock.style.display = 'none';
+        paymentDetail.required = false;
+        refName.required = false;
+        refTel.required = false;
+
+        if (val === '轉帳繳費') {
+            transferBlock.style.display = 'block';
+            paymentDetail.required = true;
+        } else if (val === '轉交介紹人') {
+            introducerBlock.style.display = 'block';
+            refName.required = true;
+            refTel.required = true;
+        }
+    });
+
     // --- 1. Email 快捷按鈕邏輯 ---
     function appendEmail(domain) {
         const emailInput = document.getElementById('emailInput');
@@ -328,6 +402,8 @@
             alert('報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
             form.reset();
             distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
+            document.getElementById('transferBlock').style.display = 'none';
+            document.getElementById('introducerBlock').style.display = 'none';
             document.getElementById('idError').style.display = 'none';
             isIdValid = false;
             btn.disabled = false;
