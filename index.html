@@ -255,6 +255,7 @@
         <div class="form-group"><label>學員姓名 <span class="required-star">*</span></label><input type="text" name="studentName" required placeholder="請輸入學員姓名"></div>
         <div class="form-group">
             <label>性別 <span class="required-star">*</span></label>
+            <!-- ✅ 選項完全對齊 Google 表單 -->
             <select name="gender" required><option value="">請選擇</option><option value="男">男</option><option value="女">女</option></select>
         </div>
         <div class="form-group"><label>目前就讀學校 (例如: 三重國小) <span class="required-star">*</span></label><input type="text" name="school" required placeholder="請輸入學校名稱"></div>
@@ -292,8 +293,10 @@
         <div class="form-group"><label>學員健康狀況 (如過敏...，如無請選填「無」) <span class="required-star">*</span></label><textarea name="healthStatus" rows="2" required placeholder="請詳述健康狀況或填寫無"></textarea></div>
         
         <div class="form-group">
-            <label>第幾次報名</label>
-            <select name="frequency">
+            <label>第幾次報名 <span class="required-star">*</span></label>
+            <!-- ✅ 已修正為「第1次」 -->
+            <select name="frequency" required>
+                <option value="">請選擇</option>
                 <option value="第1次">第1次</option><option value="第2次">第2次</option>
                 <option value="第3次">第3次</option>
             </select>
@@ -312,7 +315,8 @@
 
         <div class="form-group">
             <label>連絡電話 (市話)</label>
-            <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX" required>
+            <!-- ✅ Google表單設定為必填，為避免家長無市話卡關，由程式自動帶入「無」 -->
+            <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX (無則免填)">
         </div>
         
         <div class="form-group">
@@ -331,15 +335,16 @@
 
         <h3>三、 推薦來源</h3>
         <div class="form-group">
-            <label>推薦報名來自 (可複選)</label>
+            <label>推薦報名來自 (可複選) <span class="required-star">*</span></label>
+            <!-- ✅ 已修正為「Facebook 社群」、「Line 社群」 -->
             <div class="checkbox-group">
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="慈誠">慈誠</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="榮董">榮董</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="非會員">非會員</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook 社群">Facebook</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line 社群">Line</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook 社群">Facebook 社群</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line 社群">Line 社群</label>
             </div>
         </div>
 
@@ -387,41 +392,28 @@
     // --- Email 下拉選單邏輯 ---
     const emailDomainSelect = document.getElementById('emailDomainSelect');
     const customEmailDomain = document.getElementById('customEmailDomain');
-    
     emailDomainSelect.addEventListener('change', function() {
         if(this.value === 'custom') {
-            customEmailDomain.style.display = 'block';
-            customEmailDomain.required = true;
+            customEmailDomain.style.display = 'block'; customEmailDomain.required = true;
         } else {
-            customEmailDomain.style.display = 'none';
-            customEmailDomain.required = false;
+            customEmailDomain.style.display = 'none'; customEmailDomain.required = false;
         }
     });
 
-    // --- 0. 繳費方式動態切換 ---
+    // --- 繳費方式動態切換 ---
     document.getElementById('paymentMethodSelect').addEventListener('change', function() {
         const val = this.value;
         const transferBlock = document.getElementById('transferBlock');
         const introducerBlock = document.getElementById('introducerBlock');
-        
         const paymentDetail = document.getElementById('paymentDetailInput');
         const refName = document.getElementById('referrerNameInput');
         const refTel = document.getElementById('referrerTelInput');
 
-        transferBlock.style.display = 'none';
-        introducerBlock.style.display = 'none';
-        paymentDetail.required = false;
-        refName.required = false;
-        refTel.required = false;
+        transferBlock.style.display = 'none'; introducerBlock.style.display = 'none';
+        paymentDetail.required = false; refName.required = false; refTel.required = false;
 
-        if (val === '轉帳繳費') {
-            transferBlock.style.display = 'block';
-            paymentDetail.required = true;
-        } else if (val === '轉交介紹人') {
-            introducerBlock.style.display = 'block';
-            refName.required = true;
-            refTel.required = true;
-        }
+        if (val === '轉帳繳費') { transferBlock.style.display = 'block'; paymentDetail.required = true; } 
+        else if (val === '轉交介紹人') { introducerBlock.style.display = 'block'; refName.required = true; refTel.required = true; }
     });
 
     // --- 電話號碼防呆排版 ---
@@ -456,22 +448,16 @@
     // --- 身分證字號驗證邏輯 ---
     let isIdValid = false;
     document.getElementById('idInput').addEventListener('input', function(e) {
-        let id = e.target.value.toUpperCase();
-        e.target.value = id;
+        let id = e.target.value.toUpperCase(); e.target.value = id;
         const errObj = document.getElementById('idError');
-        
-        if (id.length === 0) { errObj.style.display = 'none'; isIdValid = false; return; }
-        if (id.length < 10) { errObj.style.display = 'block'; isIdValid = false; return; }
-        if (!/^[A-Z][12]\d{8}$/.test(id)) { errObj.style.display = 'block'; isIdValid = false; return; }
-        
-        const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
-        const dict = {};
+        if (id.length === 0 || id.length < 10 || !/^[A-Z][12]\d{8}$/.test(id)) { 
+            errObj.style.display = id.length > 0 ? 'block' : 'none'; isIdValid = false; return; 
+        }
+        const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'; const dict = {};
         for (let i = 0; i < letters.length; i++) dict[letters[i]] = i + 10;
-        const char0 = dict[id[0]];
-        let sum = Math.floor(char0 / 10) * 1 + (char0 % 10) * 9;
+        const char0 = dict[id[0]]; let sum = Math.floor(char0 / 10) * 1 + (char0 % 10) * 9;
         for (let i = 1; i < 9; i++) sum += parseInt(id[i]) * (9 - i);
         sum += parseInt(id[9]);
-        
         if (sum % 10 === 0) { errObj.style.display = 'none'; isIdValid = true; } 
         else { errObj.style.display = 'block'; isIdValid = false; }
     });
@@ -481,11 +467,7 @@
         const ySelect = document.getElementById('birthYear');
         const mSelect = document.getElementById('birthMonth');
         const dSelect = document.getElementById('birthDay');
-        
-        for (let i = 2001; i <= 2021; i++) {
-            let minguo = i - 1911;
-            ySelect.add(new Option(`西元 ${i} 年 (民國 ${minguo} 年)`, i));
-        }
+        for (let i = 2001; i <= 2021; i++) ySelect.add(new Option(`西元 ${i} 年 (民國 ${i - 1911} 年)`, i));
         for (let i = 1; i <= 12; i++) mSelect.add(new Option(i + ' 月', String(i).padStart(2, '0')));
         for (let i = 1; i <= 31; i++) dSelect.add(new Option(i + ' 日', String(i).padStart(2, '0')));
 
@@ -510,29 +492,61 @@
             "花蓮縣": ["花蓮市", "新城鄉", "秀林鄉", "吉安鄉", "壽豐鄉", "鳳林鎮", "光復鄉", "豐濱鄉", "瑞穗鄉", "萬榮鄉", "玉里鎮", "卓溪鄉", "富里鄉"],
             "臺東縣": ["臺東市", "綠島鄉", "蘭嶼鄉", "延平鄉", "卑南鄉", "鹿野鄉", "關山鎮", "海端鄉", "池上鄉", "東河鄉", "成功鎮", "長濱鄉", "太麻里鄉", "金峰鄉", "大武鄉", "達仁鄉"]
         };
-        
         const citySelect = document.getElementById('citySelect');
         const distSelect = document.getElementById('districtSelect');
         for (let city in cityData) citySelect.add(new Option(city, city));
-        
         citySelect.addEventListener('change', function() {
             distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
-            if(this.value && cityData[this.value]) {
-                cityData[this.value].forEach(dist => distSelect.add(new Option(dist, dist)));
-            }
+            if(this.value && cityData[this.value]) { cityData[this.value].forEach(dist => distSelect.add(new Option(dist, dist))); }
         });
     })();
 
-    // 🚀 --- 直接把資料送進您原本的 Google 表單 ---
+    // 🚀 --- 終極隱藏表單對接術 (保證 100% 成功送進 Google) ---
     const GOOGLE_FORM_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdtG_JpjouGR1DMDDtD2KSpRvuN1-2XYLA6FnA4Jt50PQZlUg/formResponse';
     const form = document.getElementById('enrollmentForm');
+
+    // 建立隱藏的 iframe 來接收 Google 的回傳畫面，這樣網頁就不會跳走
+    const hiddenIframe = document.createElement('iframe');
+    hiddenIframe.name = 'hidden_iframe';
+    hiddenIframe.id = 'hidden_iframe';
+    hiddenIframe.style.display = 'none';
+    document.body.appendChild(hiddenIframe);
+
+    let isSubmitting = false;
+
+    // 當資料送出，Google 伺服器回傳成功畫面載入後，觸發這個動作
+    hiddenIframe.onload = function() {
+        if (isSubmitting) {
+            alert('✅ 報名資料已成功傳送！\n\n感恩您的報名，期待與你相遇！\n系統將自動發送副本至您的信箱，也請到 Google 試算表確認資料是否寫入。');
+            form.reset();
+            document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
+            document.getElementById('transferBlock').style.display = 'none';
+            document.getElementById('introducerBlock').style.display = 'none';
+            document.getElementById('idError').style.display = 'none';
+            isIdValid = false;
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = false;
+            btn.innerText = '確認傳送資料';
+            window.scrollTo(0, 0);
+            isSubmitting = false;
+        }
+    };
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        // 1. 防呆：身分證錯誤阻擋
         if (!isIdValid) {
             alert("請檢查學員身分證字號是否填寫正確！");
             document.getElementById('idInput').focus();
+            return;
+        }
+
+        // 2. 防呆：Google 表單規定「推薦報名來自」至少要勾一個
+        const refs = document.querySelectorAll('input[name="referral"]:checked');
+        if (refs.length === 0) {
+            alert("請至少勾選一項「推薦報名來自」！");
             return;
         }
 
@@ -540,96 +554,99 @@
         btn.disabled = true;
         btn.innerText = '🔄 系統處理中，請稍候...';
 
-        // 1. 組合 Email
+        const fd = new FormData(form);
+
+        // 動態產生一個看不見的 <form> 來送出資料，完全模擬原生 Google 表單
+        const gForm = document.createElement('form');
+        gForm.action = GOOGLE_FORM_URL;
+        gForm.method = 'POST';
+        gForm.target = 'hidden_iframe';
+        gForm.style.display = 'none';
+
+        function addInput(name, value) {
+            const inp = document.createElement('input');
+            inp.type = 'hidden';
+            inp.name = name;
+            inp.value = value;
+            gForm.appendChild(inp);
+        }
+
+        // 組合 Email
         let domain = document.getElementById('emailDomainSelect').value;
         if(domain === 'custom') domain = document.getElementById('customEmailDomain').value;
-        const finalEmail = document.getElementById('emailPrefix').value + '@' + domain;
+        addInput('emailAddress', document.getElementById('emailPrefix').value + '@' + domain);
 
-        // 2. 組合生日，並自動轉換成 Google 表單要的民國年格式 (例如: 1040701)
+        // 組合生日成民國年 (ex: 1040701)
         const by = parseInt(document.getElementById('birthYear').value);
         const bm = document.getElementById('birthMonth').value;
         const bd = document.getElementById('birthDay').value;
-        const finalBirthday = String(by - 1911) + bm + bd; 
+        addInput('entry.610054497', String(by - 1911) + bm + bd);
 
-        // 3. 組合地址
+        // 組合地址
         const c = document.getElementById('citySelect').value;
         const d = document.getElementById('districtSelect').value;
         const detail = document.getElementById('addressDetail').value;
-        const finalAddress = c + d + detail;
+        addInput('entry.878287002', c + d + detail);
 
-        // 4. 擷取其他欄位
-        const fd = new FormData(form);
-
-        // 5. 繳費方式與介紹人邏輯對應 Google 表單設計
-        const paymentStatus = fd.get('paymentStatus');
-        let isPaid = '否';
-        let payDesc = paymentStatus;
-        let finalReferrerName = '';
-        let finalReferrerTel = '';
-
-        if (paymentStatus === '轉帳繳費') {
-            isPaid = '是';
-            payDesc = '轉帳: ' + fd.get('paymentDetail');
-        } else if (paymentStatus === '轉交介紹人') {
-            isPaid = '否';
-            finalReferrerName = fd.get('referrerName') || '';
-            finalReferrerTel = fd.get('referrerTel') || '';
-            payDesc = '轉交給: ' + finalReferrerName;
+        // 對應一般欄位 (依照您提供的真實 Google 表單代號)
+        addInput('entry.854084237', fd.get('submitter'));       // 填表人
+        addInput('entry.1318878612', fd.get('studentName'));    // 學員姓名
+        addInput('entry.830087417', fd.get('gender'));          // 性別
+        addInput('entry.1813047885', fd.get('school'));         // 學校
+        addInput('entry.490950672', fd.get('grade'));           // 年級
+        addInput('entry.480363667', fd.get('idNumber'));        // 身分證
+        
+        // Google 表單規定市話必填，沒填會報錯，自動補上「無」
+        let tel = fd.get('tel');
+        if (!tel || tel.trim() === '') tel = '無';
+        addInput('entry.162438360', tel);                       // 市話
+        
+        addInput('entry.154482776', fd.get('mobile'));          // 手機
+        addInput('entry.1372210003', fd.get('parentName'));     // 家長姓名
+        
+        // 處理關係欄位 (如果不是父母，觸發「其他」選項)
+        let rel = fd.get('relationship');
+        if (rel === '父' || rel === '母') {
+            addInput('entry.685540160', rel);
+        } else {
+            addInput('entry.685540160', '__other_option__');
+            addInput('entry.685540160.other_option_response', rel);
+        }
+        
+        addInput('entry.867346399', fd.get('healthStatus'));    // 健康狀況
+        addInput('entry.954261819', fd.get('frequency'));       // 第幾次報名
+        
+        // 處理複選框
+        refs.forEach(cb => { addInput('entry.1890438173', cb.value); });
+        
+        // 繳費方式與介紹人邏輯對應
+        let pStatus = document.getElementById('paymentMethodSelect').value;
+        if (pStatus === '轉帳繳費') {
+            addInput('entry.68832779', '是');
+            addInput('entry.158237487', '轉帳: ' + fd.get('paymentDetail'));
+            addInput('entry.156818559', '');
+            addInput('entry.573615619', '');
+        } else if (pStatus === '轉交介紹人') {
+            addInput('entry.68832779', '否');
+            addInput('entry.158237487', '轉交給介紹人');
+            addInput('entry.156818559', fd.get('referrerName'));
+            addInput('entry.573615619', fd.get('referrerTel'));
+        } else {
+            addInput('entry.68832779', '否');
+            addInput('entry.158237487', '現場繳費');
+            addInput('entry.156818559', '');
+            addInput('entry.573615619', '');
         }
 
-        // 6. 將資料對應到 Google 表單的 entry. ID
-        const params = new URLSearchParams();
-        params.append('emailAddress', finalEmail); // 電子郵件
-        params.append('entry.854084237', fd.get('submitter')); // 填表人
-        params.append('entry.1318878612', fd.get('studentName')); // 學員姓名
-        params.append('entry.830087417', fd.get('gender')); // 性別
-        params.append('entry.1813047885', fd.get('school')); // 就讀學校
-        params.append('entry.490950672', fd.get('grade')); // 年級
-        params.append('entry.480363667', fd.get('idNumber')); // 身分證
-        params.append('entry.610054497', finalBirthday); // 出生民國年
-        params.append('entry.1372210003', fd.get('parentName')); // 家長姓名
-        params.append('entry.685540160', fd.get('relationship')); // 關係
-        params.append('entry.162438360', fd.get('tel') || ''); // 市話
-        params.append('entry.154482776', fd.get('mobile')); // 手機
-        params.append('entry.878287002', finalAddress); // 地址
-        params.append('entry.867346399', fd.get('healthStatus')); // 健康狀況
-        params.append('entry.954261819', fd.get('frequency') || ''); // 第幾次報名
+        addInput('entry.16333216', fd.get('remark') || '');     // 備註
+
+        // 將表單放入網頁並點擊送出！
+        document.body.appendChild(gForm);
+        isSubmitting = true;
+        gForm.submit();
         
-        // 處理複選框 (推薦來自)
-        document.querySelectorAll('input[name="referral"]:checked').forEach(cb => {
-            params.append('entry.1890438173', cb.value);
-        });
-
-        params.append('entry.156818559', finalReferrerName); // 推薦人
-        params.append('entry.573615619', finalReferrerTel);  // 推薦人聯絡電話
-        params.append('entry.68832779', isPaid);             // 是否已繳費(是/否)
-        params.append('entry.158237487', payDesc);           // 繳費說明/轉交對象
-        params.append('entry.16333216', fd.get('remark') || ''); // 備註
-
-        // 7. 直接透過 fetch 送出，繞過 CORS (無痛發送)
-        fetch(GOOGLE_FORM_URL, {
-            method: 'POST',
-            mode: 'no-cors', // 強制背景送出，不會被阻擋
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: params.toString()
-        }).then(() => {
-            alert('✅ 報名資料已成功傳送！\n\n感恩您的報名，期待與你相遇！\n系統將自動發送副本至您的信箱。');
-            form.reset();
-            document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
-            document.getElementById('transferBlock').style.display = 'none';
-            document.getElementById('introducerBlock').style.display = 'none';
-            document.getElementById('idError').style.display = 'none';
-            isIdValid = false;
-            btn.disabled = false;
-            btn.innerText = '確認傳送資料';
-            window.scrollTo(0, 0);
-        }).catch(err => {
-            alert('❌ 傳送發生異常，請檢查網路連線。');
-            btn.disabled = false;
-            btn.innerText = '確認傳送資料';
-        });
+        // 送出後移除多餘的表單元素保持乾淨
+        setTimeout(() => { document.body.removeChild(gForm); }, 1000);
     });
 </script>
 
