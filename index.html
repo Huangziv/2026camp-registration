@@ -83,7 +83,7 @@
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #a4b0be; letter-spacing: 0.5px; }
         .required-star { color: #ff4757; text-shadow: 0 0 5px #ff4757; }
         
-        input[type="text"], input[type="email"], select, textarea { 
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea { 
             width: 100%; 
             padding: 12px 15px; 
             background: rgba(255, 255, 255, 0.03); 
@@ -178,7 +178,6 @@
 <body>
 
 <div class="container">
-    <!-- 營隊 Banner 圖片 -->
     <img src="banner.jpg" alt="2026 未來之光：探索&科技營" class="banner-img" onerror="this.style.display='none'">
 
     <h2>2026 未來之光：探索&科技營</h2>
@@ -269,14 +268,13 @@
 
         <div class="form-group">
             <label>連絡電話 (市話)</label>
-            <!-- 移除硬性長度限制，交由 JS 處理 -->
-            <input type="text" id="telInput" name="tel" placeholder="02-XXXX-XXXX">
+            <!-- 改用 type="tel" 確保手機只會跳出數字鍵盤 -->
+            <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX">
         </div>
         
         <div class="form-group">
             <label>緊急連絡電話 (手機) <span class="required-star">*</span></label>
-            <!-- 移除硬性長度限制，交由 JS 處理 -->
-            <input type="text" id="mobileInput" name="mobile" placeholder="09XX-XXX-XXX" required>
+            <input type="tel" id="mobileInput" name="mobile" placeholder="09XX-XXX-XXX" required>
         </div>
         
         <div class="form-group">
@@ -334,8 +332,8 @@
             </div>
             <div class="form-group" style="margin-bottom:0;">
                 <label>介紹人電話 <span class="required-star">*</span></label>
-                <!-- 移除硬性長度限制，交由 JS 處理 -->
-                <input type="text" id="referrerTelInput" name="referrerTel" placeholder="09XX-XXX-XXX 或 0X-XXXX-XXXX">
+                <!-- 改用 type="tel" -->
+                <input type="tel" id="referrerTelInput" name="referrerTel" placeholder="09XX-XXX-XXX 或 0X-XXXX-XXXX">
             </div>
         </div>
 
@@ -387,63 +385,70 @@
         emailInput.focus();
     }
 
-    // --- 2. 電話號碼防呆自動排版 (全新邏輯，防止無限增生) ---
-    function formatPhoneNumber(inputElement, isMobile) {
-        inputElement.addEventListener('input', function(e) {
-            // 如果使用者正在按刪除鍵，就不要強迫加上 '-'，讓使用者可以順利刪除
+    // --- 2. 電話號碼完美防呆排版 ---
+    function formatPhoneInput(element, forceMobile) {
+        element.addEventListener('input', function(e) {
+            // 使用者按倒退鍵刪除時，不強制干擾
             if (e.inputType === 'deleteContentBackward') return;
-
-            let val = this.value.replace(/\D/g, ''); // 只保留數字
+            
+            let originalValue = this.value;
+            let val = originalValue.replace(/\D/g, ''); // 只保留數字
             
             if (val.length === 0) {
                 this.value = '';
                 return;
             }
-
-            // 判斷是否為手機 (09 開頭)
-            let isCell = isMobile || val.startsWith('09');
-
+            
+            let isCell = forceMobile || val.startsWith('09');
+            let formatted = '';
+            
             if (isCell) {
-                // 手機最多 10 碼數字
                 val = val.substring(0, 10);
                 if (val.length > 7) {
-                    this.value = val.replace(/(\d{4})(\d{3})(\d{1,3})/, '$1-$2-$3');
+                    formatted = val.substring(0,4) + '-' + val.substring(4,7) + '-' + val.substring(7);
                 } else if (val.length > 4) {
-                    this.value = val.replace(/(\d{4})(\d{1,3})/, '$1-$2');
+                    formatted = val.substring(0,4) + '-' + val.substring(4);
                 } else {
-                    this.value = val;
+                    formatted = val;
                 }
             } else {
-                // 市話最多 10 碼數字 (如 02-1234-5678)
                 val = val.substring(0, 10);
-                // 判斷區碼 (雙北 02 兩碼，其他通常三碼)
                 let isTwoDigitArea = val.startsWith('02');
-                
                 if (isTwoDigitArea) {
                     if (val.length > 6) {
-                        this.value = val.replace(/(\d{2})(\d{4})(\d{1,4})/, '$1-$2-$3');
+                        formatted = val.substring(0,2) + '-' + val.substring(2,6) + '-' + val.substring(6);
                     } else if (val.length > 2) {
-                        this.value = val.replace(/(\d{2})(\d{1,4})/, '$1-$2');
+                        formatted = val.substring(0,2) + '-' + val.substring(2);
                     } else {
-                        this.value = val;
+                        formatted = val;
                     }
                 } else {
                     if (val.length > 6) {
-                        this.value = val.replace(/(\d{3})(\d{3})(\d{1,4})/, '$1-$2-$3');
+                        formatted = val.substring(0,3) + '-' + val.substring(3,6) + '-' + val.substring(6);
                     } else if (val.length > 3) {
-                        this.value = val.replace(/(\d{3})(\d{1,3})/, '$1-$2');
+                        formatted = val.substring(0,3) + '-' + val.substring(3);
                     } else {
-                        this.value = val;
+                        formatted = val;
                     }
                 }
+            }
+            
+            // 【修復重複輸入的關鍵】如果使用者是自己打出「-」的，就保留，不要把整個字串重置
+            if (originalValue.endsWith('-') && formatted.length === originalValue.length - 1) {
+                formatted += '-';
+            }
+            
+            // 只有當「需要排版的結果」跟「目前畫面上的結果」不一樣時才更新畫面
+            if (this.value !== formatted) {
+                this.value = formatted;
             }
         });
     }
 
-    // 綁定三個電話欄位
-    formatPhoneNumber(document.getElementById('mobileInput'), true); // 強制當手機處理
-    formatPhoneNumber(document.getElementById('telInput'), false);   // 自動判斷
-    formatPhoneNumber(document.getElementById('referrerTelInput'), false); // 自動判斷
+    // 分別為三個電話欄位套用新格式化邏輯
+    formatPhoneInput(document.getElementById('mobileInput'), true);   // 強制手機邏輯
+    formatPhoneInput(document.getElementById('telInput'), false);     // 判斷區碼邏輯
+    formatPhoneInput(document.getElementById('referrerTelInput'), false); // 判斷區碼邏輯
 
     // --- 3. 身分證字號驗證邏輯 ---
     let isIdValid = false;
