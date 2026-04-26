@@ -68,7 +68,7 @@
         .warning-text { color: #ff4757; font-weight: bold; text-shadow: 0 0 5px rgba(255, 71, 87, 0.4); }
         .info-text { color: #48dbfb; font-weight: bold; margin-top: 10px; }
         
-        /* 精彩課程卡片設計 (圖標統一化) */
+        /* 精彩課程卡片設計 */
         .course-highlights {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 159, 67, 0.3);
@@ -134,31 +134,21 @@
             color: #ffffff;
             transition: all 0.3s ease;
         }
-        /* 確保手機下拉選單樣式正常 */
-        select {
-            -webkit-appearance: auto;
-            appearance: auto;
-            cursor: pointer;
-        }
+        select { -webkit-appearance: auto; appearance: auto; cursor: pointer; }
         input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
         select option { background: #1c2541; color: #fff; }
         
         input:focus, select:focus, textarea:focus { 
-            outline: none; 
-            border-color: #00e5ff; 
+            outline: none; border-color: #00e5ff; 
             box-shadow: 0 0 12px rgba(0, 229, 255, 0.5); 
             background: rgba(0, 229, 255, 0.05);
         }
 
         /* 複選框美化 */
         .checkbox-group { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
-            gap: 12px; 
-            background: rgba(255, 255, 255, 0.02); 
-            padding: 15px; 
-            border-radius: 8px; 
-            border: 1px solid rgba(255,255,255,0.05);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+            gap: 12px; background: rgba(255, 255, 255, 0.02); padding: 15px; 
+            border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);
         }
         .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.95em; cursor: pointer; color: #dfe4ea; }
         input[type="checkbox"] { accent-color: #00e5ff; width: 18px; height: 18px; cursor: pointer; }
@@ -170,41 +160,18 @@
         
         /* 送出按鈕特效 */
         button.submit-btn { 
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5); 
-            color: white; 
-            padding: 16px; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 1.2em; 
-            font-weight: bold; 
-            margin-top: 30px; 
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 16px; 
+            border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.2em; 
+            font-weight: bold; margin-top: 30px; transition: all 0.3s ease; text-transform: uppercase;
+            letter-spacing: 2px; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
         }
         button.submit-btn:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6); 
+            transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6); 
             background: linear-gradient(45deg, #3a7bd5, #00d2ff);
         }
-        button.submit-btn:disabled { 
-            background: #576574; 
-            box-shadow: none;
-            cursor: not-allowed; 
-            transform: none;
-        }
+        button.submit-btn:disabled { background: #576574; box-shadow: none; cursor: not-allowed; transform: none; }
         
-        .hidden-group { 
-            display: none; 
-            background: rgba(255, 255, 255, 0.02); 
-            padding: 15px; 
-            border-radius: 8px; 
-            border: 1px dashed rgba(0, 229, 255, 0.4); 
-            margin-top: 15px; 
-        }
+        .hidden-group { display: none; background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 8px; border: 1px dashed rgba(0, 229, 255, 0.4); margin-top: 15px; }
 
         /* Email 特殊排版 */
         .email-container { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -263,7 +230,6 @@
 
     <form id="enrollmentForm">
         
-        <!-- 全新設計的 Email 下拉選單區塊 -->
         <div class="form-group">
             <label>電子郵件 (Email) <span class="required-star">*</span></label>
             <div class="email-container">
@@ -279,11 +245,8 @@
                         <option value="custom">其他 (自行輸入)</option>
                     </select>
                 </div>
-                <!-- 選擇其他時才會出現的輸入框 -->
                 <input type="text" id="customEmailDomain" placeholder="輸入網域 (例: abc.com)" style="display:none; flex: 1; min-width: 150px;">
             </div>
-            <!-- 隱藏欄位，送出時負責結合帳號與網域傳給 Excel -->
-            <input type="hidden" name="email" id="finalEmail">
         </div>
 
         <div class="form-group"><label>填表人姓名 <span class="required-star">*</span></label><input type="text" name="submitter" required placeholder="請輸入填表人姓名"></div>
@@ -301,9 +264,9 @@
             <select name="grade" required>
                 <option value="">請選擇年級</option>
                 <optgroup label="國小">
-                    <option value="小一">國小一年級</option><option value="小二">國小二年級</option>
-                    <option value="小三">國小三年級</option><option value="小四">國小四年級</option>
-                    <option value="小五">國小五年級</option><option value="小六">國小六年級</option>
+                    <option value="一年級">國小一年級</option><option value="二年級">國小二年級</option>
+                    <option value="三年級">國小三年級</option><option value="四年級">國小四年級</option>
+                    <option value="五年級">國小五年級</option><option value="六年級">國小六年級</option>
                 </optgroup>
                 <optgroup label="國中">
                     <option value="國一">國中一年級</option><option value="國二">國中二年級</option><option value="國三">國中三年級</option>
@@ -324,7 +287,6 @@
                 <select id="birthMonth" required><option value="">月份</option></select>
                 <select id="birthDay" required><option value="">日期</option></select>
             </div>
-            <input type="hidden" name="birthday" id="finalBirthday">
         </div>
 
         <div class="form-group"><label>學員健康狀況 (如過敏...，如無請選填「無」) <span class="required-star">*</span></label><textarea name="healthStatus" rows="2" required placeholder="請詳述健康狀況或填寫無"></textarea></div>
@@ -332,8 +294,8 @@
         <div class="form-group">
             <label>第幾次報名</label>
             <select name="frequency">
-                <option value="第一次">第一次</option><option value="第二次">第二次</option>
-                <option value="第三次">第三次</option><option value="四次以上">四次以上</option>
+                <option value="第1次">第1次</option><option value="第2次">第2次</option>
+                <option value="第3次">第3次</option>
             </select>
         </div>
 
@@ -344,15 +306,13 @@
             <label>與學員關係 <span class="required-star">*</span></label>
             <input type="text" name="relationship" list="relationList" placeholder="點擊選擇或自行輸入" required>
             <datalist id="relationList">
-                <option value="父子"></option><option value="父女"></option>
-                <option value="母子"></option><option value="母女"></option>
-                <option value="祖孫"></option>
+                <option value="父"></option><option value="母"></option>
             </datalist>
         </div>
 
         <div class="form-group">
             <label>連絡電話 (市話)</label>
-            <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX">
+            <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX" required>
         </div>
         
         <div class="form-group">
@@ -367,7 +327,6 @@
                 <select id="districtSelect" required><option value="">選擇鄉鎮市區</option></select>
             </div>
             <input type="text" id="addressDetail" placeholder="請輸入街道巷弄號樓" required>
-            <input type="hidden" name="address" id="finalAddress">
         </div>
 
         <h3>三、 推薦來源</h3>
@@ -379,9 +338,8 @@
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="慈誠">慈誠</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="榮董">榮董</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="非會員">非會員</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook">Facebook</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line">Line</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="其他">其他</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook 社群">Facebook</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line 社群">Line</label>
             </div>
         </div>
 
@@ -466,57 +424,36 @@
         }
     });
 
-    // --- 2. 電話號碼完美防呆排版 ---
+    // --- 電話號碼防呆排版 ---
     function formatPhoneInput(element, forceMobile) {
         element.addEventListener('input', function(e) {
             if (e.inputType === 'deleteContentBackward') return;
-            let originalValue = this.value;
-            let val = originalValue.replace(/\D/g, '');
+            let val = this.value.replace(/\D/g, '');
             if (val.length === 0) { this.value = ''; return; }
-            
-            let isCell = forceMobile || val.startsWith('09');
-            let formatted = '';
-            
-            if (isCell) {
+            let formatted = val;
+            if (forceMobile || val.startsWith('09')) {
                 val = val.substring(0, 10);
-                if (val.length > 7) {
-                    formatted = val.substring(0,4) + '-' + val.substring(4,7) + '-' + val.substring(7);
-                } else if (val.length > 4) {
-                    formatted = val.substring(0,4) + '-' + val.substring(4);
-                } else {
-                    formatted = val;
-                }
+                if (val.length > 7) formatted = val.substring(0,4) + '-' + val.substring(4,7) + '-' + val.substring(7);
+                else if (val.length > 4) formatted = val.substring(0,4) + '-' + val.substring(4);
             } else {
                 val = val.substring(0, 10);
-                let isTwoDigitArea = val.startsWith('02');
-                if (isTwoDigitArea) {
-                    if (val.length > 6) {
-                        formatted = val.substring(0,2) + '-' + val.substring(2,6) + '-' + val.substring(6);
-                    } else if (val.length > 2) {
-                        formatted = val.substring(0,2) + '-' + val.substring(2);
-                    } else {
-                        formatted = val;
-                    }
+                if (val.startsWith('02')) {
+                    if (val.length > 6) formatted = val.substring(0,2) + '-' + val.substring(2,6) + '-' + val.substring(6);
+                    else if (val.length > 2) formatted = val.substring(0,2) + '-' + val.substring(2);
                 } else {
-                    if (val.length > 6) {
-                        formatted = val.substring(0,3) + '-' + val.substring(3,6) + '-' + val.substring(6);
-                    } else if (val.length > 3) {
-                        formatted = val.substring(0,3) + '-' + val.substring(3);
-                    } else {
-                        formatted = val;
-                    }
+                    if (val.length > 6) formatted = val.substring(0,3) + '-' + val.substring(3,6) + '-' + val.substring(6);
+                    else if (val.length > 3) formatted = val.substring(0,3) + '-' + val.substring(3);
                 }
             }
-            if (originalValue.endsWith('-') && formatted.length === originalValue.length - 1) formatted += '-';
-            if (this.value !== formatted) this.value = formatted;
+            if (this.value.endsWith('-') && formatted.length === this.value.length - 1) formatted += '-';
+            this.value = formatted;
         });
     }
-
     formatPhoneInput(document.getElementById('mobileInput'), true);
     formatPhoneInput(document.getElementById('telInput'), false);
     formatPhoneInput(document.getElementById('referrerTelInput'), false);
 
-    // --- 3. 身分證字號驗證邏輯 ---
+    // --- 身分證字號驗證邏輯 ---
     let isIdValid = false;
     document.getElementById('idInput').addEventListener('input', function(e) {
         let id = e.target.value.toUpperCase();
@@ -530,25 +467,16 @@
         const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
         const dict = {};
         for (let i = 0; i < letters.length; i++) dict[letters[i]] = i + 10;
-        
         const char0 = dict[id[0]];
-        const n0 = Math.floor(char0 / 10);
-        const n1 = char0 % 10;
-        let sum = n0 * 1 + n1 * 9;
-        
+        let sum = Math.floor(char0 / 10) * 1 + (char0 % 10) * 9;
         for (let i = 1; i < 9; i++) sum += parseInt(id[i]) * (9 - i);
         sum += parseInt(id[9]);
         
-        if (sum % 10 === 0) {
-            errObj.style.display = 'none';
-            isIdValid = true;
-        } else {
-            errObj.style.display = 'block';
-            isIdValid = false;
-        }
+        if (sum % 10 === 0) { errObj.style.display = 'none'; isIdValid = true; } 
+        else { errObj.style.display = 'block'; isIdValid = false; }
     });
 
-    // --- 4 & 5. 確保網頁一開啟就立即產生下拉選單 (解決出不來的問題) ---
+    // --- 產生下拉選單 ---
     (function initFormSelects() {
         const ySelect = document.getElementById('birthYear');
         const mSelect = document.getElementById('birthMonth');
@@ -580,35 +508,26 @@
             "屏東縣": ["屏東市", "三地門鄉", "霧臺鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"],
             "宜蘭縣": ["宜蘭市", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "羅東鎮", "三星鄉", "大同鄉", "五結鄉", "冬山鄉", "蘇澳鎮", "南澳鄉"],
             "花蓮縣": ["花蓮市", "新城鄉", "秀林鄉", "吉安鄉", "壽豐鄉", "鳳林鎮", "光復鄉", "豐濱鄉", "瑞穗鄉", "萬榮鄉", "玉里鎮", "卓溪鄉", "富里鄉"],
-            "臺東縣": ["臺東市", "綠島鄉", "蘭嶼鄉", "延平鄉", "卑南鄉", "鹿野鄉", "關山鎮", "海端鄉", "池上鄉", "東河鄉", "成功鎮", "長濱鄉", "太麻里鄉", "金峰鄉", "大武鄉", "達仁鄉"],
-            "澎湖縣": ["馬公市", "西嶼鄉", "望安鄉", "七美鄉", "白沙鄉", "湖西鄉"],
-            "金門縣": ["金沙鎮", "金湖鎮", "金寧鄉", "金城鎮", "烈嶼鄉", "烏坵鄉"],
-            "連江縣": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
+            "臺東縣": ["臺東市", "綠島鄉", "蘭嶼鄉", "延平鄉", "卑南鄉", "鹿野鄉", "關山鎮", "海端鄉", "池上鄉", "東河鄉", "成功鎮", "長濱鄉", "太麻里鄉", "金峰鄉", "大武鄉", "達仁鄉"]
         };
         
         const citySelect = document.getElementById('citySelect');
         const distSelect = document.getElementById('districtSelect');
-        
-        for (let city in cityData) {
-            citySelect.add(new Option(city, city));
-        }
+        for (let city in cityData) citySelect.add(new Option(city, city));
         
         citySelect.addEventListener('change', function() {
             distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
             if(this.value && cityData[this.value]) {
-                cityData[this.value].forEach(function(dist) {
-                    distSelect.add(new Option(dist, dist));
-                });
+                cityData[this.value].forEach(dist => distSelect.add(new Option(dist, dist)));
             }
         });
-    })(); // 括號包起來直接執行
+    })();
 
-    // --- 6. 表單送出處理 (大聲除錯版) ---
-    // 這裡已綁定您最新的 GAS 網址
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby7z86wm4ZC3jL_7r-_nembK81x9ltVnSgIRfhro7rthH08ervXYkVvWKG9ESuXLcKQ/exec';
+    // 🚀 --- 直接把資料送進您原本的 Google 表單 ---
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdtG_JpjouGR1DMDDtD2KSpRvuN1-2XYLA6FnA4Jt50PQZlUg/formResponse';
     const form = document.getElementById('enrollmentForm');
 
-    form.addEventListener('submit', async e => {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
         
         if (!isIdValid) {
@@ -621,52 +540,96 @@
         btn.disabled = true;
         btn.innerText = '🔄 系統處理中，請稍候...';
 
-        // 組合 Email 欄位
+        // 1. 組合 Email
         let domain = document.getElementById('emailDomainSelect').value;
         if(domain === 'custom') domain = document.getElementById('customEmailDomain').value;
-        document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + '@' + domain;
+        const finalEmail = document.getElementById('emailPrefix').value + '@' + domain;
 
-        // 組合生日與地址
-        const by = document.getElementById('birthYear').value;
+        // 2. 組合生日，並自動轉換成 Google 表單要的民國年格式 (例如: 1040701)
+        const by = parseInt(document.getElementById('birthYear').value);
         const bm = document.getElementById('birthMonth').value;
         const bd = document.getElementById('birthDay').value;
-        document.getElementById('finalBirthday').value = by + bm + bd;
+        const finalBirthday = String(by - 1911) + bm + bd; 
 
+        // 3. 組合地址
         const c = document.getElementById('citySelect').value;
         const d = document.getElementById('districtSelect').value;
         const detail = document.getElementById('addressDetail').value;
-        document.getElementById('finalAddress').value = c + d + detail;
+        const finalAddress = c + d + detail;
 
-        const formData = new FormData(form);
-        const referrals = [];
-        document.querySelectorAll('input[name="referral"]:checked').forEach(cb => referrals.push(cb.value));
+        // 4. 擷取其他欄位
+        const fd = new FormData(form);
+
+        // 5. 繳費方式與介紹人邏輯對應 Google 表單設計
+        const paymentStatus = fd.get('paymentStatus');
+        let isPaid = '否';
+        let payDesc = paymentStatus;
+        let finalReferrerName = '';
+        let finalReferrerTel = '';
+
+        if (paymentStatus === '轉帳繳費') {
+            isPaid = '是';
+            payDesc = '轉帳: ' + fd.get('paymentDetail');
+        } else if (paymentStatus === '轉交介紹人') {
+            isPaid = '否';
+            finalReferrerName = fd.get('referrerName') || '';
+            finalReferrerTel = fd.get('referrerTel') || '';
+            payDesc = '轉交給: ' + finalReferrerName;
+        }
+
+        // 6. 將資料對應到 Google 表單的 entry. ID
+        const params = new URLSearchParams();
+        params.append('emailAddress', finalEmail); // 電子郵件
+        params.append('entry.854084237', fd.get('submitter')); // 填表人
+        params.append('entry.1318878612', fd.get('studentName')); // 學員姓名
+        params.append('entry.830087417', fd.get('gender')); // 性別
+        params.append('entry.1813047885', fd.get('school')); // 就讀學校
+        params.append('entry.490950672', fd.get('grade')); // 年級
+        params.append('entry.480363667', fd.get('idNumber')); // 身分證
+        params.append('entry.610054497', finalBirthday); // 出生民國年
+        params.append('entry.1372210003', fd.get('parentName')); // 家長姓名
+        params.append('entry.685540160', fd.get('relationship')); // 關係
+        params.append('entry.162438360', fd.get('tel') || ''); // 市話
+        params.append('entry.154482776', fd.get('mobile')); // 手機
+        params.append('entry.878287002', finalAddress); // 地址
+        params.append('entry.867346399', fd.get('healthStatus')); // 健康狀況
+        params.append('entry.954261819', fd.get('frequency') || ''); // 第幾次報名
         
-        const data = Object.fromEntries(formData.entries());
-        data.referral = referrals.join(', '); 
+        // 處理複選框 (推薦來自)
+        document.querySelectorAll('input[name="referral"]:checked').forEach(cb => {
+            params.append('entry.1890438173', cb.value);
+        });
 
-        try {
-            const response = await fetch(scriptURL, { 
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
+        params.append('entry.156818559', finalReferrerName); // 推薦人
+        params.append('entry.573615619', finalReferrerTel);  // 推薦人聯絡電話
+        params.append('entry.68832779', isPaid);             // 是否已繳費(是/否)
+        params.append('entry.158237487', payDesc);           // 繳費說明/轉交對象
+        params.append('entry.16333216', fd.get('remark') || ''); // 備註
 
-            if(response.ok) {
-                alert('✅ 報名資料已成功傳送！\n系統將自動分配編號並寄送 Email 通知，請至信箱查收。');
-                form.reset();
-                document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
-                document.getElementById('transferBlock').style.display = 'none';
-                document.getElementById('introducerBlock').style.display = 'none';
-                document.getElementById('idError').style.display = 'none';
-                isIdValid = false;
-            } else {
-                alert('❌ Google 伺服器拒絕了請求。\n狀態碼: ' + response.status);
-            }
-        } catch (error) {
-            alert('🚨 嚴重錯誤！資料傳送被擋下。\n這通常是因為 Apps Script 沒有設定為「所有人皆可存取」或遭遇到 CORS 跨域阻擋。\n\n錯誤詳情：\n' + error.message);
-        } finally {
+        // 7. 直接透過 fetch 送出，繞過 CORS (無痛發送)
+        fetch(GOOGLE_FORM_URL, {
+            method: 'POST',
+            mode: 'no-cors', // 強制背景送出，不會被阻擋
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params.toString()
+        }).then(() => {
+            alert('✅ 報名資料已成功傳送！\n\n感恩您的報名，期待與你相遇！\n系統將自動發送副本至您的信箱。');
+            form.reset();
+            document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
+            document.getElementById('transferBlock').style.display = 'none';
+            document.getElementById('introducerBlock').style.display = 'none';
+            document.getElementById('idError').style.display = 'none';
+            isIdValid = false;
             btn.disabled = false;
             btn.innerText = '確認傳送資料';
-        }
+            window.scrollTo(0, 0);
+        }).catch(err => {
+            alert('❌ 傳送發生異常，請檢查網路連線。');
+            btn.disabled = false;
+            btn.innerText = '確認傳送資料';
+        });
     });
 </script>
 
