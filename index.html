@@ -6,174 +6,42 @@
     <title>2026 科技夏令營報名系統</title>
     <style>
         /* 科技風背景與全局設定 */
-        body { 
-            font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; 
-            background: linear-gradient(135deg, #0b132b, #1c2541, #0a1128); 
-            color: #e0e6ed; 
-            line-height: 1.6; 
-            padding: 20px; 
-            min-height: 100vh;
-        }
-        
-        /* 毛玻璃透明容器 */
-        .container { 
-            max-width: 750px; 
-            margin: auto; 
-            background: rgba(11, 19, 43, 0.7); 
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 30px; 
-            border-radius: 15px; 
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1); 
-        }
-
-        .banner-img { 
-            width: 100%; 
-            border-radius: 10px; 
-            margin-bottom: 25px; 
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); 
-            display: block; 
-            border: 1px solid rgba(0, 229, 255, 0.5);
-        }
-
-        h2 { 
-            text-align: center; 
-            color: #00e5ff; 
-            margin-bottom: 5px; 
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-            letter-spacing: 2px;
-        }
-        
-        h3 { 
-            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent); 
-            padding: 10px 15px; 
-            border-left: 4px solid #00e5ff; 
-            font-size: 1.1em; 
-            margin-top: 35px; 
-            color: #00e5ff; 
-            border-radius: 0 8px 8px 0;
-            text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
-        }
-
-        /* 警告與資訊區塊 */
-        .notice-box { 
-            background-color: rgba(255, 71, 87, 0.05); 
-            border: 1px solid rgba(255, 71, 87, 0.3); 
-            padding: 15px; 
-            border-radius: 8px; 
-            margin-bottom: 25px; 
-            font-size: 0.95em; 
-        }
+        body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; background: linear-gradient(135deg, #0b132b, #1c2541, #0a1128); color: #e0e6ed; line-height: 1.6; padding: 20px; min-height: 100vh; }
+        .container { max-width: 750px; margin: auto; background: rgba(11, 19, 43, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 30px; border-radius: 15px; border: 1px solid rgba(0, 229, 255, 0.2); box-shadow: 0 0 30px rgba(0, 229, 255, 0.1); }
+        .banner-img { width: 100%; border-radius: 10px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); display: block; border: 1px solid rgba(0, 229, 255, 0.5); }
+        h2 { text-align: center; color: #00e5ff; margin-bottom: 5px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); letter-spacing: 2px; }
+        h3 { background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent); padding: 10px 15px; border-left: 4px solid #00e5ff; font-size: 1.1em; margin-top: 35px; color: #00e5ff; border-radius: 0 8px 8px 0; text-shadow: 0 0 5px rgba(0, 229, 255, 0.3); }
+        .notice-box { background-color: rgba(255, 71, 87, 0.05); border: 1px solid rgba(255, 71, 87, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 0.95em; }
         .warning-text { color: #ff4757; font-weight: bold; text-shadow: 0 0 5px rgba(255, 71, 87, 0.4); }
         .info-text { color: #48dbfb; font-weight: bold; margin-top: 10px; }
-        
-        /* 精彩課程卡片設計 */
-        .course-highlights {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 159, 67, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px rgba(255, 159, 67, 0.05);
-        }
-        .course-highlights h3 {
-            margin-top: 0;
-            border-left-color: #ff9f43;
-            color: #ff9f43;
-            text-shadow: 0 0 5px rgba(255, 159, 67, 0.3);
-            background: linear-gradient(90deg, rgba(255, 159, 67, 0.15), transparent);
-        }
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .course-card {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(255, 159, 67, 0.2);
-            border-color: rgba(255, 159, 67, 0.5);
-        }
+        .course-highlights { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 159, 67, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; box-shadow: 0 0 15px rgba(255, 159, 67, 0.05); }
+        .course-highlights h3 { margin-top: 0; border-left-color: #ff9f43; color: #ff9f43; text-shadow: 0 0 5px rgba(255, 159, 67, 0.3); background: linear-gradient(90deg, rgba(255, 159, 67, 0.15), transparent); }
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+        .course-card { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(255, 159, 67, 0.2); border-color: rgba(255, 159, 67, 0.5); }
         .course-icon { font-size: 2.2em; margin-bottom: 10px; text-align: center; }
         .course-title { color: #ff9f43; font-weight: bold; margin-bottom: 5px; font-size: 1.05em; text-align: center; }
         .course-desc { font-size: 0.85em; color: #ced6e0; text-align: left; }
         .course-desc-center { font-size: 0.85em; color: #ced6e0; text-align: center; }
-
-        .bank-box { 
-            background-color: rgba(46, 213, 115, 0.05); 
-            border: 1px solid rgba(46, 213, 115, 0.3); 
-            padding: 15px; 
-            border-radius: 8px; 
-            margin-bottom: 15px; 
-            font-size: 1em; 
-            color: #2ed573; 
-        }
-
-        /* 表單元素科技化 */
+        .bank-box { background-color: rgba(46, 213, 115, 0.05); border: 1px solid rgba(46, 213, 115, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 1em; color: #2ed573; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #a4b0be; letter-spacing: 0.5px; }
         .required-star { color: #ff4757; text-shadow: 0 0 5px #ff4757; }
-        
-        input[type="text"], input[type="email"], input[type="tel"], select, textarea { 
-            width: 100%; 
-            padding: 12px 15px; 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(0, 229, 255, 0.3); 
-            border-radius: 6px; 
-            box-sizing: border-box; 
-            font-size: 1em; 
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea { width: 100%; padding: 12px 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 6px; box-sizing: border-box; font-size: 1em; color: #ffffff; transition: all 0.3s ease; }
         select { -webkit-appearance: auto; appearance: auto; cursor: pointer; }
         input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
         select option { background: #1c2541; color: #fff; }
-        
-        input:focus, select:focus, textarea:focus { 
-            outline: none; border-color: #00e5ff; 
-            box-shadow: 0 0 12px rgba(0, 229, 255, 0.5); 
-            background: rgba(0, 229, 255, 0.05);
-        }
-
-        /* 複選框美化 */
-        .checkbox-group { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
-            gap: 12px; background: rgba(255, 255, 255, 0.02); padding: 15px; 
-            border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);
-        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #00e5ff; box-shadow: 0 0 12px rgba(0, 229, 255, 0.5); background: rgba(0, 229, 255, 0.05); }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
         .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.95em; cursor: pointer; color: #dfe4ea; }
         input[type="checkbox"] { accent-color: #00e5ff; width: 18px; height: 18px; cursor: pointer; }
-
         .flex-row { display: flex; gap: 10px; width: 100%; }
         .flex-row > * { flex: 1; min-width: 0; }
-        
         .error-msg { color: #ff4757; font-size: 0.85em; margin-top: 5px; display: none; text-shadow: 0 0 5px rgba(255,71,87,0.5); }
-        
-        /* 送出按鈕特效 */
-        button.submit-btn { 
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 16px; 
-            border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.2em; 
-            font-weight: bold; margin-top: 30px; transition: all 0.3s ease; text-transform: uppercase;
-            letter-spacing: 2px; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
-        }
-        button.submit-btn:hover { 
-            transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6); 
-            background: linear-gradient(45deg, #3a7bd5, #00d2ff);
-        }
+        button.submit-btn { background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 16px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.2em; font-weight: bold; margin-top: 30px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4); }
+        button.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6); background: linear-gradient(45deg, #3a7bd5, #00d2ff); }
         button.submit-btn:disabled { background: #576574; box-shadow: none; cursor: not-allowed; transform: none; }
-        
         .hidden-group { display: none; background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 8px; border: 1px dashed rgba(0, 229, 255, 0.4); margin-top: 15px; }
-
-        /* Email 特殊排版 */
         .email-container { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .email-core { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 250px; }
     </style>
@@ -195,36 +63,15 @@
         <p class="warning-text" style="margin-top:15px;">【防詐騙提醒】我們不會以任何名義通知更改付款方式或要求您到ATM進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥165反詐騙專線查詢或與我們聯繫：(02)2981-0310。</p>
     </div>
 
-    <!-- 吸引人的課程資訊區塊 -->
     <div class="course-highlights">
         <h3>✨ 營隊亮點與精彩課程 ✨</h3>
         <p style="font-size:0.9em; color:#a4b0be; margin-top:-5px;">精心設計的兩日探索之旅，結合靜態與動態，激發孩子無限潛能！</p>
         <div class="cards-container">
-            <div class="course-card">
-                <div class="course-icon">🚀</div>
-                <div class="course-title">前瞻科技探索</div>
-                <div class="course-desc">邀請黃子軒師兄親自帶領，結合最新科技趨勢，啟發孩子對未知領域的好奇心與創造力。</div>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">🌿</div>
-                <div class="course-title">戶外探索體驗</div>
-                <div class="course-desc">跟著黃建豪師兄走進自然，在戶外活動中學習互助合作，勇敢迎接挑戰並突破自我。</div>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">🎭</div>
-                <div class="course-title">多元潛能開發</div>
-                <div class="course-desc">豐富的才藝分組：勁歌熱舞、傳統戲曲、魔法音樂輔療、旗陣演練，發掘每位孩子專屬天賦！</div>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">⚖️</div>
-                <div class="course-title">生活法律與防毒</div>
-                <div class="course-desc">黃川裕律師專業開講，以淺顯易懂的方式建立正確價值觀與校園自我保護意識。</div>
-            </div>
-            <div class="course-card" style="grid-column: 1 / -1;">
-                <div class="course-icon">🌟</div>
-                <div class="course-title">星光人文之夜 (7/18 晚間)</div>
-                <div class="course-desc-center">愛的饗宴、震撼舞龍展演、粉墨登場、親子同樂競賽與各隊創意表演，創造難忘的夏夜回憶。</div>
-            </div>
+            <div class="course-card"><div class="course-icon">🚀</div><div class="course-title">前瞻科技探索</div><div class="course-desc">邀請黃子軒師兄親自帶領，結合最新科技趨勢，啟發孩子對未知領域的好奇心與創造力。</div></div>
+            <div class="course-card"><div class="course-icon">🌿</div><div class="course-title">戶外探索體驗</div><div class="course-desc">跟著黃建豪師兄走進自然，在戶外活動中學習互助合作，勇敢迎接挑戰並突破自我。</div></div>
+            <div class="course-card"><div class="course-icon">🎭</div><div class="course-title">多元潛能開發</div><div class="course-desc">豐富的才藝分組：勁歌熱舞、傳統戲曲、魔法音樂輔療、旗陣演練，發掘每位孩子專屬天賦！</div></div>
+            <div class="course-card"><div class="course-icon">⚖️</div><div class="course-title">生活法律與防毒</div><div class="course-desc">黃川裕律師專業開講，以淺顯易懂的方式建立正確價值觀與校園自我保護意識。</div></div>
+            <div class="course-card" style="grid-column: 1 / -1;"><div class="course-icon">🌟</div><div class="course-title">星光人文之夜 (7/18 晚間)</div><div class="course-desc-center">愛的饗宴、震撼舞龍展演、粉墨登場、親子同樂競賽與各隊創意表演，創造難忘的夏夜回憶。</div></div>
         </div>
     </div>
 
@@ -247,17 +94,14 @@
                 </div>
                 <input type="text" id="customEmailDomain" placeholder="輸入網域 (例: abc.com)" style="display:none; flex: 1; min-width: 150px;">
             </div>
+            <input type="hidden" name="email" id="finalEmail">
         </div>
 
         <div class="form-group"><label>填表人姓名 <span class="required-star">*</span></label><input type="text" name="submitter" required placeholder="請輸入填表人姓名"></div>
 
         <h3>一、 學員基本資料</h3>
         <div class="form-group"><label>學員姓名 <span class="required-star">*</span></label><input type="text" name="studentName" required placeholder="請輸入學員姓名"></div>
-        <div class="form-group">
-            <label>性別 <span class="required-star">*</span></label>
-            <!-- ✅ 選項完全對齊 Google 表單 -->
-            <select name="gender" required><option value="">請選擇</option><option value="男">男</option><option value="女">女</option></select>
-        </div>
+        <div class="form-group"><label>性別 <span class="required-star">*</span></label><select name="gender" required><option value="">請選擇</option><option value="男">男</option><option value="女">女</option></select></div>
         <div class="form-group"><label>目前就讀學校 (例如: 三重國小) <span class="required-star">*</span></label><input type="text" name="school" required placeholder="請輸入學校名稱"></div>
         
         <div class="form-group">
@@ -265,9 +109,8 @@
             <select name="grade" required>
                 <option value="">請選擇年級</option>
                 <optgroup label="國小">
-                    <option value="一年級">國小一年級</option><option value="二年級">國小二年級</option>
-                    <option value="三年級">國小三年級</option><option value="四年級">國小四年級</option>
-                    <option value="五年級">國小五年級</option><option value="六年級">國小六年級</option>
+                    <option value="一年級">國小一年級</option><option value="二年級">國小二年級</option><option value="三年級">國小三年級</option>
+                    <option value="四年級">國小四年級</option><option value="五年級">國小五年級</option><option value="六年級">國小六年級</option>
                 </optgroup>
                 <optgroup label="國中">
                     <option value="國一">國中一年級</option><option value="國二">國中二年級</option><option value="國三">國中三年級</option>
@@ -288,41 +131,26 @@
                 <select id="birthMonth" required><option value="">月份</option></select>
                 <select id="birthDay" required><option value="">日期</option></select>
             </div>
+            <input type="hidden" name="birthday" id="finalBirthday">
         </div>
 
         <div class="form-group"><label>學員健康狀況 (如過敏...，如無請選填「無」) <span class="required-star">*</span></label><textarea name="healthStatus" rows="2" required placeholder="請詳述健康狀況或填寫無"></textarea></div>
         
         <div class="form-group">
             <label>第幾次報名 <span class="required-star">*</span></label>
-            <!-- ✅ 已修正為「第1次」 -->
-            <select name="frequency" required>
-                <option value="">請選擇</option>
-                <option value="第1次">第1次</option><option value="第2次">第2次</option>
-                <option value="第3次">第3次</option>
-            </select>
+            <select name="frequency" required><option value="">請選擇</option><option value="第一次">第一次</option><option value="第二次">第二次</option><option value="第三次">第三次</option></select>
         </div>
 
         <h3>二、 家長聯繫資訊</h3>
         <div class="form-group"><label>家長姓名 <span class="required-star">*</span></label><input type="text" name="parentName" required placeholder="請輸入家長姓名"></div>
-        
         <div class="form-group">
             <label>與學員關係 <span class="required-star">*</span></label>
             <input type="text" name="relationship" list="relationList" placeholder="點擊選擇或自行輸入" required>
-            <datalist id="relationList">
-                <option value="父"></option><option value="母"></option>
-            </datalist>
+            <datalist id="relationList"><option value="父"></option><option value="母"></option></datalist>
         </div>
 
-        <div class="form-group">
-            <label>連絡電話 (市話)</label>
-            <!-- ✅ Google表單設定為必填，為避免家長無市話卡關，由程式自動帶入「無」 -->
-            <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX (無則免填)">
-        </div>
-        
-        <div class="form-group">
-            <label>緊急連絡電話 (手機) <span class="required-star">*</span></label>
-            <input type="tel" id="mobileInput" name="mobile" placeholder="09XX-XXX-XXX" required>
-        </div>
+        <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX (無則免填)"></div>
+        <div class="form-group"><label>緊急連絡電話 (手機) <span class="required-star">*</span></label><input type="tel" id="mobileInput" name="mobile" placeholder="09XX-XXX-XXX" required></div>
         
         <div class="form-group">
             <label>聯絡地址 <span class="required-star">*</span></label>
@@ -331,20 +159,20 @@
                 <select id="districtSelect" required><option value="">選擇鄉鎮市區</option></select>
             </div>
             <input type="text" id="addressDetail" placeholder="請輸入街道巷弄號樓" required>
+            <input type="hidden" name="address" id="finalAddress">
         </div>
 
         <h3>三、 推薦來源</h3>
         <div class="form-group">
             <label>推薦報名來自 (可複選) <span class="required-star">*</span></label>
-            <!-- ✅ 已修正為「Facebook 社群」、「Line 社群」 -->
             <div class="checkbox-group">
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="慈誠">慈誠</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="榮董">榮董</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="非會員">非會員</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook 社群">Facebook 社群</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line 社群">Line 社群</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook 社群">Facebook</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line 社群">Line</label>
             </div>
         </div>
 
@@ -372,14 +200,8 @@
         </div>
 
         <div id="introducerBlock" class="hidden-group">
-            <div class="form-group" style="margin-bottom:10px;">
-                <label>介紹人姓名 <span class="required-star">*</span></label>
-                <input type="text" id="referrerNameInput" name="referrerName" placeholder="請輸入介紹人姓名">
-            </div>
-            <div class="form-group" style="margin-bottom:0;">
-                <label>介紹人電話 <span class="required-star">*</span></label>
-                <input type="tel" id="referrerTelInput" name="referrerTel" placeholder="09XX-XXX-XXX 或 0X-XXXX-XXXX">
-            </div>
+            <div class="form-group" style="margin-bottom:10px;"><label>介紹人姓名 <span class="required-star">*</span></label><input type="text" id="referrerNameInput" name="referrerName" placeholder="請輸入介紹人姓名"></div>
+            <div class="form-group" style="margin-bottom:0;"><label>介紹人電話 <span class="required-star">*</span></label><input type="tel" id="referrerTelInput" name="referrerTel" placeholder="09XX-XXX-XXX 或 0X-XXXX-XXXX"></div>
         </div>
 
         <div class="form-group" style="margin-top: 18px;"><label>備註</label><textarea name="remark" rows="3" placeholder="如有其他需求請填寫於此"></textarea></div>
@@ -389,111 +211,34 @@
 </div>
 
 <script>
-    // --- Email 下拉選單邏輯 ---
+    // --- Email 邏輯 ---
     const emailDomainSelect = document.getElementById('emailDomainSelect');
     const customEmailDomain = document.getElementById('customEmailDomain');
     emailDomainSelect.addEventListener('change', function() {
-        if(this.value === 'custom') {
-            customEmailDomain.style.display = 'block'; customEmailDomain.required = true;
-        } else {
-            customEmailDomain.style.display = 'none'; customEmailDomain.required = false;
-        }
+        if(this.value === 'custom') { customEmailDomain.style.display = 'block'; customEmailDomain.required = true; } 
+        else { customEmailDomain.style.display = 'none'; customEmailDomain.required = false; }
     });
 
-    // --- 繳費方式動態切換 ---
+    // --- 繳費切換邏輯 ---
     document.getElementById('paymentMethodSelect').addEventListener('change', function() {
         const val = this.value;
-        const transferBlock = document.getElementById('transferBlock');
-        const introducerBlock = document.getElementById('introducerBlock');
-        const paymentDetail = document.getElementById('paymentDetailInput');
-        const refName = document.getElementById('referrerNameInput');
-        const refTel = document.getElementById('referrerTelInput');
-
+        const transferBlock = document.getElementById('transferBlock'); const introducerBlock = document.getElementById('introducerBlock');
+        const paymentDetail = document.getElementById('paymentDetailInput'); const refName = document.getElementById('referrerNameInput'); const refTel = document.getElementById('referrerTelInput');
         transferBlock.style.display = 'none'; introducerBlock.style.display = 'none';
         paymentDetail.required = false; refName.required = false; refTel.required = false;
-
         if (val === '轉帳繳費') { transferBlock.style.display = 'block'; paymentDetail.required = true; } 
         else if (val === '轉交介紹人') { introducerBlock.style.display = 'block'; refName.required = true; refTel.required = true; }
     });
 
-    // --- 電話號碼防呆排版 ---
-    function formatPhoneInput(element, forceMobile) {
-        element.addEventListener('input', function(e) {
-            if (e.inputType === 'deleteContentBackward') return;
-            let val = this.value.replace(/\D/g, '');
-            if (val.length === 0) { this.value = ''; return; }
-            let formatted = val;
-            if (forceMobile || val.startsWith('09')) {
-                val = val.substring(0, 10);
-                if (val.length > 7) formatted = val.substring(0,4) + '-' + val.substring(4,7) + '-' + val.substring(7);
-                else if (val.length > 4) formatted = val.substring(0,4) + '-' + val.substring(4);
-            } else {
-                val = val.substring(0, 10);
-                if (val.startsWith('02')) {
-                    if (val.length > 6) formatted = val.substring(0,2) + '-' + val.substring(2,6) + '-' + val.substring(6);
-                    else if (val.length > 2) formatted = val.substring(0,2) + '-' + val.substring(2);
-                } else {
-                    if (val.length > 6) formatted = val.substring(0,3) + '-' + val.substring(3,6) + '-' + val.substring(6);
-                    else if (val.length > 3) formatted = val.substring(0,3) + '-' + val.substring(3);
-                }
-            }
-            if (this.value.endsWith('-') && formatted.length === this.value.length - 1) formatted += '-';
-            this.value = formatted;
-        });
-    }
-    formatPhoneInput(document.getElementById('mobileInput'), true);
-    formatPhoneInput(document.getElementById('telInput'), false);
-    formatPhoneInput(document.getElementById('referrerTelInput'), false);
-
-    // --- 身分證字號驗證邏輯 ---
-    let isIdValid = false;
-    document.getElementById('idInput').addEventListener('input', function(e) {
-        let id = e.target.value.toUpperCase(); e.target.value = id;
-        const errObj = document.getElementById('idError');
-        if (id.length === 0 || id.length < 10 || !/^[A-Z][12]\d{8}$/.test(id)) { 
-            errObj.style.display = id.length > 0 ? 'block' : 'none'; isIdValid = false; return; 
-        }
-        const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'; const dict = {};
-        for (let i = 0; i < letters.length; i++) dict[letters[i]] = i + 10;
-        const char0 = dict[id[0]]; let sum = Math.floor(char0 / 10) * 1 + (char0 % 10) * 9;
-        for (let i = 1; i < 9; i++) sum += parseInt(id[i]) * (9 - i);
-        sum += parseInt(id[9]);
-        if (sum % 10 === 0) { errObj.style.display = 'none'; isIdValid = true; } 
-        else { errObj.style.display = 'block'; isIdValid = false; }
-    });
-
-    // --- 產生下拉選單 ---
+    // --- 產生選項邏輯 ---
     (function initFormSelects() {
-        const ySelect = document.getElementById('birthYear');
-        const mSelect = document.getElementById('birthMonth');
-        const dSelect = document.getElementById('birthDay');
+        const ySelect = document.getElementById('birthYear'); const mSelect = document.getElementById('birthMonth'); const dSelect = document.getElementById('birthDay');
         for (let i = 2001; i <= 2021; i++) ySelect.add(new Option(`西元 ${i} 年 (民國 ${i - 1911} 年)`, i));
         for (let i = 1; i <= 12; i++) mSelect.add(new Option(i + ' 月', String(i).padStart(2, '0')));
         for (let i = 1; i <= 31; i++) dSelect.add(new Option(i + ' 日', String(i).padStart(2, '0')));
 
-        const cityData = {
-            "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
-            "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
-            "新北市": ["萬里區", "金山區", "板橋區", "汐止區", "深坑區", "石碇區", "瑞芳區", "平溪區", "雙溪區", "貢寮區", "新店區", "坪林區", "烏來區", "永和區", "中和區", "土城區", "三峽區", "樹林區", "鶯歌區", "三重區", "新莊區", "泰山區", "林口區", "蘆洲區", "五股區", "八里區", "淡水區", "三芝區", "石門區"],
-            "桃園市": ["中壢區", "平鎮區", "龍潭區", "楊梅區", "新屋區", "觀音區", "桃園區", "龜山區", "八德區", "大溪區", "復興區", "大園區", "蘆竹區"],
-            "新竹市": ["東區", "北區", "香山區"],
-            "新竹縣": ["竹北市", "湖口鄉", "新豐鄉", "新埔鎮", "關西鎮", "芎林鄉", "寶山鄉", "竹東鎮", "五峰鄉", "橫山鄉", "尖石鄉", "北埔鄉", "峨眉鄉"],
-            "苗栗縣": ["竹南鎮", "頭份市", "三灣鄉", "南庄鄉", "獅潭鄉", "後龍鎮", "通霄鎮", "苑裡鎮", "苗栗市", "造橋鄉", "頭屋鄉", "公館鄉", "大湖鄉", "泰安鄉", "銅鑼鄉", "三義鄉", "西湖鄉", "卓蘭鎮"],
-            "臺中市": ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
-            "彰化縣": ["彰化市", "芬園鄉", "花壇鄉", "秀水鄉", "鹿港鎮", "福興鄉", "線西鄉", "伸港鄉", "和美鎮", "員林市", "社頭鄉", "二水鄉", "田中鎮", "田尾鄉", "埤頭鄉", "溪州鄉", "竹塘鄉", "二林鎮", "大城鄉", "芳苑鄉", "埔鹽鄉", "埔心鄉", "溪湖鎮", "北斗鎮"],
-            "南投縣": ["南投市", "中寮鄉", "草屯鎮", "國姓鄉", "埔里鎮", "仁愛鄉", "名間鄉", "集集鎮", "水里鄉", "魚池鄉", "信義鄉", "竹山鎮", "鹿谷鄉"],
-            "雲林縣": ["斗南鎮", "大埤鄉", "虎尾鎮", "土庫鎮", "褒忠鄉", "東勢鄉", "臺西鄉", "崙背鄉", "麥寮鄉", "斗六市", "林內鄉", "古坑鄉", "莿桐鄉", "西螺鎮", "二崙鄉", "北港鎮", "水林鄉", "口湖鄉", "四湖鄉", "元長鄉"],
-            "嘉義市": ["東區", "西區"],
-            "嘉義縣": ["番路鄉", "梅山鄉", "竹崎鄉", "阿里山鄉", "中埔鄉", "大埔鄉", "水上鄉", "鹿草鄉", "太保市", "朴子市", "東石鄉", "六腳鄉", "新港鄉", "民雄鄉", "大林鎮", "溪口鄉", "義竹鄉", "布袋鎮"],
-            "臺南市": ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
-            "高雄市": ["新興區", "前金區", "苓雅區", "鹽埕區", "鼓山區", "旗津區", "前鎮區", "三民區", "楠梓區", "小港區", "左營區", "仁武區", "大社區", "東沙群島", "南沙群島", "岡山區", "路竹區", "阿蓮區", "田寮區", "燕巢區", "橋頭區", "梓官區", "彌陀區", "永安區", "湖內區", "鳳山區", "大寮區", "林園區", "鳥松區", "大樹區", "旗山區", "美濃區", "六龜區", "內門區", "杉林區", "甲仙區", "桃源區", "那瑪夏區", "茂林區"],
-            "屏東縣": ["屏東市", "三地門鄉", "霧臺鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"],
-            "宜蘭縣": ["宜蘭市", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "羅東鎮", "三星鄉", "大同鄉", "五結鄉", "冬山鄉", "蘇澳鎮", "南澳鄉"],
-            "花蓮縣": ["花蓮市", "新城鄉", "秀林鄉", "吉安鄉", "壽豐鄉", "鳳林鎮", "光復鄉", "豐濱鄉", "瑞穗鄉", "萬榮鄉", "玉里鎮", "卓溪鄉", "富里鄉"],
-            "臺東縣": ["臺東市", "綠島鄉", "蘭嶼鄉", "延平鄉", "卑南鄉", "鹿野鄉", "關山鎮", "海端鄉", "池上鄉", "東河鄉", "成功鎮", "長濱鄉", "太麻里鄉", "金峰鄉", "大武鄉", "達仁鄉"]
-        };
-        const citySelect = document.getElementById('citySelect');
-        const distSelect = document.getElementById('districtSelect');
+        const cityData = { "基隆市":["仁愛區","信義區","中正區","中山區","安樂區","暖暖區","七堵區"], "臺北市":["中正區","大同區","中山區","松山區","大安區","萬華區","信義區","士林區","北投區","內湖區","南港區","文山區"], "新北市":["萬里區","金山區","板橋區","汐止區","深坑區","石碇區","瑞芳區","平溪區","雙溪區","貢寮區","新店區","坪林區","烏來區","永和區","中和區","土城區","三峽區","樹林區","鶯歌區","三重區","新莊區","泰山區","林口區","蘆洲區","五股區","八里區","淡水區","三芝區","石門區"], "桃園市":["中壢區","平鎮區","龍潭區","楊梅區","新屋區","觀音區","桃園區","龜山區","八德區","大溪區","復興區","大園區","蘆竹區"], "新竹市":["東區","北區","香山區"], "新竹縣":["竹北市","湖口鄉","新豐鄉","新埔鎮","關西鎮","芎林鄉","寶山鄉","竹東鎮","五峰鄉","橫山鄉","尖石鄉","北埔鄉","峨眉鄉"], "苗栗縣":["竹南鎮","頭份市","三灣鄉","南庄鄉","獅潭鄉","後龍鎮","通霄鎮","苑裡鎮","苗栗市","造橋鄉","頭屋鄉","公館鄉","大湖鄉","泰安鄉","銅鑼鄉","三義鄉","西湖鄉","卓蘭鎮"], "臺中市":["中區","東區","南區","西區","北區","北屯區","西屯區","南屯區","太平區","大里區","霧峰區","烏日區","豐原區","后里區","石岡區","東勢區","和平區","新社區","潭子區","大雅區","神岡區","大肚區","沙鹿區","龍井區","梧棲區","清水區","大甲區","外埔區","大安區"], "彰化縣":["彰化市","芬園鄉","花壇鄉","秀水鄉","鹿港鎮","福興鄉","線西鄉","伸港鄉","和美鎮","員林市","社頭鄉","二水鄉","田中鎮","田尾鄉","埤頭鄉","溪州鄉","竹塘鄉","二林鎮","大城鄉","芳苑鄉","埔鹽鄉","埔心鄉","溪湖鎮","北斗鎮"], "南投縣":["南投市","中寮鄉","草屯鎮","國姓鄉","埔里鎮","仁愛鄉","名間鄉","集集鎮","水里鄉","魚池鄉","信義鄉","竹山鎮","鹿谷鄉"], "雲林縣":["斗南鎮","大埤鄉","虎尾鎮","土庫鎮","褒忠鄉","東勢鄉","臺西鄉","崙背鄉","麥寮鄉","斗六市","林內鄉","古坑鄉","莿桐鄉","西螺鎮","二崙鄉","北港鎮","水林鄉","口湖鄉","四湖鄉","元長鄉"], "嘉義市":["東區","西區"], "嘉義縣":["番路鄉","梅山鄉","竹崎鄉","阿里山鄉","中埔鄉","大埔鄉","水上鄉","鹿草鄉","太保市","朴子市","東石鄉","六腳鄉","新港鄉","民雄鄉","大林鎮","溪口鄉","義竹鄉","布袋鎮"], "臺南市":["中西區","東區","南區","北區","安平區","安南區","永康區","歸仁區","新化區","左鎮區","玉井區","楠西區","南化區","仁德區","關廟區","龍崎區","官田區","麻豆區","佳里區","西港區","七股區","將軍區","學甲區","北門區","新營區","後壁區","白河區","東山區","六甲區","下營區","柳營區","鹽水區","善化區","大內區","山上區","新市區","安定區"], "高雄市":["新興區","前金區","苓雅區","鹽埕區","鼓山區","旗津區","前鎮區","三民區","楠梓區","小港區","左營區","仁武區","大社區","東沙群島","南沙群島","岡山區","路竹區","阿蓮區","田寮區","燕巢區","橋頭區","梓官區","彌陀區","永安區","湖內區","鳳山區","大寮區","林園區","鳥松區","大樹區","旗山區","美濃區","六龜區","內門區","杉林區","甲仙區","桃源區","那瑪夏區","茂林區"], "屏東縣":["屏東市","三地門鄉","霧臺鄉","瑪家鄉","九如鄉","里港鄉","高樹鄉","鹽埔鄉","長治鄉","麟洛鄉","竹田鄉","內埔鄉","萬丹鄉","潮州鎮","泰武鄉","來義鄉","萬巒鄉","崁頂鄉","新埤鄉","南州鄉","林邊鄉","東港鎮","琉球鄉","佳冬鄉","新園鄉","枋寮鄉","枋山鄉","春日鄉","獅子鄉","車城鄉","牡丹鄉","恆春鎮","滿州鄉"], "宜蘭縣":["宜蘭市","頭城鎮","礁溪鄉","壯圍鄉","員山鄉","羅東鎮","三星鄉","大同鄉","五結鄉","冬山鄉","蘇澳鎮","南澳鄉"], "花蓮縣":["花蓮市","新城鄉","秀林鄉","吉安鄉","壽豐鄉","鳳林鎮","光復鄉","豐濱鄉","瑞穗鄉","萬榮鄉","玉里鎮","卓溪鄉","富里鄉"], "臺東縣":["臺東市","綠島鄉","蘭嶼鄉","延平鄉","卑南鄉","鹿野鄉","關山鎮","海端鄉","池上鄉","東河鄉","成功鎮","長濱鄉","太麻里鄉","金峰鄉","大武鄉","達仁鄉"] };
+        const citySelect = document.getElementById('citySelect'); const distSelect = document.getElementById('districtSelect');
         for (let city in cityData) citySelect.add(new Option(city, city));
         citySelect.addEventListener('change', function() {
             distSelect.innerHTML = '<option value="">選擇鄉鎮市區</option>';
@@ -501,152 +246,80 @@
         });
     })();
 
-    // 🚀 --- 終極隱藏表單對接術 (保證 100% 成功送進 Google) ---
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdtG_JpjouGR1DMDDtD2KSpRvuN1-2XYLA6FnA4Jt50PQZlUg/formResponse';
+    // 身分證驗證
+    let isIdValid = false;
+    document.getElementById('idInput').addEventListener('input', function(e) {
+        let id = e.target.value.toUpperCase(); e.target.value = id;
+        const errObj = document.getElementById('idError');
+        if (id.length === 0 || id.length < 10 || !/^[A-Z][12]\d{8}$/.test(id)) { errObj.style.display = id.length > 0 ? 'block' : 'none'; isIdValid = false; return; }
+        const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO'; const dict = {};
+        for (let i = 0; i < letters.length; i++) dict[letters[i]] = i + 10;
+        const char0 = dict[id[0]]; let sum = Math.floor(char0 / 10) * 1 + (char0 % 10) * 9;
+        for (let i = 1; i < 9; i++) sum += parseInt(id[i]) * (9 - i);
+        sum += parseInt(id[9]);
+        if (sum % 10 === 0) { errObj.style.display = 'none'; isIdValid = true; } else { errObj.style.display = 'block'; isIdValid = false; }
+    });
+
+    // 🚀 --- 資料送出機制 (寫入後台 Excel) ---
+    // ✅ 這裡已經為您綁定最新的 Google Apps Script 網址！
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
+    
     const form = document.getElementById('enrollmentForm');
 
-    // 建立隱藏的 iframe 來接收 Google 的回傳畫面，這樣網頁就不會跳走
-    const hiddenIframe = document.createElement('iframe');
-    hiddenIframe.name = 'hidden_iframe';
-    hiddenIframe.id = 'hidden_iframe';
-    hiddenIframe.style.display = 'none';
-    document.body.appendChild(hiddenIframe);
-
-    let isSubmitting = false;
-
-    // 當資料送出，Google 伺服器回傳成功畫面載入後，觸發這個動作
-    hiddenIframe.onload = function() {
-        if (isSubmitting) {
-            alert('✅ 報名資料已成功傳送！\n\n感恩您的報名，期待與你相遇！\n系統將自動發送副本至您的信箱，也請到 Google 試算表確認資料是否寫入。');
-            form.reset();
-            document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
-            document.getElementById('transferBlock').style.display = 'none';
-            document.getElementById('introducerBlock').style.display = 'none';
-            document.getElementById('idError').style.display = 'none';
-            isIdValid = false;
-            
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = false;
-            btn.innerText = '確認傳送資料';
-            window.scrollTo(0, 0);
-            isSubmitting = false;
-        }
-    };
-
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async e => {
         e.preventDefault();
         
-        // 1. 防呆：身分證錯誤阻擋
-        if (!isIdValid) {
-            alert("請檢查學員身分證字號是否填寫正確！");
-            document.getElementById('idInput').focus();
-            return;
-        }
-
-        // 2. 防呆：Google 表單規定「推薦報名來自」至少要勾一個
+        if (!isIdValid) { alert("請檢查學員身分證字號是否填寫正確！"); document.getElementById('idInput').focus(); return; }
         const refs = document.querySelectorAll('input[name="referral"]:checked');
-        if (refs.length === 0) {
-            alert("請至少勾選一項「推薦報名來自」！");
-            return;
-        }
+        if (refs.length === 0) { alert("請至少勾選一項「推薦報名來自」！"); return; }
 
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
         btn.innerText = '🔄 系統處理中，請稍候...';
 
-        const fd = new FormData(form);
-
-        // 動態產生一個看不見的 <form> 來送出資料，完全模擬原生 Google 表單
-        const gForm = document.createElement('form');
-        gForm.action = GOOGLE_FORM_URL;
-        gForm.method = 'POST';
-        gForm.target = 'hidden_iframe';
-        gForm.style.display = 'none';
-
-        function addInput(name, value) {
-            const inp = document.createElement('input');
-            inp.type = 'hidden';
-            inp.name = name;
-            inp.value = value;
-            gForm.appendChild(inp);
-        }
-
-        // 組合 Email
+        // 組合資料
         let domain = document.getElementById('emailDomainSelect').value;
         if(domain === 'custom') domain = document.getElementById('customEmailDomain').value;
-        addInput('emailAddress', document.getElementById('emailPrefix').value + '@' + domain);
-
-        // 組合生日成民國年 (ex: 1040701)
-        const by = parseInt(document.getElementById('birthYear').value);
-        const bm = document.getElementById('birthMonth').value;
-        const bd = document.getElementById('birthDay').value;
-        addInput('entry.610054497', String(by - 1911) + bm + bd);
-
-        // 組合地址
-        const c = document.getElementById('citySelect').value;
-        const d = document.getElementById('districtSelect').value;
-        const detail = document.getElementById('addressDetail').value;
-        addInput('entry.878287002', c + d + detail);
-
-        // 對應一般欄位 (依照您提供的真實 Google 表單代號)
-        addInput('entry.854084237', fd.get('submitter'));       // 填表人
-        addInput('entry.1318878612', fd.get('studentName'));    // 學員姓名
-        addInput('entry.830087417', fd.get('gender'));          // 性別
-        addInput('entry.1813047885', fd.get('school'));         // 學校
-        addInput('entry.490950672', fd.get('grade'));           // 年級
-        addInput('entry.480363667', fd.get('idNumber'));        // 身分證
+        document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + '@' + domain;
         
-        // Google 表單規定市話必填，沒填會報錯，自動補上「無」
-        let tel = fd.get('tel');
-        if (!tel || tel.trim() === '') tel = '無';
-        addInput('entry.162438360', tel);                       // 市話
+        const by = document.getElementById('birthYear').value; const bm = document.getElementById('birthMonth').value; const bd = document.getElementById('birthDay').value;
+        document.getElementById('finalBirthday').value = String(parseInt(by) - 1911) + bm + bd;
         
-        addInput('entry.154482776', fd.get('mobile'));          // 手機
-        addInput('entry.1372210003', fd.get('parentName'));     // 家長姓名
-        
-        // 處理關係欄位 (如果不是父母，觸發「其他」選項)
-        let rel = fd.get('relationship');
-        if (rel === '父' || rel === '母') {
-            addInput('entry.685540160', rel);
-        } else {
-            addInput('entry.685540160', '__other_option__');
-            addInput('entry.685540160.other_option_response', rel);
+        const c = document.getElementById('citySelect').value; const d = document.getElementById('districtSelect').value; const detail = document.getElementById('addressDetail').value;
+        document.getElementById('finalAddress').value = c + d + detail;
+
+        const formData = new FormData(form);
+        const referrals = [];
+        refs.forEach(cb => referrals.push(cb.value));
+        const data = Object.fromEntries(formData.entries());
+        data.referral = referrals.join(', ');
+
+        try {
+            // 透過 fetch 發送給 Apps Script，並讀取回傳的結果，如果出錯前端會大聲報錯！
+            const response = await fetch(scriptURL, { 
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+
+            const resultText = await response.text();
+
+            if (response.ok && resultText === 'Success') {
+                alert('✅ 報名資料已成功傳送！\n\n系統將自動寄送 Email 通知，請至信箱查收。\n(如果沒看到，請檢查垃圾信件匣喔！)');
+                form.reset();
+                document.getElementById('districtSelect').innerHTML = '<option value="">選擇鄉鎮市區</option>';
+                document.getElementById('transferBlock').style.display = 'none';
+                document.getElementById('introducerBlock').style.display = 'none';
+                isIdValid = false;
+                window.scrollTo(0, 0);
+            } else {
+                alert('❌ 發生錯誤，資料未成功寫入！\n錯誤原因：' + resultText + '\n\n請截圖告知工程師！');
+            }
+        } catch (error) {
+            alert('🚨 嚴重網路錯誤！\n可能是因為沒有開放「所有人可存取」權限。\n錯誤詳情：' + error.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerText = '確認傳送資料';
         }
-        
-        addInput('entry.867346399', fd.get('healthStatus'));    // 健康狀況
-        addInput('entry.954261819', fd.get('frequency'));       // 第幾次報名
-        
-        // 處理複選框
-        refs.forEach(cb => { addInput('entry.1890438173', cb.value); });
-        
-        // 繳費方式與介紹人邏輯對應
-        let pStatus = document.getElementById('paymentMethodSelect').value;
-        if (pStatus === '轉帳繳費') {
-            addInput('entry.68832779', '是');
-            addInput('entry.158237487', '轉帳: ' + fd.get('paymentDetail'));
-            addInput('entry.156818559', '');
-            addInput('entry.573615619', '');
-        } else if (pStatus === '轉交介紹人') {
-            addInput('entry.68832779', '否');
-            addInput('entry.158237487', '轉交給介紹人');
-            addInput('entry.156818559', fd.get('referrerName'));
-            addInput('entry.573615619', fd.get('referrerTel'));
-        } else {
-            addInput('entry.68832779', '否');
-            addInput('entry.158237487', '現場繳費');
-            addInput('entry.156818559', '');
-            addInput('entry.573615619', '');
-        }
-
-        addInput('entry.16333216', fd.get('remark') || '');     // 備註
-
-        // 將表單放入網頁並點擊送出！
-        document.body.appendChild(gForm);
-        isSubmitting = true;
-        gForm.submit();
-        
-        // 送出後移除多餘的表單元素保持乾淨
-        setTimeout(() => { document.body.removeChild(gForm); }, 1000);
     });
 </script>
 
