@@ -5,90 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 科技夏令營報名系統</title>
     <style>
-        :root {
-            --primary: #00e5ff;
-            --secondary: #00d2ff;
-            --bg: #0b132b;
-            --card-bg: rgba(11, 19, 43, 0.9);
-        }
-
-        body { 
-            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif; 
-            background: linear-gradient(135deg, #0b132b, #1c2541); 
-            color: #e0e6ed; 
-            margin: 0; padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container { 
-            max-width: 700px; 
-            margin: auto; 
-            background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 15px; 
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1); 
-        }
-
-        h2 { text-align: center; color: var(--primary); text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
-        h3 { border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 30px; color: var(--primary); background: rgba(0,229,255,0.05); padding-top: 8px; padding-bottom: 8px; }
-
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #ced6e0; }
-        .required { color: #ff4757; margin-left: 3px; }
-        
-        /* ⚠️ 解決選單字體隱形問題 */
+        :root { --primary: #00e5ff; --bg: #0b132b; }
+        body { font-family: "Microsoft JhengHei", sans-serif; background: #0b132b; color: #e0e6ed; padding: 15px; margin: 0; }
+        .container { max-width: 600px; margin: auto; background: rgba(11, 19, 43, 0.95); padding: 25px; border-radius: 15px; border: 1px solid var(--primary); box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); }
+        h2 { text-align: center; color: var(--primary); margin-bottom: 25px; }
+        h3 { border-left: 5px solid var(--primary); padding-left: 15px; color: var(--primary); background: rgba(0,229,255,0.05); margin: 30px 0 15px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; }
+        /* ⚠️ 強制白底黑字，解決隱形問題 */
         input, select, textarea { 
-            width: 100%; 
-            padding: 12px; 
-            background: #ffffff !important; /* 強制背景白色 */
-            color: #000000 !important;      /* 強制文字黑色 */
-            border: 1px solid var(--primary); 
-            border-radius: 6px; 
-            font-size: 16px; /* 防止 iOS 自動縮放 */
-            box-sizing: border-box;
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--primary); 
+            background: #ffffff !important; color: #000000 !important; font-size: 16px; box-sizing: border-box;
         }
-
-        /* 針對下拉選項做特殊修正 */
-        select option {
-            background-color: #ffffff !important;
-            color: #000000 !important;
-        }
-
-        .flex-row { display: flex; gap: 10px; }
-        .flex-row > * { flex: 1; }
-
-        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; }
-        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; }
-        input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
-
+        select option { background: #ffffff; color: #000000; }
+        .flex-row { display: flex; gap: 10px; align-items: center; }
+        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 0.85em; cursor: pointer; }
         .status-msg { padding: 15px; border-radius: 8px; margin: 20px 0; display: none; text-align: center; font-weight: bold; }
         .success { background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid #2ed573; }
-        .error { background: rgba(255, 71, 87, 0.2); color: #ff4757; border: 1px solid #ff4757; }
-
-        .submit-btn { 
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 15px; 
-            border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.1em; 
-            font-weight: bold; margin-top: 20px; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
-        }
-        .submit-btn:disabled { background: #576574; opacity: 0.7; }
-
-        @media (max-width: 500px) {
-            .flex-row { flex-direction: column; }
-        }
+        .submit-btn { background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.15em; font-weight: bold; margin-top: 20px; }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h2>2026 未來之光：探索&科技營</h2>
-    
+    <h2>2026 探索&科技營報名</h2>
     <form id="enrollmentForm">
         <div class="form-group">
-            <label>電子郵件 (Email)<span class="required">*</span></label>
-            <div class="flex-row" style="align-items: center;">
+            <label>電子郵件 (Email)</label>
+            <div class="flex-row">
                 <input type="text" id="emailPrefix" placeholder="帳號" required>
-                <span style="padding:0 5px;">@</span>
+                <span>@</span>
                 <select id="emailDomainSelect">
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
@@ -96,28 +43,26 @@
                     <option value="custom">其他</option>
                 </select>
             </div>
-            <input type="text" id="customEmailDomain" placeholder="請輸入網域 (例: abc.com)" style="display:none; margin-top:10px;">
+            <input type="text" id="customEmailDomain" placeholder="例: abc.com" style="display:none; margin-top:8px;">
             <input type="hidden" name="email" id="finalEmail">
         </div>
-
-        <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required></div>
-
-        <h3>一、 學員基本資料</h3>
-        <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
-        <div class="form-group"><label>性別<span class="required">*</span></label><select name="gender" required><option value="">選擇性別</option><option value="男">男</option><option value="女">女</option></select></div>
-        <div class="form-group"><label>就讀學校<span class="required">*</span></label><input type="text" name="school" required></div>
+        <div class="form-group"><label>填表人姓名</label><input type="text" name="submitter" required></div>
+        <h3>一、 學員資料</h3>
+        <div class="form-group"><label>學員姓名</label><input type="text" name="studentName" required></div>
+        <div class="form-group"><label>性別</label><select name="gender" required><option value="">選擇</option><option value="男">男</option><option value="女">女</option></select></div>
+        <div class="form-group"><label>就讀學校</label><input type="text" name="school" required></div>
         <div class="form-group">
-            <label>暑假過後年級<span class="required">*</span></label>
+            <label>暑假過後就讀年級</label>
             <select name="grade" required>
-                <option value="">選擇年級</option>
+                <option value="">選擇</option>
                 <option value="一年級">一年級</option><option value="二年級">二年級</option><option value="三年級">三年級</option>
                 <option value="四年級">四年級</option><option value="五年級">五年級</option><option value="六年級">六年級</option>
                 <option value="國一">國一</option><option value="國二">國二</option><option value="國三">國三</option>
             </select>
         </div>
-        <div class="form-group"><label>身分證字號<span class="required">*</span></label><input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="保險用，例: F123456789" style="text-transform: uppercase;"></div>
+        <div class="form-group"><label>身分證字號</label><input type="text" name="idNumber" maxlength="10" required style="text-transform: uppercase;"></div>
         <div class="form-group">
-            <label>出生年月日<span class="required">*</span></label>
+            <label>出生年月日</label>
             <div class="flex-row">
                 <select id="birthYear" required><option value="">年份</option></select>
                 <select id="birthMonth" required><option value="">月份</option></select>
@@ -125,13 +70,17 @@
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
-        <div class="form-group"><label>健康狀況<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="過敏或其他狀況，無請填無"></textarea></div>
-
-        <h3>二、 家長與繳費</h3>
-        <div class="form-group"><label>家長姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
-        <div class="form-group"><label>聯絡手機<span class="required">*</span></label><input type="tel" name="mobile" required placeholder="09XX-XXX-XXX"></div>
+        <div class="form-group"><label>健康狀況 (無請填無)</label><textarea name="healthStatus" rows="2" required></textarea></div>
+        <div class="form-group"><label>第幾次報名</label><select name="frequency"><option value="第一次">第一次</option><option value="第二次">第二次</option><option value="第三次">第三次</option></select></div>
+        <h3>二、 家長聯繫</h3>
+        <div class="form-group"><label>家長姓名</label><input type="text" name="parentName" required></div>
+        <div class="form-group"><label>與學員關係</label><input type="text" name="relationship" required placeholder="父/母/其他"></div>
+        <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" name="tel"></div>
+        <div class="form-group"><label>緊急連絡手機</label><input type="tel" name="mobile" required></div>
+        <div class="form-group"><label>聯絡地址</label><input type="text" id="fullAddress" placeholder="縣市/區域/街道門牌" required><input type="hidden" name="address" id="finalAddress"></div>
+        <h3>三、 其他資訊</h3>
         <div class="form-group">
-            <label>推薦來源<span class="required">*</span></label>
+            <label>推薦報名來自</label>
             <div class="checkbox-group">
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="會員"> 會員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook"> Facebook</label>
@@ -140,70 +89,48 @@
             </div>
         </div>
         <div class="form-group">
-            <label>繳費方式<span class="required">*</span></label>
+            <label>繳費方式</label>
             <select id="paymentMethodSelect" name="paymentStatus" required>
-                <option value="現場繳費">現場繳費</option>
-                <option value="轉帳繳費">轉帳繳費</option>
-                <option value="轉交介紹人">轉交介紹人</option>
+                <option value="現場繳費">現場繳費</option><option value="轉帳繳費">轉帳繳費</option><option value="轉交介紹人">轉交介紹人</option>
             </select>
         </div>
         <div id="paymentDetailBlock" style="display:none; margin-bottom: 20px;"><label>轉帳五碼或詳情</label><input type="text" name="paymentDetail"></div>
-
+        <div class="form-group"><label>備註</label><textarea name="remark" rows="2"></textarea></div>
         <div id="statusMsg" class="status-msg"></div>
-        <button type="submit" id="submitBtn" class="submit-btn">確認傳送報名表</button>
+        <button type="submit" id="submitBtn" class="submit-btn">確認傳送報名資料</button>
     </form>
 </div>
-
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
-    
-    // 初始化日期選單
-    (function initDate() {
+    (function init() {
         const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
-        for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年 (民國 ${i-1911} 年)`, i));
-        for (let i = 1; i <= 12; i++) m.add(new Option(i + ' 月', String(i).padStart(2, '0')));
-        for (let i = 1; i <= 31; i++) d.add(new Option(i + ' 日', String(i).padStart(2, '0')));
+        for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年 (${i-1911}年)`, i));
+        for (let i = 1; i <= 12; i++) m.add(new Option(i + '月', String(i).padStart(2, '0')));
+        for (let i = 1; i <= 31; i++) d.add(new Option(i + '日', String(i).padStart(2, '0')));
     })();
-
-    document.getElementById('emailDomainSelect').onchange = function() {
-        document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none';
-    };
-
-    document.getElementById('paymentMethodSelect').onchange = function() {
-        document.getElementById('paymentDetailBlock').style.display = (this.value === '現場繳費') ? 'none' : 'block';
-    };
-
+    document.getElementById('emailDomainSelect').onchange = function() { document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none'; };
+    document.getElementById('paymentMethodSelect').onchange = function() { document.getElementById('paymentDetailBlock').style.display = this.value === '現場繳費' ? 'none' : 'block'; };
     document.getElementById('enrollmentForm').onsubmit = async function(e) {
         e.preventDefault();
         const btn = document.getElementById('submitBtn'), msg = document.getElementById('statusMsg');
-        btn.disabled = true; btn.innerText = '傳送中，請稍候...';
-        msg.style.display = 'block'; msg.innerText = '⏳ 正在上傳報名資料...'; msg.className = 'status-msg success';
-
-        // 整理 Email
-        let dom = document.getElementById('emailDomainSelect').value;
-        if(dom === 'custom') dom = document.getElementById('customEmailDomain').value;
+        btn.disabled = true; btn.innerText = '處理中...';
+        msg.style.display = 'block'; msg.innerText = '⏳ 正在寫入 Excel...'; msg.className = 'status-msg success';
+        let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
-        
-        // 整理生日
         document.getElementById('finalBirthday').value = (document.getElementById('birthYear').value - 1911) + document.getElementById('birthMonth').value + document.getElementById('birthDay').value;
-
+        document.getElementById('finalAddress').value = document.getElementById('fullAddress').value;
         const formData = new FormData(this);
         const refs = []; document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
         const data = Object.fromEntries(formData.entries());
         data.referral = refs.join(', ');
-
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
-            const result = await res.text();
-            if(result === 'Success') {
-                msg.innerText = '✅ 報名成功！請至信箱查看報到編號。';
+            if(await res.text() === 'Success') {
+                msg.innerText = '✅ 報名完成！資料已正確寫入，編號見信箱。';
                 this.reset(); window.scrollTo(0, 0);
-            } else { throw new Error(result); }
-        } catch (err) {
-            msg.innerText = '❌ 發生錯誤：' + err.message; msg.className = 'status-msg error';
-        } finally {
-            btn.disabled = false; btn.innerText = '確認傳送報名表';
-        }
+            }
+        } catch (err) { msg.innerText = '❌ 錯誤：' + err.message; msg.className = 'status-msg error'; }
+        btn.disabled = false; btn.innerText = '確認傳送報名資料';
     };
 </script>
 </body>
