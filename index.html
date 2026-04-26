@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 科技夏令營報名系統</title>
-    <!-- 引入高品質字體 -->
+    <!-- 引入高品質科技感字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,7 +12,7 @@
             --secondary: #007cf0;
             --bg-dark: #050a18;
             --glass: rgba(11, 20, 45, 0.9);
-            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(255, 255, 255, 0.1);
             --accent: #ff9f43;
             --success: #00f2fe;
             --error: #ff4757;
@@ -76,7 +76,6 @@
             padding: 18px;
             text-align: center;
             margin-bottom: 30px;
-            box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.2);
             animation: pulse-glow 2.5s infinite;
         }
         @keyframes pulse-glow {
@@ -96,7 +95,7 @@
         .scam-warning { color: var(--error); font-weight: bold; font-size: 0.9em; border-top: 1px solid rgba(255, 71, 87, 0.3); padding-top: 15px; margin-top: 15px; line-height: 1.6; text-align: center; }
         .camp-time { display: flex; justify-content: center; gap: 30px; margin-top: 20px; color: var(--primary); font-weight: bold; font-size: 1.1em; font-family: 'Orbitron', sans-serif; }
 
-        /* 創客亮點卡片 */
+        /* 亮點卡片 */
         .course-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -112,7 +111,6 @@
         .course-card:hover {
             transform: translateY(-10px);
             border-color: var(--primary);
-            background: rgba(0, 229, 255, 0.06);
             box-shadow: 0 15px 35px rgba(0, 229, 255, 0.2);
         }
         .course-icon { font-size: 3em; margin-bottom: 15px; display: block; filter: drop-shadow(0 0 10px var(--primary)); }
@@ -129,31 +127,29 @@
             color: var(--primary);
             border-radius: 0 12px 12px 0;
             font-size: 1.4em;
-            letter-spacing: 1px;
         }
 
         .form-group { margin-bottom: 30px; }
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* 科技感填寫框：深色背底、白色文字、霓虹外框 */
+        /* 科技感資訊框視覺：深色背底、白色文字、霓虹外框 */
         input, select, textarea {
             width: 100%; padding: 16px;
             background: var(--input-bg) !important;
             color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
-        input::placeholder { color: rgba(255, 255, 255, 0.3); }
+        input::placeholder { color: rgba(255, 255, 255, 0.4); }
         input:focus, select:focus, textarea:focus {
             border-color: var(--primary);
-            background: rgba(0, 229, 255, 0.08) !important;
+            background: rgba(0, 229, 255, 0.1) !important;
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
             outline: none;
-            transform: scale(1.005);
         }
         
         select option { background: #0e1a3a; color: white; }
@@ -167,14 +163,12 @@
             padding-right: 45px;
         }
 
-        optgroup { font-weight: bold; color: var(--primary); background: #050a18; }
-
         .flex-row { display: flex; gap: 18px; align-items: center; }
         .flex-row > * { flex: 1; min-width: 0; }
 
         .checkbox-group {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px; padding: 25px; background: rgba(255, 255, 255, 0.03);
+            gap: 15px; padding: 25px; background: rgba(255, 255, 255, 0.05);
             border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .checkbox-item { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 0.95em; transition: 0.2s; }
@@ -187,19 +181,17 @@
             padding: 25px; border-radius: 16px;
             color: var(--primary);
             font-size: 1.1em; margin-bottom: 40px;
-            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.1);
         }
 
-        .payment-sub-fields {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-            padding: 20px;
+        .sub-field-box {
             background: rgba(0, 229, 255, 0.05);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid rgba(0, 229, 255, 0.2);
+            padding: 20px;
+            margin-top: 15px;
         }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
         .status-msg { display: none; padding: 20px; border-radius: 12px; margin: 30px 0; text-align: center; font-weight: bold; }
         .success { background: rgba(0, 229, 255, 0.1); color: var(--primary); border: 1px solid var(--primary); }
@@ -221,7 +213,7 @@
 
         @media (max-width: 650px) {
             .container { padding: 30px 20px; margin: 20px 10px; }
-            .flex-row, .payment-sub-fields { grid-template-columns: 1fr; flex-direction: column; gap: 15px; }
+            .flex-row, .grid-2 { flex-direction: column; grid-template-columns: 1fr; gap: 15px; }
             h2 { font-size: 1.8em; }
             .course-grid { grid-template-columns: 1fr; }
             .camp-time { flex-direction: column; align-items: center; gap: 8px; }
@@ -232,8 +224,7 @@
 
 <div class="container">
     <div class="banner-container">
-        <!-- 圖片橫幅 -->
-        <img src="banner.jpg" alt="[2026 夏令營科技橫幅]" class="banner-img" onerror="this.style.display='none'">
+        <img src="banner.jpg" alt="" class="banner-img" onerror="this.style.display='none'">
     </div>
 
     <h2>2026 未來之光：探索&科技營</h2>
@@ -413,34 +404,43 @@
             </select>
         </div>
         
-        <!-- ✅ 依照要求：拆分為末五碼與日期時間 -->
-        <div id="bankDetailFields" class="payment-sub-fields" style="display:none;">
-            <div>
+        <!-- ✅ 依照要求：轉帳時間改為選單 -->
+        <div id="bankDetailFields" class="sub-field-box" style="display:none;">
+            <div class="form-group">
                 <label>轉帳帳號末五碼<span class="required">*</span></label>
                 <input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="請輸入 5 位數字">
             </div>
-            <div>
-                <label>轉帳日期與時間<span class="required">*</span></label>
-                <input type="text" id="bankDateTime" name="bankDateTime" placeholder="例: 4/25 14:30">
+            <label>轉帳日期與時間<span class="required">*</span></label>
+            <div class="grid-2">
+                <div class="flex-row">
+                    <select id="transMonth"><option value="" disabled selected>月</option></select>
+                    <select id="transDay"><option value="" disabled selected>日</option></select>
+                </div>
+                <div class="flex-row">
+                    <select id="transHour"><option value="" disabled selected>時 (24H)</option></select>
+                    <select id="transMin"><option value="" disabled selected>分</option></select>
+                </div>
+            </div>
+            <input type="hidden" name="bankDateTime" id="finalBankDateTime">
+        </div>
+
+        <!-- ✅ 依照要求：介紹人手機自動連字號 -->
+        <div id="referralDetailFields" class="sub-field-box" style="display:none;">
+            <div class="grid-2">
+                <div>
+                    <label>介紹人姓名<span class="required">*</span></label>
+                    <input type="text" id="referralName" name="referralName" placeholder="請填寫姓名">
+                </div>
+                <div>
+                    <label>介紹人手機<span class="required">*</span></label>
+                    <input type="tel" id="referralPhone" name="referralPhone" placeholder="例: 09XX-XXX-XXX">
+                </div>
             </div>
         </div>
 
-        <!-- ✅ 依照要求：拆分為介紹人姓名與電話 -->
-        <div id="referralDetailFields" class="payment-sub-fields" style="display:none;">
-            <div>
-                <label>介紹人姓名<span class="required">*</span></label>
-                <input type="text" id="referralName" name="referralName" placeholder="請輸入姓名">
-            </div>
-            <div>
-                <label>介紹人電話<span class="required">*</span></label>
-                <input type="tel" id="referralPhone" name="referralPhone" placeholder="請輸入電話">
-            </div>
-        </div>
-
-        <!-- 通用備註詳情 (針對繳費方式為其他) -->
         <div id="otherPaymentBlock" style="display:none; margin-top: 15px;">
             <label>繳費詳情說明<span class="required">*</span></label>
-            <input type="text" id="otherPaymentDetail" name="otherPaymentDetail" placeholder="請說明繳費情形">
+            <input type="text" id="otherPaymentDetail" name="otherPaymentDetail" placeholder="請輸入詳情">
         </div>
         
         <div class="form-group" style="margin-top: 30px;"><label>其他備註事項</label><textarea name="remark" rows="2" placeholder="特殊需求或給營隊的建議..."></textarea></div>
@@ -453,7 +453,7 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
-    // 台灣身分證驗證邏輯
+    // 台灣身分證驗證
     function validateTaiwanID(id) {
         id = id.toUpperCase();
         if (!/^[A-Z][12]\d{8}$/.test(id)) return false;
@@ -476,6 +476,8 @@
         "苗栗縣": ["苗栗市", "頭份市", "竹南鎮", "後龍鎮", "通霄鎮", "苑裡鎮", "造橋鄉", "頭屋鄉", "公館鄉", "大湖鄉", "泰安鄉", "銅鑼鄉", "三義鄉", "西湖鄉", "卓蘭鎮", "三灣鄉", "獅潭鄉", "南庄鄉"],
         "臺中市": ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
         "彰化縣": ["彰化市", "鹿港鎮", "和美鎮", "線西鄉", "伸港鄉", "福興鄉", "秀水鄉", "花壇鄉", "芬園鄉", "員林市", "溪湖鎮", "田中鎮", "大村鄉", "埔鹽鄉", "埔心鄉", "永靖鄉", "社頭鄉", "二水鄉", "田尾鄉", "埤頭鄉", "芳苑鄉", "二林鎮", "大城鄉", "竹塘鄉", "溪州鄉", "北斗鎮"],
+        "南投縣": ["南投市", "埔里鎮", "草屯鎮", "竹山鎮", "集集鎮", "名間鄉", "鹿谷鄉", "中寮鄉", "魚池鄉", "國姓鄉", "水里鄉", "信義鄉", "仁愛鄉"],
+        "雲林縣": ["斗六市", "斗南鎮", "虎尾鎮", "西螺鎮", "土庫鎮", "北港鎮", "古坑鄉", "大埤鄉", "迓桐鄉", "林內鄉", "二崙鄉", "崙背鄉", "麥寮鄉", "東勢鄉", "褒忠鄉", "臺西鄉", "元長鄉", "四湖鄉", "口湖鄉", "水林鄉"],
         "宜蘭縣": ["宜蘭市", "羅東鎮", "蘇澳鎮", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "冬山鄉", "五結鄉", "三星鄉", "大同鄉", "南澳鄉"],
         "花蓮縣": ["花蓮市", "鳳林鎮", "玉里鎮", "新城鄉", "吉安鄉", "壽豐鄉", "光復鄉", "豐濱鄉", "瑞穗鄉", "富里鄉", "秀林鄉", "萬榮鄉", "卓溪鄉"],
         "臺東縣": ["臺東市", "成功鎮", "關山鎮", "卑名鄉", "鹿野鄉", "池上鄉", "東河鄉", "長濱鄉", "太麻里鄉", "大武鄉", "綠島鄉", "海端鄉", "延平鄉", "金峰鄉", "達仁鄉", "蘭嶼鄉"],
@@ -498,6 +500,13 @@
             ds.innerHTML = '<option value="" disabled selected>區域</option>';
             if(taiwanDistricts[cs.value]) taiwanDistricts[cs.value].forEach(d => ds.add(new Option(d, d)));
         };
+
+        // 初始化轉帳時間選單
+        const tm = document.getElementById('transMonth'), td = document.getElementById('transDay'), th = document.getElementById('transHour'), tmin = document.getElementById('transMin');
+        for (let i = 1; i <= 12; i++) tm.add(new Option(i + '月', String(i).padStart(2, '0')));
+        for (let i = 1; i <= 31; i++) td.add(new Option(i + '日', String(i).padStart(2, '0')));
+        for (let i = 0; i <= 23; i++) th.add(new Option(String(i).padStart(2, '0') + '時', String(i).padStart(2, '0')));
+        for (let i = 0; i <= 59; i += 5) tmin.add(new Option(String(i).padStart(2, '0') + '分', String(i).padStart(2, '0')));
 
         setupPhoneFormatting(document.getElementById('mobileInput'), 'mobile');
         setupPhoneFormatting(document.getElementById('telInput'), 'landline');
@@ -539,47 +548,34 @@
         const refBlock = document.getElementById('referralDetailFields');
         const otherBlock = document.getElementById('otherPaymentBlock');
         
-        // 重置所有子欄位的必填狀態
-        const inputs = [
-            document.getElementById('bankLast5'), document.getElementById('bankDateTime'),
-            document.getElementById('referralName'), document.getElementById('referralPhone'),
-            document.getElementById('otherPaymentDetail')
-        ];
-        inputs.forEach(i => { i.required = false; });
+        bankBlock.style.display = (this.value === '轉帳繳費') ? 'block' : 'none';
+        refBlock.style.display = (this.value === '轉交介紹人') ? 'block' : 'none';
+        otherBlock.style.display = (this.value === '其他') ? 'block' : 'none';
 
-        // 隱藏所有區塊
-        bankBlock.style.display = 'none';
-        refBlock.style.display = 'none';
-        otherBlock.style.display = 'none';
-
-        // 根據選擇顯示對應區塊並設為必填
-        if(this.value === '轉帳繳費') {
-            bankBlock.style.display = 'grid';
-            document.getElementById('bankLast5').required = true;
-            document.getElementById('bankDateTime').required = true;
-        } else if(this.value === '轉交介紹人') {
-            refBlock.style.display = 'grid';
-            document.getElementById('referralName').required = true;
-            document.getElementById('referralPhone').required = true;
-        } else if(this.value === '其他') {
-            otherBlock.style.display = 'block';
-            document.getElementById('otherPaymentDetail').required = true;
-        }
+        // 動態必填設定
+        document.getElementById('bankLast5').required = (this.value === '轉帳繳費');
+        document.getElementById('transMonth').required = (this.value === '轉帳繳費');
+        document.getElementById('transDay').required = (this.value === '轉帳繳費');
+        document.getElementById('transHour').required = (this.value === '轉帳繳費');
+        document.getElementById('transMin').required = (this.value === '轉帳繳費');
+        document.getElementById('referralName').required = (this.value === '轉交介紹人');
+        document.getElementById('referralPhone').required = (this.value === '轉交介紹人');
+        document.getElementById('otherPaymentDetail').required = (this.value === '其他');
     };
 
     document.getElementById('enrollmentForm').onsubmit = async function(e) {
         e.preventDefault();
         const btn = document.getElementById('submitBtn'), msg = document.getElementById('statusMsg');
         
-        // 身分證驗證
+        // 驗證身分證
         const idVal = document.getElementById('idInput').value;
         if (!validateTaiwanID(idVal)) {
-            alert('❌ 身分證字號邏輯校驗失敗，請確認是否填寫正確 (第一位大寫字母+九位數字)。');
+            alert('❌ 身分證字號邏輯校驗失敗，請確認是否填寫正確。');
             document.getElementById('idInput').focus();
             return;
         }
 
-        // 推薦來源驗證
+        // 驗證推薦來源
         const refs = []; 
         document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
         if(refs.length === 0) {
@@ -587,13 +583,19 @@
             return;
         }
 
-        btn.disabled = true; btn.innerText = '正在處理中...';
-        msg.style.display = 'block'; msg.innerText = '正在進行加密通訊並同步數據，請稍候...'; msg.className = 'status-msg success';
+        btn.disabled = true; btn.innerText = '資料加密傳輸中...';
+        msg.style.display = 'block'; msg.innerText = '正在處理您的報名請求，請稍候...'; msg.className = 'status-msg success';
 
+        // 組合資料
         let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
         document.getElementById('finalBirthday').value = (document.getElementById('birthYear').value - 1911) + document.getElementById('birthMonth').value + document.getElementById('birthDay').value;
         document.getElementById('finalAddress').value = document.getElementById('citySelect').value + document.getElementById('districtSelect').value + document.getElementById('addressDetail').value;
+        
+        // 組合轉帳日期時間
+        if(document.getElementById('paymentMethodSelect').value === '轉帳繳費') {
+            document.getElementById('finalBankDateTime').value = `2026-${document.getElementById('transMonth').value}-${document.getElementById('transDay').value} ${document.getElementById('transHour').value}:${document.getElementById('transMin').value}`;
+        }
 
         const formData = new FormData(this);
         const data = Object.fromEntries(formData.entries());
@@ -602,15 +604,14 @@
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             if(await res.text() === 'Success') {
-                msg.innerText = '✅ 報名資料提交成功！感謝您的參與，確認信已發送至您的信箱。';
+                msg.innerText = '✅ 報名資料提交成功！請查收信箱確認，三重慈少歡迎您。';
                 this.reset(); window.scrollTo({ top: 0, behavior: 'smooth' });
-                // 隱藏動態顯示的欄位
                 document.getElementById('bankDetailFields').style.display = 'none';
                 document.getElementById('referralDetailFields').style.display = 'none';
                 document.getElementById('otherPaymentBlock').style.display = 'none';
             }
         } catch (error) { 
-            msg.innerText = '❌ 資料送出失敗，請檢查網路連線後再試。'; 
+            msg.innerText = '❌ 資料送出失敗，請檢查網路連線。'; 
             msg.className = 'status-msg error'; 
         } finally {
             btn.disabled = false; btn.innerText = '立即傳送報名資料';
