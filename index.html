@@ -4,157 +4,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 科技夏令營報名系統</title>
-    <!-- 引入高品質字體 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00e5ff;
-            --secondary: #00d2ff;
-            --bg-dark: #0b132b;
-            --glass: rgba(11, 19, 43, 0.94);
+            --secondary: #007cf0;
+            --bg-dark: #050a18;
+            --glass: rgba(11, 19, 43, 0.85);
             --accent: #ff9f43;
-            --success: #2ed573;
+            --success: #00f2fe;
             --error: #ff4757;
+            --neon-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
         }
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+            background: radial-gradient(circle at center, #1c2541 0%, #050a18 100%);
+            background-attachment: fixed;
             color: #e0e6ed;
             margin: 0; padding: 0;
             min-height: 100vh;
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 850px;
-            margin: 20px auto;
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        /* 科技感背景網格 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
         }
 
-        /* 頂部橫幅 */
-        .banner-container { width: 100%; margin-bottom: 25px; text-align: center; }
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 229, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-container { width: 100%; margin-bottom: 30px; text-align: center; }
         .banner-img {
-            width: 100%; border-radius: 15px;
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+            width: 100%; border-radius: 16px;
+            box-shadow: var(--neon-shadow);
             border: 1px solid var(--primary);
             display: block;
         }
 
         h2 {
+            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
             text-align: center; color: var(--primary);
-            font-size: 2.2em; letter-spacing: 3px;
-            margin: 15px 0 5px;
-            text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+            font-size: 2.4em; letter-spacing: 4px;
+            margin: 20px 0 10px;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
         }
 
-        /* 官方聲明資訊 */
         .official-notice {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 229, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.1);
         }
-        .notice-text { font-size: 0.95em; color: #ced6e0; text-align: center; margin-bottom: 10px; font-weight: 500; }
-        .scam-warning { color: var(--error); font-weight: bold; font-size: 0.9em; border-top: 1px solid rgba(255, 71, 87, 0.3); padding-top: 12px; margin-top: 10px; line-height: 1.6; text-align: center; }
-        .camp-time { display: flex; justify-content: center; gap: 20px; margin-top: 15px; color: var(--primary); font-weight: bold; font-size: 1.1em; }
+        .notice-text { font-size: 1em; color: #ced6e0; text-align: center; margin-bottom: 12px; }
+        .scam-warning { color: var(--error); font-weight: bold; font-size: 0.95em; border-top: 1px solid rgba(255, 71, 87, 0.3); padding-top: 15px; margin-top: 15px; line-height: 1.6; text-align: center; }
+        .camp-time { display: flex; justify-content: center; gap: 30px; margin-top: 20px; color: var(--primary); font-weight: bold; font-size: 1.2em; font-family: 'Orbitron', sans-serif; }
 
-        /* 課程亮點卡片 */
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         .course-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px; border-radius: 15px;
-            text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s ease;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px; border-radius: 20px;
+            text-align: center; border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
-        .course-card:hover { transform: translateY(-8px); border-color: var(--primary); background: rgba(0, 229, 255, 0.1); }
-        .course-icon { font-size: 2.5em; margin-bottom: 10px; display: block; }
-        .course-name { color: var(--accent); font-weight: bold; font-size: 1.1em; margin-bottom: 8px; display: block; }
-        .course-detail { font-size: 0.85em; color: #ced6e0; text-align: left; }
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            background: rgba(0, 229, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+        }
+        .course-icon { font-size: 3em; margin-bottom: 15px; display: block; filter: drop-shadow(0 0 10px var(--primary)); }
+        .course-name { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-bottom: 10px; display: block; text-shadow: 0 0 5px var(--primary); }
+        .course-detail { font-size: 0.9em; color: #b0b8c1; text-align: left; line-height: 1.5; }
         
-        .starry-night { grid-column: 1 / -1; background: linear-gradient(90deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1)); border-color: var(--accent); }
+        .starry-night { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1)); border-color: var(--accent); }
 
         h3 {
-            border-left: 6px solid var(--primary);
-            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent);
-            padding: 12px 18px;
-            margin: 45px 0 20px;
+            border-left: 8px solid var(--primary);
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.2), transparent);
+            padding: 15px 20px;
+            margin: 50px 0 25px;
             color: var(--primary);
-            border-radius: 0 10px 10px 0;
-            font-size: 1.3em;
+            border-radius: 0 12px 12px 0;
+            font-size: 1.4em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 10px; font-weight: bold; color: #ced6e0; font-size: 0.95em; }
-        .required { color: var(--error); margin-left: 5px; }
+        .form-group { margin-bottom: 30px; }
+        label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1em; }
+        .required { color: var(--error); margin-left: 6px; }
 
-        /* 顯色修正：強制白底黑字，確保所有手機端清楚顯示 */
         input, select, textarea {
-            width: 100%; padding: 15px;
+            width: 100%; padding: 16px;
             background: #ffffff !important;
             color: #000000 !important;
             border: 2px solid transparent;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
-        input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); outline: none; }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+            outline: none;
+            transform: scale(1.01);
+        }
         
-        /* 下拉選單外觀 */
         select {
             cursor: pointer; -webkit-appearance: none; appearance: none;
             background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
             background-repeat: no-repeat;
-            background-position: right 15px top 50%;
+            background-position: right 18px top 50%;
             background-size: 14px auto;
-            padding-right: 40px;
+            padding-right: 45px;
         }
 
-        /* 分組標籤樣式 */
-        optgroup { font-weight: bold; color: var(--bg-dark); background: #f2f2f2; }
+        optgroup { font-weight: bold; color: #333; background: #eee; }
 
-        .flex-row { display: flex; gap: 15px; align-items: center; }
+        .flex-row { display: flex; gap: 18px; align-items: center; }
         .flex-row > * { flex: 1; min-width: 0; }
 
-        /* 推薦來源 Checkbox 美化 */
         .checkbox-group {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px; padding: 20px; background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px; padding: 25px; background: rgba(0, 229, 255, 0.03);
+            border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9em; transition: 0.2s; }
+        .checkbox-item { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 0.95em; transition: 0.3s; }
         .checkbox-item:hover { color: var(--primary); }
         input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--primary); cursor: pointer; }
 
-        .bank-info { background: rgba(46, 213, 115, 0.1); border: 1px solid var(--success); padding: 20px; border-radius: 12px; color: var(--success); font-size: 1em; margin-bottom: 30px; }
+        .bank-info {
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid var(--primary);
+            padding: 25px; border-radius: 16px;
+            color: var(--primary);
+            font-size: 1.1em; margin-bottom: 40px;
+            box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.2);
+        }
 
-        .status-msg { display: none; padding: 18px; border-radius: 10px; margin: 25px 0; text-align: center; font-weight: bold; }
-        .success { background: rgba(46, 213, 115, 0.2); color: var(--success); border: 1px solid var(--success); }
-        .error { background: rgba(255, 71, 87, 0.2); color: var(--error); border: 1px solid var(--error); }
+        .status-msg { display: none; padding: 20px; border-radius: 12px; margin: 30px 0; text-align: center; font-weight: bold; font-size: 1.1em; }
+        .success { background: rgba(0, 229, 255, 0.1); color: var(--primary); border: 1px solid var(--primary); }
+        .error { background: rgba(255, 71, 87, 0.1); color: var(--error); border: 1px solid var(--error); }
 
-        .submit-btn { background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 20px; border: none; border-radius: 15px; cursor: pointer; width: 100%; font-size: 1.3em; font-weight: bold; transition: 0.4s; box-shadow: 0 10px 25px rgba(0, 210, 255, 0.4); margin-top: 25px; letter-spacing: 2px; }
-        .submit-btn:hover:not(:disabled) { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0, 210, 255, 0.6); }
-        .submit-btn:disabled { background: #576574; opacity: 0.7; cursor: not-allowed; }
+        .submit-btn {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: #050a18; padding: 22px; border: none; border-radius: 16px;
+            cursor: pointer; width: 100%; font-size: 1.4em; font-weight: 900;
+            transition: all 0.4s; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+            margin-top: 30px; letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .submit-btn:hover:not(:disabled) {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.7);
+            filter: brightness(1.1);
+        }
+        .submit-btn:disabled { background: #334155; opacity: 0.6; cursor: not-allowed; box-shadow: none; }
 
         @media (max-width: 650px) {
-            .container { padding: 25px 15px; }
-            .flex-row { flex-direction: column; gap: 15px; }
+            .container { padding: 30px 20px; margin: 20px 10px; }
+            .flex-row { flex-direction: column; gap: 20px; }
             h2 { font-size: 1.8em; }
             .course-grid { grid-template-columns: 1fr; }
-            .camp-time { flex-direction: column; align-items: center; gap: 5px; }
+            .camp-time { flex-direction: column; align-items: center; gap: 8px; }
         }
     </style>
 </head>
@@ -162,20 +202,20 @@
 
 <div class="container">
     <div class="banner-container">
-        <!-- 圖片需放置於 GitHub 目錄下並命名為 banner.jpg -->
         <img src="banner.jpg" alt="" class="banner-img" onerror="this.style.display='none'">
     </div>
 
-    <h2>2026 未來之光：探索&科技營</h2>
+    <h2>FUTURE LIGHT 2026</h2>
     
     <div class="official-notice">
         <div class="notice-text">本資料僅提供 2026 年慈濟三重園區 未來之光：探索&科技營報名使用</div>
         <div class="scam-warning">
-            🛡️ <b>防詐騙聲明：</b>我們不會以任何名義通知更改付款方式或要求您到 ATM 進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥 165 反詐騙專線查詢或與我們聯繫：(02)2981-0310
+            🛡️ <b>SECURITY ALERT</b><br>
+            營隊不會以任何名義通知更改付款方式或要求您到 ATM 操作！接獲類似電話請勿提供金融資料，並撥 165 反詐騙專線或聯繫我們：(02)2981-0310
         </div>
         <div class="camp-time">
-            <span>🚀 7/17 (五) 07:30 - 17:00</span>
-            <span>🌟 7/18 (六) 07:30 - 20:15</span>
+            <span>🚀 7/17 (FRI) 07:30 - 17:00</span>
+            <span>🌟 7/18 (SAT) 07:30 - 20:15</span>
         </div>
     </div>
 
@@ -183,32 +223,27 @@
         <div class="course-card">
             <span class="course-icon">🚀</span>
             <span class="course-name">前瞻科技探索</span>
-            <span class="course-detail">邀請黃子軒師兄親自帶領，結合最新科技趨勢，啟發孩子對未來數位領域的想像。</span>
+            <span class="course-detail">黃子軒師兄領軍，探索 AI 與未來科技趨勢，開啟數位領域的無限可能。</span>
         </div>
         <div class="course-card">
             <span class="course-icon">🌿</span>
             <span class="course-name">戶外探索體驗</span>
-            <span class="course-detail">由黃建豪師兄引領走入自然，在團隊活動中學習互助，勇敢迎接挑戰並突破自我。</span>
-        </div>
-        <div class="course-card">
-            <span class="course-icon">🎭</span>
-            <span class="course-name">多元潛能開發</span>
-            <span class="course-detail">勁歌熱舞、傳統戲曲、魔法音樂輔療、旗陣演練，在舞台上發掘專屬的閃耀天賦。</span>
+            <span class="course-detail">黃建豪師兄引領，在自然挑戰中學習團隊協作，勇於突破個人舒適圈。</span>
         </div>
         <div class="course-card">
             <span class="course-icon">📖</span>
             <span class="course-name">心靈靜思語</span>
-            <span class="course-detail">由教聯會&團隊精心規劃，在寧靜中體悟智慧，培養正向的人生價值觀與生活態度。</span>
+            <span class="course-detail">教聯會導師群帶領，在靜心中體悟智慧，建立正向的人生導航與價值觀。</span>
         </div>
         <div class="course-card">
             <span class="course-icon">⚖️</span>
             <span class="course-name">法律與防毒</span>
-            <span class="course-detail">黃川裕律師專業開講，建立學員法規意識，遠離毒品誘惑並學會自我保護。</span>
+            <span class="course-detail">黃川裕律師專業講座，提升法規意識與防毒警覺，學會堅定自我防護。</span>
         </div>
         <div class="course-card starry-night">
             <span class="course-icon">🌟</span>
-            <span class="course-name">星光人文之夜 (7/18 晚間)</span>
-            <span style="display:block; text-align:center; font-size:0.9em; color:#ced6e0;">愛的饗宴、震撼舞龍展演、粉墨登場、親子競賽與創意演出，創造仲夏難忘回憶。</span>
+            <span class="course-name">星光人文之夜</span>
+            <span style="display:block; text-align:center; font-size:0.95em; color:#ced6e0;">震撼舞龍、親子競賽、魔法音樂與創意展演。讓我們共同見證愛與光的奇蹟時刻。</span>
         </div>
     </div>
 
@@ -218,21 +253,21 @@
             <label>電子郵件 (Email)<span class="required">*</span></label>
             <div class="flex-row">
                 <input type="text" id="emailPrefix" placeholder="帳號" required>
-                <div style="font-weight:bold; font-size: 1.3em; text-align: center;">@</div>
+                <div style="font-weight:bold; font-size: 1.4em; text-align: center; color: var(--primary);">@</div>
                 <select id="emailDomainSelect" required>
                     <option value="" disabled selected>請選擇</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="msa.hinet.net">msa.hinet.net</option>
                     <option value="icloud.com">icloud.com</option>
-                    <option value="custom">其他 (自行輸入)</option>
+                    <option value="custom">其他 (手動輸入)</option>
                 </select>
             </div>
-            <input type="text" id="customEmailDomain" placeholder="例: abc.com" style="display:none; margin-top:10px;">
+            <input type="text" id="customEmailDomain" placeholder="例如: abc.com" style="display:none; margin-top:12px;">
             <input type="hidden" name="email" id="finalEmail">
         </div>
 
-        <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請填寫填表人完整姓名"></div>
+        <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請輸入您的真實姓名"></div>
 
         <h3>一、 學員基本資料</h3>
         <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
@@ -244,10 +279,10 @@
                 <option value="女">女</option>
             </select>
         </div>
-        <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例：三重國小"></div>
+        <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例如：三重國小"></div>
         
         <div class="form-group">
-            <label>暑假過後就讀幾年級<span class="required">*</span></label>
+            <label>暑假過後就讀年級<span class="required">*</span></label>
             <select name="grade" required>
                 <option value="" disabled selected>請選擇</option>
                 <optgroup label="國小">
@@ -266,17 +301,17 @@
         </div>
         
         <div class="form-group">
-            <label>出生年月日<span class="required">*</span></label>
+            <label>學員出生年月日<span class="required">*</span></label>
             <div class="flex-row">
-                <select id="birthYear" required><option value="" disabled selected>請選擇年份</option></select>
-                <select id="birthMonth" required><option value="" disabled selected>請選擇月份</option></select>
-                <select id="birthDay" required><option value="" disabled selected>請選擇日期</option></select>
+                <select id="birthYear" required><option value="" disabled selected>年份</option></select>
+                <select id="birthMonth" required><option value="" disabled selected>月份</option></select>
+                <select id="birthDay" required><option value="" disabled selected>日期</option></select>
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
-        <div class="form-group"><label>學員健康狀況 (無則填「無」)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required></textarea></div>
+        <div class="form-group"><label>學員健康狀況 (無則填「無」)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="例如：藥物過敏、特殊病史..."></textarea></div>
         <div class="form-group">
-            <label>第幾次報名</label>
+            <label>報名次數</label>
             <select name="frequency">
                 <option value="" disabled selected>請選擇</option>
                 <option value="第一次">第一次</option>
@@ -286,7 +321,7 @@
         </div>
 
         <h3>二、 家長聯繫與地址</h3>
-        <div class="form-group"><label>家長姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
+        <div class="form-group"><label>家長/監護人姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
         <div class="form-group">
             <label>與學員關係<span class="required">*</span></label>
             <select name="relationship" required>
@@ -298,20 +333,12 @@
             </select>
         </div>
         
-        <div class="form-group">
-            <label>連絡電話 (市話)</label>
-            <input type="tel" id="telInput" name="tel" placeholder="例: 02-2981-0310">
-        </div>
+        <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" id="telInput" name="tel" placeholder="例: 02-2981-0310"></div>
+        <div class="form-group"><label>緊急連絡手機<span class="required">*</span></label><input type="tel" id="mobileInput" name="mobile" required placeholder="例: 0912-345-678"></div>
         
         <div class="form-group">
-            <label>緊急連絡手機<span class="required">*</span></label>
-            <input type="tel" id="mobileInput" name="mobile" required placeholder="例: 0912-345-678">
-        </div>
-        
-        <div class="form-group">
-            <!-- ✅ 依照要求：移除 (全台縣市支援) 文字 -->
             <label>聯絡地址<span class="required">*</span></label>
-            <div class="flex-row" style="margin-bottom: 10px;">
+            <div class="flex-row" style="margin-bottom: 12px;">
                 <select id="citySelect" required><option value="" disabled selected>請選擇縣市</option></select>
                 <select id="districtSelect" required><option value="" disabled selected>請選擇區域</option></select>
             </div>
@@ -321,7 +348,7 @@
 
         <h3>三、 推薦來源與繳費</h3>
         <div class="form-group">
-            <label>推薦報名來自 (可複選)<span class="required">*</span></label>
+            <label>推薦報名來源 (可複選)<span class="required">*</span></label>
             <div class="checkbox-group" id="referralGroup">
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
@@ -335,36 +362,36 @@
         </div>
 
         <div class="bank-info">
-            <strong>💎 繳費帳戶資訊：</strong><br>
-            銀行：第一銀行泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499
+            <strong>💎 繳費帳戶資訊 (OFFICIAL)</strong><br>
+            銀行：第一銀行泰山分行 (007)<br>
+            戶名：吳麗玉 / 帳號：230-50-594499
         </div>
 
         <div class="form-group">
             <label>繳費方式<span class="required">*</span></label>
             <select id="paymentMethodSelect" name="paymentStatus" required>
                 <option value="" disabled selected>請選擇</option>
-                <option value="轉帳繳費">轉帳繳費</option>
+                <option value="轉帳繳費">銀行轉帳</option>
                 <option value="轉交介紹人">轉交介紹人</option>
-                <option value="其他">其他</option>
+                <option value="其他">其他方式</option>
             </select>
         </div>
-        <!-- ✅ 轉交介紹人邏輯優化 -->
-        <div id="paymentDetailBlock" style="display:none; margin-bottom: 20px;">
-            <label id="paymentDetailLabel">付款詳情備註</label>
+        
+        <div id="paymentDetailBlock" style="display:none; margin-bottom: 25px;">
+            <label id="paymentDetailLabel">資訊備註<span class="required">*</span></label>
             <input type="text" id="paymentDetailInput" name="paymentDetail" placeholder="請填寫詳細資訊">
         </div>
         
-        <div class="form-group"><label>備註</label><textarea name="remark" rows="2" placeholder="其他事項說明..."></textarea></div>
+        <div class="form-group"><label>備註事項</label><textarea name="remark" rows="2" placeholder="其他特殊需求或建議..."></textarea></div>
 
         <div id="statusMsg" class="status-msg"></div>
-        <button type="submit" id="submitBtn" class="submit-btn">確認報名並送出資料</button>
+        <button type="submit" id="submitBtn" class="submit-btn">INITIATE REGISTRATION</button>
     </form>
 </div>
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
-    // 全台灣行政區資料
     const taiwanDistricts = {
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
         "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
@@ -443,16 +470,16 @@
         const input = document.getElementById('paymentDetailInput');
         block.style.display = 'block';
         if(this.value === '轉交介紹人') {
-            label.innerText = '介紹人姓名與電話';
-            input.placeholder = '請輸入介紹人姓名與連絡電話';
+            label.innerHTML = '介紹人姓名與電話 <span class="required">*</span>';
+            input.placeholder = '必填：請輸入介紹人姓名與連絡電話';
             input.required = true;
         } else if(this.value === '轉帳繳費') {
-            label.innerText = '轉帳末五碼';
-            input.placeholder = '請輸入末五碼';
+            label.innerHTML = '轉帳末五碼 <span class="required">*</span>';
+            input.placeholder = '必填：請輸入銀行帳號末五碼';
             input.required = true;
         } else {
-            label.innerText = '付款詳情備註';
-            input.placeholder = '請在此輸入內容';
+            label.innerHTML = '付款詳情備註';
+            input.placeholder = '請填寫相關詳情';
             input.required = false;
         }
     };
@@ -460,8 +487,17 @@
     document.getElementById('enrollmentForm').onsubmit = async function(e) {
         e.preventDefault();
         const btn = document.getElementById('submitBtn'), msg = document.getElementById('statusMsg');
-        btn.disabled = true; btn.innerText = '🚀 正在傳輸中...';
-        msg.style.display = 'block'; msg.innerText = '正在處理您的報名資料，請稍候...'; msg.className = 'status-msg success';
+        
+        // 推薦來源驗證
+        const refs = []; 
+        document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
+        if(refs.length === 0) {
+            alert('請至少勾選一項推薦報名來源。');
+            return;
+        }
+
+        btn.disabled = true; btn.innerText = 'TRANSMITTING...';
+        msg.style.display = 'block'; msg.innerText = '正在處理加密傳輸，請稍候...'; msg.className = 'status-msg success';
 
         let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
@@ -469,19 +505,22 @@
         document.getElementById('finalAddress').value = document.getElementById('citySelect').value + document.getElementById('districtSelect').value + document.getElementById('addressDetail').value;
 
         const formData = new FormData(this);
-        const refs = []; document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
         const data = Object.fromEntries(formData.entries());
         data.referral = refs.join(', ');
 
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             if(await res.text() === 'Success') {
-                msg.innerText = '✅ 報名完成！詳細資訊已發送至您的信箱，感謝您的報名。';
-                this.reset(); window.scrollTo(0, 0);
+                msg.innerText = '✅ REGISTRATION COMPLETE! 資料已成功寫入，請查收電子郵件。';
+                this.reset(); window.scrollTo({ top: 0, behavior: 'smooth' });
                 document.getElementById('paymentDetailBlock').style.display = 'none';
             }
-        } catch (error) { msg.innerText = '❌ 傳送失敗，請聯繫營隊人員。'; msg.className = 'status-msg error'; }
-        btn.disabled = false; btn.innerText = '確認報名並送出資料';
+        } catch (error) { 
+            msg.innerText = '❌ CONNECTION ERROR. 請檢查網路狀態或聯繫管理員。'; 
+            msg.className = 'status-msg error'; 
+        } finally {
+            btn.disabled = false; btn.innerText = 'INITIATE REGISTRATION';
+        }
     };
 </script>
 </body>
