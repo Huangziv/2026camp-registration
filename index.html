@@ -12,7 +12,8 @@
             --error-red: #ff4757;
             --success-green: #2ed573;
             --bg-dark: #0b132b;
-            --glass-bg: rgba(11, 19, 43, 0.8);
+            --glass-bg: rgba(11, 19, 43, 0.85);
+            --input-bg: #16213e; /* 稍微亮一點的背景，提升對比度 */
         }
 
         body { 
@@ -48,60 +49,72 @@
         h2 { 
             text-align: center; 
             color: var(--primary-glow); 
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 10px; 
             text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
         
         h3 { 
             background: linear-gradient(90deg, rgba(0, 229, 255, 0.2), transparent); 
             padding: 12px 20px; 
             border-left: 5px solid var(--primary-glow); 
-            font-size: 1.2em; 
+            font-size: 1.1em; 
             margin-top: 40px; 
             color: var(--primary-glow); 
             border-radius: 0 10px 10px 0;
         }
 
+        /* 內容區塊 */
         .notice-box { 
             background-color: rgba(255, 71, 87, 0.08); 
             border: 1px solid rgba(255, 71, 87, 0.3); 
             padding: 20px; 
             border-radius: 10px; 
             margin-bottom: 30px; 
+            font-size: 0.9em;
         }
+
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: #ced6e0; font-size: 0.95em; }
+        .required-star { color: var(--error-red); margin-left: 4px; }
         
-        /* 課程亮點卡片 */
-        .course-highlights {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 159, 67, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .course-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
+        /* ⚠️ 核心修正：強制設定下拉選單顏色 */
+        input, select, textarea { 
+            width: 100%; 
+            padding: 14px 18px; 
+            background: var(--input-bg); 
+            border: 1px solid rgba(0, 229, 255, 0.4); 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 1em; 
+            color: #ffffff !important; /* 強制文字白色 */
             transition: 0.3s;
         }
-        .course-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-orange);
-            box-shadow: 0 10px 20px rgba(255, 159, 67, 0.2);
+
+        /* 強制設定下拉選項在所有瀏覽器的樣式 */
+        select option {
+            background-color: #1a1a2e; /* 深色背景 */
+            color: #ffffff !important; /* 白色文字 */
+            padding: 10px;
         }
-        .course-icon { font-size: 2.5em; margin-bottom: 10px; }
-        .course-title { color: var(--accent-orange); font-weight: bold; margin-bottom: 8px; }
-        .course-desc { font-size: 0.9em; color: #a4b0be; }
+
+        input:focus, select:focus, textarea:focus { 
+            outline: none; 
+            border-color: var(--primary-glow); 
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            background: #1b264f;
+        }
+
+        .flex-row { display: flex; gap: 15px; }
+        .flex-row > * { flex: 1; min-width: 0; }
+
+        .checkbox-group { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 15px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px;
+        }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9em; }
+        input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary-glow); }
 
         .bank-box { 
             background-color: rgba(46, 213, 115, 0.1); 
@@ -110,42 +123,9 @@
             border-radius: 10px; 
             margin-bottom: 20px; 
             color: var(--success-green); 
+            font-size: 0.95em;
         }
 
-        /* 表單樣式 */
-        .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 10px; font-weight: 600; color: #ced6e0; }
-        .required-star { color: var(--error-red); margin-left: 4px; }
-        
-        input, select, textarea { 
-            width: 100%; 
-            padding: 14px 18px; 
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(0, 229, 255, 0.3); 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-size: 1em; 
-            color: #fff;
-            transition: 0.3s;
-        }
-        input:focus, select:focus, textarea:focus { 
-            outline: none; 
-            border-color: var(--primary-glow); 
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-            background: rgba(0, 229, 255, 0.05);
-        }
-
-        .flex-row { display: flex; gap: 15px; }
-        .flex-row > * { flex: 1; }
-
-        .checkbox-group { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
-            gap: 15px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px;
-        }
-        .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: var(--primary-glow); }
-
-        /* 狀態訊息欄 */
         #statusMessage {
             display: none;
             padding: 15px;
@@ -153,68 +133,45 @@
             margin-top: 20px;
             text-align: center;
             font-weight: bold;
+            font-size: 0.95em;
         }
         .status-success { background: rgba(46, 213, 115, 0.2); color: var(--success-green); border: 1px solid var(--success-green); }
         .status-error { background: rgba(255, 71, 87, 0.2); color: var(--error-red); border: 1px solid var(--error-red); }
 
         button.submit-btn { 
             background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 18px; 
-            border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.3em; 
+            border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.2em; 
             font-weight: bold; margin-top: 40px; transition: 0.4s; letter-spacing: 2px;
             box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
         }
         button.submit-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 210, 255, 0.6); }
         button.submit-btn:disabled { background: #576574; cursor: not-allowed; opacity: 0.7; }
         
-        .hidden-group { display: none; margin-top: 15px; }
-        
         @media (max-width: 600px) {
-            .container { padding: 20px; }
+            .container { padding: 25px 15px; }
             .flex-row { flex-direction: column; gap: 10px; }
+            h2 { font-size: 1.5em; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="banner.jpg" alt="營隊 Banner" class="banner-img" onerror="this.style.display='none'">
-
     <h2>2026 未來之光：探索&科技營</h2>
     
     <div class="notice-box">
-        <p style="color: #ff4757; font-weight:bold; font-size:1.1em; text-align:center;">🚫 防詐騙提醒 🚫</p>
-        <p style="font-size:0.95em;">我們不會以任何名義要求您至 ATM 操作。若接到疑慮電話，請撥打 165 反詐騙專線或聯繫營隊專線：(02)2981-0310。</p>
-    </div>
-
-    <div class="course-highlights">
-        <h3 style="margin-top:0;">✨ 精彩課程搶先看</h3>
-        <div class="cards-container">
-            <div class="course-card">
-                <div class="course-icon">🚀</div>
-                <div class="course-title">前瞻科技</div>
-                <div class="course-desc">探索 AI 與未來科技趨勢，開啟數位新眼界。</div>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">🌿</div>
-                <div class="course-title">戶外探索</div>
-                <div class="course-desc">走入大自然體驗互助與勇敢，挑戰極限自我。</div>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">⚖️</div>
-                <div class="course-title">法律防毒</div>
-                <div class="course-desc">律師開講！建立正確法治觀念與校園保護。</div>
-            </div>
-        </div>
+        <p style="color: #ff4757; font-weight:bold; text-align:center; margin-top:0;">🚫 防詐騙提醒 🚫</p>
+        <p>我們不會以任何名義要求您至 ATM 操作。若接到疑慮電話，請撥打 165 反詐騙專線或聯繫營隊：(02)2981-0310。</p>
     </div>
 
     <form id="enrollmentForm">
         
         <div class="form-group">
             <label>電子郵件 (Email)<span class="required-star">*</span></label>
-            <div class="flex-row" style="align-items: center;">
-                <input type="text" id="emailPrefix" placeholder="帳號" required style="flex: 2;">
-                <span style="padding: 0 10px; font-weight:bold;">@</span>
-                <select id="emailDomainSelect" style="flex: 2;">
+            <div class="flex-row">
+                <input type="text" id="emailPrefix" placeholder="帳號" required>
+                <div style="display: flex; align-items: center; justify-content: center; font-weight:bold;">@</div>
+                <select id="emailDomainSelect">
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="icloud.com">icloud.com</option>
@@ -246,7 +203,6 @@
         <div class="form-group">
             <label>身分證字號 (辦理保險用)<span class="required-star">*</span></label>
             <input type="text" id="idInput" name="idNumber" maxlength="10" placeholder="例如: F123456789" required style="text-transform: uppercase;">
-            <p id="idError" style="color:var(--error-red); font-size:0.85em; display:none; margin-top:5px;">⚠️ 格式錯誤，請檢查首位字母與數字</p>
         </div>
         <div class="form-group">
             <label>出生年月日 (西元/民國)<span class="required-star">*</span></label>
@@ -281,10 +237,10 @@
             <input type="hidden" name="address" id="finalAddress">
         </div>
 
-        <h3>三、 推薦來源與繳費</h3>
+        <h3>三、 推薦與繳費</h3>
         <div class="form-group">
             <label>推薦報名來自 (可複選)<span class="required-star">*</span></label>
-            <div class="checkbox-group" id="referralGroup">
+            <div class="checkbox-group">
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
                 <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook">Facebook</label>
@@ -308,9 +264,9 @@
             </select>
         </div>
 
-        <div id="paymentDetailBlock" class="hidden-group">
-            <label id="paymentDetailLabel">資訊細節 (轉帳五碼或介紹人姓名)</label>
-            <input type="text" name="paymentDetail" placeholder="請輸入細節內容">
+        <div id="paymentDetailBlock" style="display:none; margin-top:15px;">
+            <label>轉帳五碼或介紹人資訊</label>
+            <input type="text" name="paymentDetail" placeholder="請輸入詳情">
         </div>
 
         <div class="form-group" style="margin-top:20px;"><label>備註</label><textarea name="remark" rows="3"></textarea></div>
@@ -321,10 +277,8 @@
 </div>
 
 <script>
-    // ⚠️ 確保這裡是您最新的 GAS 網址
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
-    // 初始化選單
     (function init() {
         const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
         for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年 (民國 ${i-1911} 年)`, i));
@@ -333,8 +287,7 @@
 
         const cityData = {
             "新北市": ["三重區", "蘆洲區", "新莊區", "板橋區", "中和區", "永和區", "五股區", "泰山區"],
-            "臺北市": ["萬華區", "中正區", "大同區", "士林區", "北投區", "中山區"],
-            "桃園市": ["桃園區", "龜山區", "中壢區"]
+            "臺北市": ["萬華區", "中正區", "大同區", "士林區", "北投區", "中山區"]
         };
         const cSel = document.getElementById('citySelect'), dSel = document.getElementById('districtSelect');
         Object.keys(cityData).forEach(c => cSel.add(new Option(c, c)));
@@ -344,66 +297,31 @@
         };
     })();
 
-    // UI 控制
     document.getElementById('emailDomainSelect').onchange = function() {
         document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none';
     };
 
     document.getElementById('paymentMethodSelect').onchange = function() {
-        const block = document.getElementById('paymentDetailBlock');
-        block.style.display = (this.value === '現場繳費' || this.value === '') ? 'none' : 'block';
+        document.getElementById('paymentDetailBlock').style.display = (this.value === '現場繳費' || this.value === '') ? 'none' : 'block';
     };
 
-    // 身分證驗證
-    let isIdValid = false;
-    document.getElementById('idInput').oninput = function() {
-        const id = this.value.toUpperCase();
-        const err = document.getElementById('idError');
-        if(/^[A-Z][12]\d{8}$/.test(id)) {
-            const letters = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
-            const dict = {}; for(let i=0; i<26; i++) dict[letters[i]] = i+10;
-            const c0 = dict[id[0]];
-            let sum = Math.floor(c0/10) + (c0%10)*9;
-            for(let i=1; i<9; i++) sum += parseInt(id[i]) * (9-i);
-            sum += parseInt(id[9]);
-            isIdValid = (sum % 10 === 0);
-        } else { isIdValid = false; }
-        err.style.display = (this.value.length >= 10 && !isIdValid) ? 'block' : 'none';
-    };
-
-    // 表單送出
     const form = document.getElementById('enrollmentForm');
     const msg = document.getElementById('statusMessage');
 
     form.onsubmit = async (e) => {
         e.preventDefault();
-        
-        if(!isIdValid) {
-            showStatus("請檢查學員身分證字號格式是否正確", "error");
-            return;
-        }
-
         const btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        btn.innerText = '🔄 系統資料傳輸中...';
-        showStatus("正在處理報名資料，請稍候...", "success");
+        btn.disabled = true; btn.innerText = '處理中...';
+        showStatus("資料傳送中，請稍候...", "success");
 
-        // 整理 Email
         let dom = document.getElementById('emailDomainSelect').value;
         if(dom === 'custom') dom = document.getElementById('customEmailDomain').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
-
-        // 整理生日 (民國年格式)
-        const by = document.getElementById('birthYear').value;
-        document.getElementById('finalBirthday').value = (by - 1911) + document.getElementById('birthMonth').value + document.getElementById('birthDay').value;
-
-        // 整理地址
+        document.getElementById('finalBirthday').value = (document.getElementById('birthYear').value - 1911) + document.getElementById('birthMonth').value + document.getElementById('birthDay').value;
         document.getElementById('finalAddress').value = document.getElementById('citySelect').value + document.getElementById('districtSelect').value + document.getElementById('addressDetail').value;
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        
-        // 處理複選框
         const refs = [];
         document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
         data.referral = refs.join(', ');
@@ -411,20 +329,13 @@
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             const result = await res.text();
-            
             if(result === 'Success') {
-                showStatus("✅ 報名成功！感謝您的參與，報到編號將寄送至您的電子信箱。", "success");
+                showStatus("✅ 報名成功！請至信箱查收確認信。", "success");
                 form.reset();
-                setTimeout(() => window.scrollTo(0,0), 500);
-            } else {
-                showStatus("❌ 寫入失敗：" + result, "error");
-            }
-        } catch (error) {
-            showStatus("🚨 網路連線異常，請確認後再試一次。", "error");
-        } finally {
-            btn.disabled = false;
-            btn.innerText = '確認報名並送出資料';
-        }
+                window.scrollTo(0,0);
+            } else { showStatus("❌ 錯誤：" + result, "error"); }
+        } catch (error) { showStatus("🚨 網路錯誤，請稍後再試。", "error"); }
+        btn.disabled = false; btn.innerText = '確認報名並送出資料';
     };
 
     function showStatus(text, type) {
