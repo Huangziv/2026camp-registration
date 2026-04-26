@@ -4,65 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 科技夏令營報名系統</title>
+    <!-- 引入 Google 字體提升質感 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00e5ff; --bg: #0b132b; }
-        body { font-family: "Microsoft JhengHei", sans-serif; background: #0b132b; color: #e0e6ed; padding: 15px; margin: 0; }
-        .container { max-width: 600px; margin: auto; background: rgba(11, 19, 43, 0.95); padding: 25px; border-radius: 15px; border: 1px solid var(--primary); box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); }
-        h2 { text-align: center; color: var(--primary); margin-bottom: 25px; }
-        h3 { border-left: 5px solid var(--primary); padding-left: 15px; color: var(--primary); background: rgba(0,229,255,0.05); margin: 30px 0 15px; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; }
-        /* ⚠️ 強制白底黑字，解決隱形問題 */
-        input, select, textarea { 
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--primary); 
-            background: #ffffff !important; color: #000000 !important; font-size: 16px; box-sizing: border-box;
+        :root {
+            --primary: #00e5ff;
+            --secondary: #00d2ff;
+            --bg-dark: #0b132b;
+            --glass: rgba(11, 19, 43, 0.88);
+            --accent-orange: #ff9f43;
+            --success: #2ed573;
+            --error: #ff4757;
+            --card-hover: rgba(0, 229, 255, 0.15);
         }
-        select option { background: #ffffff; color: #000000; }
-        .flex-row { display: flex; gap: 10px; align-items: center; }
-        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; }
-        .checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 0.85em; cursor: pointer; }
-        .status-msg { padding: 15px; border-radius: 8px; margin: 20px 0; display: none; text-align: center; font-weight: bold; }
-        .success { background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid #2ed573; }
-        .submit-btn { background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.15em; font-weight: bold; margin-top: 20px; }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+            color: #e0e6ed;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 橫幅設計 */
+        .banner-container {
+            width: 100%;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .banner-img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+            border: 1px solid var(--primary);
+            display: block;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2em;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+
+        .notice-box {
+            background: rgba(255, 71, 87, 0.12);
+            border: 1px dashed var(--error);
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 0.95em;
+            margin-bottom: 35px;
+            color: #ffcccc;
+            text-align: center;
+        }
+
+        /* 精彩課程卡片設計 */
+        .course-section-title {
+            text-align: center;
+            color: var(--accent-orange);
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .course-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            background: var(--card-hover);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
+        }
+        .course-icon { font-size: 2.8em; margin-bottom: 15px; display: block; }
+        .course-name { color: var(--primary); font-weight: bold; font-size: 1.1em; margin-bottom: 8px; display: block; }
+        .course-detail { font-size: 0.85em; color: #ced6e0; text-align: left; }
+
+        .starry-night {
+            grid-column: 1 / -1;
+            background: linear-gradient(90deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1));
+            border-color: var(--accent-orange);
+        }
+
+        h3 {
+            border-left: 6px solid var(--primary);
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent);
+            padding: 12px 18px;
+            margin: 45px 0 20px;
+            color: var(--primary);
+            border-radius: 0 10px 10px 0;
+            font-size: 1.3em;
+        }
+
+        /* 表單元素：解決隱形問題 */
+        .form-group { margin-bottom: 28px; }
+        label { display: block; margin-bottom: 10px; font-weight: bold; color: #ced6e0; font-size: 0.95em; }
+        .required { color: var(--error); margin-left: 5px; }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            background: #ffffff !important; /* 強制白底 */
+            color: #000000 !important;      /* 強制黑字 */
+            border: 2px solid transparent;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            outline: none;
+        }
+
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 14px auto;
+            padding-right: 40px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .flex-row { display: flex; gap: 15px; align-items: center; }
+        .flex-row > * { flex: 1; }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9em; }
+        input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--primary); cursor: pointer; }
+
+        .bank-info {
+            background: rgba(46, 213, 115, 0.1);
+            border: 1px solid var(--success);
+            padding: 20px;
+            border-radius: 12px;
+            color: var(--success);
+            font-size: 1em;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .status-msg {
+            display: none;
+            padding: 18px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        .success { background: rgba(46, 213, 115, 0.25); color: #2ed573; border: 1px solid #2ed573; }
+        .error { background: rgba(255, 71, 87, 0.25); color: #ff4757; border: 1px solid #ff4757; }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: 0.4s;
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.4);
+            margin-top: 25px;
+            letter-spacing: 2px;
+        }
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 210, 255, 0.6);
+        }
+        .submit-btn:disabled { background: #576574; opacity: 0.7; cursor: not-allowed; }
+
+        @media (max-width: 650px) {
+            .container { padding: 20px 15px; margin: 10px; }
+            .flex-row { flex-direction: column; gap: 15px; }
+            h2 { font-size: 1.7em; }
+            .course-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <h2>2026 探索&科技營報名</h2>
+    <div class="banner-container">
+        <!-- 若目錄下有 banner.jpg 則會顯示 -->
+        <img src="banner.jpg" alt="2026 夏令營 Banner" class="banner-img" onerror="this.style.display='none'">
+    </div>
+
+    <h2>2026 未來之光：探索&科技營</h2>
+    
+    <div class="notice-box">
+        <strong>🛡️ 守護安全，防範詐騙</strong><br>
+        營隊不會電話要求您至 ATM 匯款或操作。如有疑慮請撥打 165 或連繫本中心：(02)2981-0310。
+    </div>
+
+    <div class="course-section-title">✨ 營隊亮點與精彩課程 ✨</div>
+    <div class="course-grid">
+        <div class="course-card">
+            <span class="course-icon">🚀</span>
+            <span class="course-name">前瞻科技探索</span>
+            <span class="course-detail">結合最新科技趨勢，啟發孩子對未來數位領域的好奇心與創造力。</span>
+        </div>
+        <div class="course-card">
+            <span class="course-icon">🌿</span>
+            <span class="course-name">戶外探索體驗</span>
+            <span class="course-detail">在自然中學習互助合作，透過體驗活動勇敢挑戰自我，突破極限。</span>
+        </div>
+        <div class="course-card">
+            <span class="course-icon">🎭</span>
+            <span class="course-name">多元潛能開發</span>
+            <span class="course-detail">熱舞、戲曲、音樂輔療與旗陣演練，發掘每位孩子專屬的閃耀天賦。</span>
+        </div>
+        <div class="course-card">
+            <span class="course-icon">⚖️</span>
+            <span class="course-name">生活法律防毒</span>
+            <span class="course-detail">專業律師開講，以淺顯易懂的方式建立正確法治觀念與自我保護。</span>
+        </div>
+        <div class="course-card starry-night">
+            <span class="course-icon">🌟</span>
+            <span class="course-name">星光人文之夜 (7/18 晚間)</span>
+            <span style="display:block; text-align:center; font-size:0.85em; color:#ced6e0;">愛的饗宴、震撼舞龍展演、親子同樂競賽與創意表演，創造難忘仲夏回憶。</span>
+        </div>
+    </div>
+
     <form id="enrollmentForm">
+        
         <div class="form-group">
-            <label>電子郵件 (Email)</label>
+            <label>電子郵件 (Email)<span class="required">*</span></label>
             <div class="flex-row">
-                <input type="text" id="emailPrefix" placeholder="帳號" required>
-                <span>@</span>
+                <input type="text" id="emailPrefix" placeholder="信箱帳號" required>
+                <div style="font-weight:bold; font-size: 1.3em; text-align: center;">@</div>
                 <select id="emailDomainSelect">
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="icloud.com">icloud.com</option>
-                    <option value="custom">其他</option>
+                    <option value="custom">其他 (自行輸入)</option>
                 </select>
             </div>
-            <input type="text" id="customEmailDomain" placeholder="例: abc.com" style="display:none; margin-top:8px;">
+            <input type="text" id="customEmailDomain" placeholder="例: msa.hinet.net" style="display:none; margin-top:10px;">
             <input type="hidden" name="email" id="finalEmail">
         </div>
-        <div class="form-group"><label>填表人姓名</label><input type="text" name="submitter" required></div>
-        <h3>一、 學員資料</h3>
-        <div class="form-group"><label>學員姓名</label><input type="text" name="studentName" required></div>
-        <div class="form-group"><label>性別</label><select name="gender" required><option value="">選擇</option><option value="男">男</option><option value="女">女</option></select></div>
-        <div class="form-group"><label>就讀學校</label><input type="text" name="school" required></div>
+
         <div class="form-group">
-            <label>暑假過後就讀年級</label>
+            <label>填表人姓名<span class="required">*</span></label>
+            <input type="text" name="submitter" required placeholder="請填寫完整姓名">
+        </div>
+
+        <h3>一、 學員基本資料</h3>
+        <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
+        <div class="form-group"><label>性別<span class="required">*</span></label><select name="gender" required><option value="">選擇性別</option><option value="男">男</option><option value="女">女</option></select></div>
+        <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例：三重國小"></div>
+        <div class="form-group">
+            <label>暑假過後就讀年級<span class="required">*</span></label>
             <select name="grade" required>
-                <option value="">選擇</option>
+                <option value="">選擇年級</option>
                 <option value="一年級">一年級</option><option value="二年級">二年級</option><option value="三年級">三年級</option>
                 <option value="四年級">四年級</option><option value="五年級">五年級</option><option value="六年級">六年級</option>
                 <option value="國一">國一</option><option value="國二">國二</option><option value="國三">國三</option>
             </select>
         </div>
-        <div class="form-group"><label>身分證字號</label><input type="text" name="idNumber" maxlength="10" required style="text-transform: uppercase;"></div>
         <div class="form-group">
-            <label>出生年月日</label>
+            <label>學員身分證字號<span class="required">*</span></label>
+            <input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="辦理保險用 (例: F123456789)" style="text-transform: uppercase;">
+        </div>
+        <div class="form-group">
+            <label>出生年月日 (西元/民國年)<span class="required">*</span></label>
             <div class="flex-row">
                 <select id="birthYear" required><option value="">年份</option></select>
                 <select id="birthMonth" required><option value="">月份</option></select>
@@ -70,68 +316,187 @@
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
-        <div class="form-group"><label>健康狀況 (無請填無)</label><textarea name="healthStatus" rows="2" required></textarea></div>
-        <div class="form-group"><label>第幾次報名</label><select name="frequency"><option value="第一次">第一次</option><option value="第二次">第二次</option><option value="第三次">第三次</option></select></div>
-        <h3>二、 家長聯繫</h3>
-        <div class="form-group"><label>家長姓名</label><input type="text" name="parentName" required></div>
-        <div class="form-group"><label>與學員關係</label><input type="text" name="relationship" required placeholder="父/母/其他"></div>
-        <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" name="tel"></div>
-        <div class="form-group"><label>緊急連絡手機</label><input type="tel" name="mobile" required></div>
-        <div class="form-group"><label>聯絡地址</label><input type="text" id="fullAddress" placeholder="縣市/區域/街道門牌" required><input type="hidden" name="address" id="finalAddress"></div>
-        <h3>三、 其他資訊</h3>
+        <div class="form-group"><label>學員健康狀況<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="如有過敏、病史請詳述，若無請填「無」"></textarea></div>
         <div class="form-group">
-            <label>推薦報名來自</label>
-            <div class="checkbox-group">
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="會員"> 會員</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook"> Facebook</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line"> Line</label>
-                <label class="checkbox-item"><input type="checkbox" name="referral" value="非會員"> 非會員</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>繳費方式</label>
-            <select id="paymentMethodSelect" name="paymentStatus" required>
-                <option value="現場繳費">現場繳費</option><option value="轉帳繳費">轉帳繳費</option><option value="轉交介紹人">轉交介紹人</option>
+            <label>第幾次報名</label>
+            <select name="frequency">
+                <option value="第一次">第一次</option>
+                <option value="第二次">第二次</option>
+                <option value="第三次">第三次</option>
             </select>
         </div>
-        <div id="paymentDetailBlock" style="display:none; margin-bottom: 20px;"><label>轉帳五碼或詳情</label><input type="text" name="paymentDetail"></div>
-        <div class="form-group"><label>備註</label><textarea name="remark" rows="2"></textarea></div>
+
+        <h3>二、 家長聯繫資訊</h3>
+        <div class="form-group"><label>家長/監護人姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
+        <div class="form-group">
+            <label>與學員關係<span class="required">*</span></label>
+            <select name="relationship" required>
+                <option value="父">父</option>
+                <option value="母">母</option>
+                <option value="祖父母">祖父母</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" name="tel" placeholder="02-XXXX-XXXX"></div>
+        <div class="form-group"><label>緊急連絡手機<span class="required">*</span></label><input type="tel" name="mobile" required placeholder="09XX-XXX-XXX"></div>
+        <div class="form-group">
+            <label>聯絡地址<span class="required">*</span></label>
+            <div class="flex-row" style="margin-bottom: 10px;">
+                <select id="citySelect" required><option value="">選擇縣市</option></select>
+                <select id="districtSelect" required><option value="">選擇區域</option></select>
+            </div>
+            <input type="text" id="addressDetail" placeholder="街道、門牌、樓層" required>
+            <input type="hidden" name="address" id="finalAddress">
+        </div>
+
+        <h3>三、 推薦來源與繳費</h3>
+        <div class="form-group">
+            <label>推薦報名來自 (可複選)<span class="required">*</span></label>
+            <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="會員">會員</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="委員">委員</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Facebook">Facebook</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="Line">Line</label>
+                <label class="checkbox-item"><input type="checkbox" name="referral" value="非會員">非會員</label>
+            </div>
+        </div>
+
+        <div class="bank-info">
+            <strong>💎 繳費帳戶資訊：</strong><br>
+            銀行：第一銀行泰山分行 (007)<br>
+            戶名：吳麗玉<br>
+            帳號：230-50-594499
+        </div>
+
+        <div class="form-group">
+            <label>繳費方式<span class="required">*</span></label>
+            <select id="paymentMethodSelect" name="paymentStatus" required>
+                <option value="現場繳費">現場繳費</option>
+                <option value="轉帳繳費">轉帳繳費</option>
+                <option value="轉交介紹人">轉交介紹人</option>
+            </select>
+        </div>
+        <div id="paymentDetailBlock" style="display:none; margin-bottom: 25px;">
+            <label>轉帳後五碼 / 介紹人資訊<span class="required">*</span></label>
+            <input type="text" name="paymentDetail" placeholder="請在此輸入詳情">
+        </div>
+
+        <div class="form-group">
+            <label>備註</label>
+            <textarea name="remark" rows="2" placeholder="其他事項說明..."></textarea>
+        </div>
+
         <div id="statusMsg" class="status-msg"></div>
-        <button type="submit" id="submitBtn" class="submit-btn">確認傳送報名資料</button>
+        <button type="submit" id="submitBtn" class="submit-btn">確認報名並送出資料</button>
     </form>
 </div>
+
 <script>
+    // ✅ 您的 Google Apps Script URL
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
-    (function init() {
+    
+    // 初始化全台縣市與日期選單
+    (function initForm() {
         const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
-        for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年 (${i-1911}年)`, i));
-        for (let i = 1; i <= 12; i++) m.add(new Option(i + '月', String(i).padStart(2, '0')));
-        for (let i = 1; i <= 31; i++) d.add(new Option(i + '日', String(i).padStart(2, '0')));
+        // 產生年份 (西元)
+        for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年 (民國 ${i-1911} 年)`, i));
+        // 產生月份
+        for (let i = 1; i <= 12; i++) m.add(new Option(i + ' 月', String(i).padStart(2, '0')));
+        // 產生日期
+        for (let i = 1; i <= 31; i++) d.add(new Option(i + ' 日', String(i).padStart(2, '0')));
+
+        // 縣市資料
+        const cityData = {
+            "新北市": ["三重區", "蘆洲區", "新莊區", "板橋區", "中和區", "永和區", "五股區", "泰山區", "林口區", "土城區", "樹林區", "鶯歌區", "淡水區"],
+            "臺北市": ["萬華區", "中正區", "大同區", "中山區", "松山區", "大安區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
+            "桃園市": ["桃園區", "龜山區", "中壢區", "蘆竹區", "八德區", "平鎮區", "大溪區"],
+            "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"]
+        };
+        const cSel = document.getElementById('citySelect'), dSel = document.getElementById('districtSelect');
+        Object.keys(cityData).forEach(c => cSel.add(new Option(c, c)));
+        cSel.onchange = () => {
+            dSel.innerHTML = '<option value="">鄉鎮市區</option>';
+            if(cityData[cSel.value]) cityData[cSel.value].forEach(d => dSel.add(new Option(d, d)));
+        };
     })();
-    document.getElementById('emailDomainSelect').onchange = function() { document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none'; };
-    document.getElementById('paymentMethodSelect').onchange = function() { document.getElementById('paymentDetailBlock').style.display = this.value === '現場繳費' ? 'none' : 'block'; };
-    document.getElementById('enrollmentForm').onsubmit = async function(e) {
+
+    // 選單切換
+    document.getElementById('emailDomainSelect').onchange = function() {
+        document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none';
+        if(this.value === 'custom') document.getElementById('customEmailDomain').required = true;
+    };
+
+    document.getElementById('paymentMethodSelect').onchange = function() {
+        const block = document.getElementById('paymentDetailBlock');
+        block.style.display = (this.value === '現場繳費') ? 'none' : 'block';
+        block.querySelector('input').required = (this.value !== '現場繳費');
+    };
+
+    // 表單提交
+    const form = document.getElementById('enrollmentForm');
+    const msg = document.getElementById('statusMsg');
+    const btn = document.getElementById('submitBtn');
+
+    form.onsubmit = async (e) => {
         e.preventDefault();
-        const btn = document.getElementById('submitBtn'), msg = document.getElementById('statusMsg');
-        btn.disabled = true; btn.innerText = '處理中...';
-        msg.style.display = 'block'; msg.innerText = '⏳ 正在寫入 Excel...'; msg.className = 'status-msg success';
-        let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
+        
+        // 驗證身分證格式
+        const id = document.getElementById('idInput').value.toUpperCase();
+        if(!/^[A-Z][12]\d{8}$/.test(id)) {
+            alert('學員身分證字號格式不正確，請重新確認。');
+            return;
+        }
+
+        // 驗證推薦來源
+        const refs = []; 
+        document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
+        if(refs.length === 0) {
+            alert('請至少勾選一項報名推薦來源。');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = '🚀 資料安全傳輸中...';
+        msg.style.display = 'block';
+        msg.innerText = '正在連線後台系統，請勿關閉或重新整理視窗...';
+        msg.className = 'status-msg success';
+
+        // 整理 Email
+        let dom = document.getElementById('emailDomainSelect').value;
+        if(dom === 'custom') dom = document.getElementById('customEmailDomain').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
-        document.getElementById('finalBirthday').value = (document.getElementById('birthYear').value - 1911) + document.getElementById('birthMonth').value + document.getElementById('birthDay').value;
-        document.getElementById('finalAddress').value = document.getElementById('fullAddress').value;
-        const formData = new FormData(this);
-        const refs = []; document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
+        
+        // 整理生日為民國年 (ex: 1040510)
+        const minguoY = document.getElementById('birthYear').value - 1911;
+        document.getElementById('finalBirthday').value = minguoY + document.getElementById('birthMonth').value + document.getElementById('birthDay').value;
+
+        // 整理地址
+        document.getElementById('finalAddress').value = document.getElementById('citySelect').value + document.getElementById('districtSelect').value + document.getElementById('addressDetail').value;
+
+        const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         data.referral = refs.join(', ');
+
         try {
-            const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
-            if(await res.text() === 'Success') {
-                msg.innerText = '✅ 報名完成！資料已正確寫入，編號見信箱。';
-                this.reset(); window.scrollTo(0, 0);
+            const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
+            const result = await response.text();
+            
+            if(result === 'Success') {
+                msg.innerText = '✅ 報名資料傳送成功！感謝您的報名，請查看信箱中的報到編號與確認信。';
+                form.reset();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                throw new Error(result);
             }
-        } catch (err) { msg.innerText = '❌ 錯誤：' + err.message; msg.className = 'status-msg error'; }
-        btn.disabled = false; btn.innerText = '確認傳送報名資料';
+        } catch (error) {
+            msg.innerText = '❌ 發生錯誤：' + error.message + '。請稍後再試或聯繫系統管理員。';
+            msg.className = 'status-msg error';
+        } finally {
+            btn.disabled = false;
+            btn.innerText = '確認報名並送出資料';
+        }
     };
 </script>
+
 </body>
 </html>
