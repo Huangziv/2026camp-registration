@@ -68,6 +68,45 @@
         .warning-text { color: #ff4757; font-weight: bold; text-shadow: 0 0 5px rgba(255, 71, 87, 0.4); }
         .info-text { color: #48dbfb; font-weight: bold; margin-top: 10px; }
         
+        /* 精彩課程卡片設計 */
+        .course-highlights {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 159, 67, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(255, 159, 67, 0.05);
+        }
+        .course-highlights h3 {
+            margin-top: 0;
+            border-left-color: #ff9f43;
+            color: #ff9f43;
+            text-shadow: 0 0 5px rgba(255, 159, 67, 0.3);
+            background: linear-gradient(90deg, rgba(255, 159, 67, 0.15), transparent);
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .course-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 159, 67, 0.2);
+            border-color: rgba(255, 159, 67, 0.5);
+        }
+        .course-icon { font-size: 2.2em; margin-bottom: 10px; }
+        .course-title { color: #ff9f43; font-weight: bold; margin-bottom: 5px; font-size: 1.05em; }
+        .course-desc { font-size: 0.85em; color: #ced6e0; text-align: left; }
+
         .bank-box { 
             background-color: rgba(46, 213, 115, 0.05); 
             border: 1px solid rgba(46, 213, 115, 0.3); 
@@ -192,6 +231,37 @@
         <p class="warning-text" style="margin-top:15px;">【防詐騙提醒】我們不會以任何名義通知更改付款方式或要求您到ATM進行任何操作！若您接獲類似電話，請勿提供任何個人金融資料，並請撥165反詐騙專線查詢或與我們聯繫：(02)2981-0310。</p>
     </div>
 
+    <!-- 吸引人的課程資訊區塊 -->
+    <div class="course-highlights">
+        <h3>✨ 營隊亮點與精彩課程 ✨</h3>
+        <p style="font-size:0.9em; color:#a4b0be; margin-top:-5px;">精心設計的兩日探索之旅，結合靜態與動態，激發孩子無限潛能！</p>
+        <div class="cards-container">
+            <div class="course-card">
+                <div class="course-icon">🚀</div>
+                <div class="course-title">前瞻科技探索</div>
+                <div class="course-desc">邀請黃子軒師兄親自帶領，結合最新科技趨勢，啟發孩子對未知領域的好奇心與創造力。</div>
+            </div>
+            <div class="course-card">
+                <div class="course-icon">🌿</div>
+                <div class="course-title">戶外探索體驗</div>
+                <div class="course-desc">跟著黃建豪師兄走進自然，在戶外活動中學習互助合作，勇敢迎接挑戰並突破自我。</div>
+            </div>
+            <div class="course-card">
+                <div class="course-icon">🎭</div>
+                <div class="course-title">多元潛能開發</div>
+                <div class="course-desc">豐富的才藝分組：勁歌熱舞、傳統戲曲、魔法音樂輔療、旗陣演練，發掘每位孩子專屬天賦！</div>
+            </div>
+            <div class="course-card">
+                <div class="course-title">⚖️ 生活法律與防毒</div>
+                <div class="course-desc">黃川裕律師專業開講，以淺顯易懂的方式建立正確價值觀與校園自我保護意識。</div>
+            </div>
+            <div class="course-card" style="grid-column: 1 / -1;">
+                <div class="course-title" style="text-align: center;">🌟 星光人文之夜 (7/18 晚間)</div>
+                <div class="course-desc" style="text-align: center;">愛的饗宴、震撼舞龍展演、粉墨登場、親子同樂競賽與各隊創意表演，創造難忘的夏夜回憶。</div>
+            </div>
+        </div>
+    </div>
+
     <form id="enrollmentForm">
         <div class="form-group">
             <label>電子郵件 (Email) <span class="required-star">*</span></label>
@@ -268,7 +338,6 @@
 
         <div class="form-group">
             <label>連絡電話 (市話)</label>
-            <!-- 改用 type="tel" 確保手機只會跳出數字鍵盤 -->
             <input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX">
         </div>
         
@@ -332,7 +401,6 @@
             </div>
             <div class="form-group" style="margin-bottom:0;">
                 <label>介紹人電話 <span class="required-star">*</span></label>
-                <!-- 改用 type="tel" -->
                 <input type="tel" id="referrerTelInput" name="referrerTel" placeholder="09XX-XXX-XXX 或 0X-XXXX-XXXX">
             </div>
         </div>
@@ -388,11 +456,10 @@
     // --- 2. 電話號碼完美防呆排版 ---
     function formatPhoneInput(element, forceMobile) {
         element.addEventListener('input', function(e) {
-            // 使用者按倒退鍵刪除時，不強制干擾
             if (e.inputType === 'deleteContentBackward') return;
             
             let originalValue = this.value;
-            let val = originalValue.replace(/\D/g, ''); // 只保留數字
+            let val = originalValue.replace(/\D/g, '');
             
             if (val.length === 0) {
                 this.value = '';
@@ -433,22 +500,19 @@
                 }
             }
             
-            // 【修復重複輸入的關鍵】如果使用者是自己打出「-」的，就保留，不要把整個字串重置
             if (originalValue.endsWith('-') && formatted.length === originalValue.length - 1) {
                 formatted += '-';
             }
             
-            // 只有當「需要排版的結果」跟「目前畫面上的結果」不一樣時才更新畫面
             if (this.value !== formatted) {
                 this.value = formatted;
             }
         });
     }
 
-    // 分別為三個電話欄位套用新格式化邏輯
-    formatPhoneInput(document.getElementById('mobileInput'), true);   // 強制手機邏輯
-    formatPhoneInput(document.getElementById('telInput'), false);     // 判斷區碼邏輯
-    formatPhoneInput(document.getElementById('referrerTelInput'), false); // 判斷區碼邏輯
+    formatPhoneInput(document.getElementById('mobileInput'), true);
+    formatPhoneInput(document.getElementById('telInput'), false);
+    formatPhoneInput(document.getElementById('referrerTelInput'), false);
 
     // --- 3. 身分證字號驗證邏輯 ---
     let isIdValid = false;
