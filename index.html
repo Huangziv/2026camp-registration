@@ -54,7 +54,7 @@
             text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
         }
 
-        /* 法律聲明與時間資訊 */
+        /* 官方聲明資訊 */
         .official-notice {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
@@ -100,7 +100,7 @@
         label { display: block; margin-bottom: 10px; font-weight: bold; color: #ced6e0; font-size: 0.95em; }
         .required { color: var(--error); margin-left: 5px; }
 
-        /* 顯色修正：強制白底黑字 */
+        /* 顯色修正：強制白底黑字，確保所有手機端清楚顯示 */
         input, select, textarea {
             width: 100%; padding: 15px;
             background: #ffffff !important;
@@ -113,7 +113,7 @@
         }
         input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); outline: none; }
         
-        /* 下拉選單外觀優化 */
+        /* 下拉選單外觀 */
         select {
             cursor: pointer; -webkit-appearance: none; appearance: none;
             background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
@@ -123,8 +123,8 @@
             padding-right: 40px;
         }
 
-        /* 分組標籤美化 */
-        optgroup { font-weight: bold; color: var(--bg-dark); background: #f4f4f4; }
+        /* 分組標籤樣式 */
+        optgroup { font-weight: bold; color: var(--bg-dark); background: #f2f2f2; }
 
         .flex-row { display: flex; gap: 15px; align-items: center; }
         .flex-row > * { flex: 1; min-width: 0; }
@@ -162,8 +162,8 @@
 
 <div class="container">
     <div class="banner-container">
-        <!-- 圖片橫幅 -->
-        <img src="banner.jpg" alt="[2026 夏令營橫幅]" class="banner-img" onerror="this.style.display='none'">
+        <!-- 圖片需放置於 GitHub 目錄下並命名為 banner.jpg -->
+        <img src="banner.jpg" alt="" class="banner-img" onerror="this.style.display='none'">
     </div>
 
     <h2>2026 未來之光：探索&科技營</h2>
@@ -219,8 +219,8 @@
             <div class="flex-row">
                 <input type="text" id="emailPrefix" placeholder="帳號" required>
                 <div style="font-weight:bold; font-size: 1.3em; text-align: center;">@</div>
-                <select id="emailDomainSelect">
-                    <option value="" disabled selected>預設請選擇</option>
+                <select id="emailDomainSelect" required>
+                    <option value="" disabled selected>請選擇</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="msa.hinet.net">msa.hinet.net</option>
@@ -232,20 +232,14 @@
             <input type="hidden" name="email" id="finalEmail">
         </div>
 
-        <div class="form-group">
-            <label>填表人姓名<span class="required">*</span></label>
-            <input type="text" name="submitter" required placeholder="請填寫填表人完整姓名">
-        </div>
+        <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請填寫填表人完整姓名"></div>
 
         <h3>一、 學員基本資料</h3>
-        <div class="form-group">
-            <label>學員姓名<span class="required">*</span></label>
-            <input type="text" name="studentName" required>
-        </div>
+        <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
         <div class="form-group">
             <label>學員性別<span class="required">*</span></label>
             <select name="gender" required>
-                <option value="" disabled selected>預設請選擇</option>
+                <option value="" disabled selected>請選擇</option>
                 <option value="男">男</option>
                 <option value="女">女</option>
             </select>
@@ -255,7 +249,7 @@
         <div class="form-group">
             <label>暑假過後就讀幾年級<span class="required">*</span></label>
             <select name="grade" required>
-                <option value="" disabled selected>預設請選擇</option>
+                <option value="" disabled selected>請選擇</option>
                 <optgroup label="國小">
                     <option value="一年級">國小一年級</option><option value="二年級">國小二年級</option><option value="三年級">國小三年級</option>
                     <option value="四年級">國小四年級</option><option value="五年級">國小五年級</option><option value="六年級">國小六年級</option>
@@ -274,9 +268,9 @@
         <div class="form-group">
             <label>出生年月日<span class="required">*</span></label>
             <div class="flex-row">
-                <select id="birthYear" required><option value="" disabled selected>年份</option></select>
-                <select id="birthMonth" required><option value="" disabled selected>月份</option></select>
-                <select id="birthDay" required><option value="" disabled selected>日期</option></select>
+                <select id="birthYear" required><option value="" disabled selected>請選擇年份</option></select>
+                <select id="birthMonth" required><option value="" disabled selected>請選擇月份</option></select>
+                <select id="birthDay" required><option value="" disabled selected>請選擇日期</option></select>
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
@@ -284,7 +278,7 @@
         <div class="form-group">
             <label>第幾次報名</label>
             <select name="frequency">
-                <option value="" disabled selected>預設請選擇</option>
+                <option value="" disabled selected>請選擇</option>
                 <option value="第一次">第一次</option>
                 <option value="第二次">第二次</option>
                 <option value="第三次">第三次</option>
@@ -296,7 +290,7 @@
         <div class="form-group">
             <label>與學員關係<span class="required">*</span></label>
             <select name="relationship" required>
-                <option value="" disabled selected>預設請選擇</option>
+                <option value="" disabled selected>請選擇</option>
                 <option value="父">父</option>
                 <option value="母">母</option>
                 <option value="祖父母">祖父母</option>
@@ -306,19 +300,20 @@
         
         <div class="form-group">
             <label>連絡電話 (市話)</label>
-            <input type="tel" id="telInput" name="tel" placeholder="自動格式化：02-XXXX-XXXX">
+            <input type="tel" id="telInput" name="tel" placeholder="例: 02-2981-0310">
         </div>
         
         <div class="form-group">
             <label>緊急連絡手機<span class="required">*</span></label>
-            <input type="tel" id="mobileInput" name="mobile" required placeholder="自動格式化：09XX-XXX-XXX">
+            <input type="tel" id="mobileInput" name="mobile" required placeholder="例: 0912-345-678">
         </div>
         
         <div class="form-group">
-            <label>聯絡地址 (全台縣市支援)<span class="required">*</span></label>
+            <!-- ✅ 依照要求：移除 (全台縣市支援) 文字 -->
+            <label>聯絡地址<span class="required">*</span></label>
             <div class="flex-row" style="margin-bottom: 10px;">
-                <select id="citySelect" required><option value="" disabled selected>預設請選擇縣市</option></select>
-                <select id="districtSelect" required><option value="" disabled selected>區域</option></select>
+                <select id="citySelect" required><option value="" disabled selected>請選擇縣市</option></select>
+                <select id="districtSelect" required><option value="" disabled selected>請選擇區域</option></select>
             </div>
             <input type="text" id="addressDetail" placeholder="街道、門牌、樓層" required>
             <input type="hidden" name="address" id="finalAddress">
@@ -347,13 +342,18 @@
         <div class="form-group">
             <label>繳費方式<span class="required">*</span></label>
             <select id="paymentMethodSelect" name="paymentStatus" required>
-                <option value="" disabled selected>預設請選擇</option>
+                <option value="" disabled selected>請選擇</option>
                 <option value="轉帳繳費">轉帳繳費</option>
                 <option value="轉交介紹人">轉交介紹人</option>
                 <option value="其他">其他</option>
             </select>
         </div>
-        <div id="paymentDetailBlock" style="display:none; margin-bottom: 20px;"><label>轉帳五碼或詳情備註</label><input type="text" name="paymentDetail"></div>
+        <!-- ✅ 轉交介紹人邏輯優化 -->
+        <div id="paymentDetailBlock" style="display:none; margin-bottom: 20px;">
+            <label id="paymentDetailLabel">付款詳情備註</label>
+            <input type="text" id="paymentDetailInput" name="paymentDetail" placeholder="請填寫詳細資訊">
+        </div>
+        
         <div class="form-group"><label>備註</label><textarea name="remark" rows="2" placeholder="其他事項說明..."></textarea></div>
 
         <div id="statusMsg" class="status-msg"></div>
@@ -362,7 +362,6 @@
 </div>
 
 <script>
-    // ✅ 您的 Apps Script 網址
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
     // 全台灣行政區資料
@@ -392,21 +391,18 @@
     };
 
     (function init() {
-        // 初始化日期
         const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
         for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年 (${i-1911}年)`, i));
         for (let i = 1; i <= 12; i++) m.add(new Option(i + '月', String(i).padStart(2, '0')));
         for (let i = 1; i <= 31; i++) d.add(new Option(i + '日', String(i).padStart(2, '0')));
         
-        // 初始化行政區選單
         const cs = document.getElementById('citySelect'), ds = document.getElementById('districtSelect');
         Object.keys(taiwanDistricts).forEach(c => cs.add(new Option(c, c)));
         cs.onchange = () => {
-            ds.innerHTML = '<option value="" disabled selected>區域</option>';
+            ds.innerHTML = '<option value="" disabled selected>請選擇區域</option>';
             if(taiwanDistricts[cs.value]) taiwanDistricts[cs.value].forEach(d => ds.add(new Option(d, d)));
         };
 
-        // 設定電話自動格式化
         setupPhoneFormatting(document.getElementById('mobileInput'), 'mobile');
         setupPhoneFormatting(document.getElementById('telInput'), 'landline');
     })();
@@ -436,14 +432,36 @@
         });
     }
 
-    document.getElementById('emailDomainSelect').onchange = function() { document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none'; };
-    document.getElementById('paymentMethodSelect').onchange = function() { document.getElementById('paymentDetailBlock').style.display = 'block'; };
+    document.getElementById('emailDomainSelect').onchange = function() {
+        document.getElementById('customEmailDomain').style.display = this.value === 'custom' ? 'block' : 'none';
+        document.getElementById('customEmailDomain').required = (this.value === 'custom');
+    };
+
+    document.getElementById('paymentMethodSelect').onchange = function() {
+        const block = document.getElementById('paymentDetailBlock');
+        const label = document.getElementById('paymentDetailLabel');
+        const input = document.getElementById('paymentDetailInput');
+        block.style.display = 'block';
+        if(this.value === '轉交介紹人') {
+            label.innerText = '介紹人姓名與電話';
+            input.placeholder = '請輸入介紹人姓名與連絡電話';
+            input.required = true;
+        } else if(this.value === '轉帳繳費') {
+            label.innerText = '轉帳末五碼';
+            input.placeholder = '請輸入末五碼';
+            input.required = true;
+        } else {
+            label.innerText = '付款詳情備註';
+            input.placeholder = '請在此輸入內容';
+            input.required = false;
+        }
+    };
 
     document.getElementById('enrollmentForm').onsubmit = async function(e) {
         e.preventDefault();
         const btn = document.getElementById('submitBtn'), msg = document.getElementById('statusMsg');
-        btn.disabled = true; btn.innerText = '🚀 正在傳輸資料...';
-        msg.style.display = 'block'; msg.innerText = '正在處理您的報名，請稍候...'; msg.className = 'status-msg success';
+        btn.disabled = true; btn.innerText = '🚀 正在傳輸中...';
+        msg.style.display = 'block'; msg.innerText = '正在處理您的報名資料，請稍候...'; msg.className = 'status-msg success';
 
         let dom = document.getElementById('emailDomainSelect').value === 'custom' ? document.getElementById('customEmailDomain').value : document.getElementById('emailDomainSelect').value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + dom;
@@ -458,10 +476,11 @@
         try {
             const res = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) });
             if(await res.text() === 'Success') {
-                msg.innerText = '✅ 報名完成！感謝您的參與，詳細編號已發送至您的信箱。';
+                msg.innerText = '✅ 報名完成！詳細資訊已發送至您的信箱，感謝您的報名。';
                 this.reset(); window.scrollTo(0, 0);
+                document.getElementById('paymentDetailBlock').style.display = 'none';
             }
-        } catch (error) { msg.innerText = '❌ 送出失敗，請檢查網路連線。'; msg.className = 'status-msg error'; }
+        } catch (error) { msg.innerText = '❌ 傳送失敗，請聯繫營隊人員。'; msg.className = 'status-msg error'; }
         btn.disabled = false; btn.innerText = '確認報名並送出資料';
     };
 </script>
