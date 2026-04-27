@@ -94,7 +94,7 @@
         .location-info { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-bottom: 12px; }
         .camp-time { display: flex; justify-content: center; gap: 30px; color: var(--primary); font-weight: bold; font-size: 1.2em; font-family: 'Orbitron', sans-serif; }
 
-        /* ✅ 課程資訊重新排版 (電腦版為對稱佈局) */
+        /* ✅ 課程資訊重新排版 */
         .course-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -165,8 +165,17 @@
             outline: none;
         }
         
-        /* 修正下拉選單顯示問題 */
-        select option { background: #0e1a3a; color: white; padding: 10px; }
+        /* ✅ 修正下拉選單看不到字的問題 (強制選項背景與文字顏色) */
+        select option { 
+            background-color: #0e1a3a !important; 
+            color: #ffffff !important; 
+            padding: 10px;
+        }
+        optgroup {
+            background-color: #0e1a3a !important;
+            color: var(--primary) !important;
+            font-weight: bold;
+        }
 
         .flex-row { display: flex; gap: 18px; align-items: center; }
         .flex-row > * { flex: 1; min-width: 0; }
@@ -287,7 +296,7 @@
         </div>
     </div>
 
-    <!-- ✅ 課程資訊區重排 (2x2 對稱佈局 + 底部長橫幅) -->
+    <!-- 課程資訊區重排 (2x2 對稱佈局 + 底部長橫幅) -->
     <div class="course-grid">
         <div class="course-card">
             <span class="course-icon">🚀</span>
@@ -372,7 +381,7 @@
             </div>
             <div class="form-group">
                 <label>第幾次報名</label>
-                <select name="frequency">
+                <select name="frequency" id="frequencySelect">
                     <option value="第一次">第一次</option>
                     <option value="第二次">第二次</option>
                     <option value="第三次以上">第三次以上</option>
@@ -452,6 +461,9 @@
                     <div class="flex-row">
                         <select id="transMonth"><option value="" disabled selected>月</option></select>
                         <select id="transDay"><option value="" disabled selected>日</option></select>
+                        <!-- ✅ 新增時/分選擇 -->
+                        <select id="transHour"><option value="" disabled selected>時</option></select>
+                        <select id="transMin"><option value="" disabled selected>分</option></select>
                     </div>
                 </div>
             </div>
@@ -472,7 +484,7 @@
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqF_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
     // 全台縣市鄉鎮資料
     const taiwanData = {
@@ -525,9 +537,12 @@
             if(taiwanData[cs.value]) taiwanData[cs.value].forEach(d => ds.add(new Option(d, d)));
         };
 
-        const tm = document.getElementById('transMonth'), td = document.getElementById('transDay');
+        const tm = document.getElementById('transMonth'), td = document.getElementById('transDay'), th = document.getElementById('transHour'), tmin = document.getElementById('transMin');
         for (let i = 1; i <= 12; i++) tm.add(new Option(i + '月', i));
         for (let i = 1; i <= 31; i++) td.add(new Option(i + '日', i));
+        // ✅ 產生時/分選項
+        for (let i = 0; i <= 23; i++) th.add(new Option(i + '時', String(i).padStart(2, '0')));
+        for (let i = 0; i <= 59; i += 5) tmin.add(new Option(i + '分', String(i).padStart(2, '0')));
 
         setupPhoneFormatting(document.getElementById('mobileInput'));
         setupPhoneFormatting(document.getElementById('referralPhone'));
@@ -553,6 +568,10 @@
         document.getElementById('bankDetailFields').style.display = (this.value === '轉帳繳費') ? 'block' : 'none';
         document.getElementById('referralDetailFields').style.display = (this.value === '轉交介紹人') ? 'block' : 'none';
         document.getElementById('bankLast5').required = (this.value === '轉帳繳費');
+        document.getElementById('transMonth').required = (this.value === '轉帳繳費');
+        document.getElementById('transDay').required = (this.value === '轉帳繳費');
+        document.getElementById('transHour').required = (this.value === '轉帳繳費');
+        document.getElementById('transMin').required = (this.value === '轉帳繳費');
         document.getElementById('referralName').required = (this.value === '轉交介紹人');
         document.getElementById('referralPhone').required = (this.value === '轉交介紹人');
     };
@@ -579,7 +598,12 @@
         document.getElementById('finalAddress').value = document.getElementById('citySelect').value + document.getElementById('districtSelect').value + document.getElementById('addressDetail').value;
         
         if(document.getElementById('paymentMethodSelect').value === '轉帳繳費') {
-            document.getElementById('finalBankDateTime').value = document.getElementById('transMonth').value + "/" + document.getElementById('transDay').value;
+            // ✅ 更新為包含時/分的完整時間字串
+            document.getElementById('finalBankDateTime').value = 
+                document.getElementById('transMonth').value + "/" + 
+                document.getElementById('transDay').value + " " + 
+                document.getElementById('transHour').value + ":" + 
+                document.getElementById('transMin').value;
         }
 
         const formData = new FormData(this);
