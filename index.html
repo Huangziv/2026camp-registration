@@ -148,7 +148,7 @@
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1.1em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* ✅ 下拉選單與輸入框樣式強化 (解決顯示問題) */
+        /* 下拉選單與輸入框樣式強化 */
         input, select, textarea {
             width: 100%; padding: 18px;
             background-color: var(--input-bg) !important;
@@ -167,7 +167,7 @@
             outline: none;
         }
         
-        /* ✅ 強制修正下拉選單看不到字的問題 */
+        /* 強制修正下拉選單看不到字的問題 */
         select option { 
             background-color: #0e1a3a !important; 
             color: #ffffff !important; 
@@ -190,13 +190,18 @@
         .checkbox-item { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 1em; transition: 0.3s; }
         input[type="checkbox"] { width: 24px; height: 24px; accent-color: var(--primary); cursor: pointer; }
 
+        /* 標註繳費資訊 */
         .bank-info {
             background: rgba(0, 229, 255, 0.05);
-            border: 1px solid var(--primary);
-            padding: 30px; border-radius: 20px;
+            border: 1.5px solid var(--primary);
+            padding: 25px; 
+            border-radius: 18px;
             color: var(--primary);
-            font-size: 1.2em; margin-bottom: 40px;
+            font-size: 1.3em; 
+            margin: 20px 0 40px;
             text-align: center;
+            font-weight: bold;
+            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.1);
         }
 
         .sub-field-box {
@@ -266,7 +271,8 @@
     <div class="modal-content">
         <span style="font-size: 5em; display: block; margin-bottom: 20px;">🚀</span>
         <div style="font-size: 2em; color: var(--primary); font-weight: bold; margin-bottom: 10px;">報名提交成功</div>
-        <div style="color: #b0b8c1;">您的專屬報到編號為：</div>
+        <!-- ✅ 修正：改為報名編號 -->
+        <div style="color: #b0b8c1;">您的專屬報名編號為：</div>
         <div class="reg-id-box" id="displayRegID">----</div>
         <div style="color: #b0b8c1; margin-bottom: 30px; font-size: 0.95em;">確認信已發送至您的電子信箱。</div>
         <button class="modal-close-btn" onclick="location.reload()">確認並關閉</button>
@@ -329,7 +335,6 @@
                 <input type="text" id="emailPrefix" placeholder="帳號" required>
                 <div style="font-weight:bold; color: var(--primary);">@</div>
                 <select id="emailDomainSelect" required>
-                    <option value="" disabled selected>請選擇</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="msa.hinet.net">msa.hinet.net</option>
@@ -351,7 +356,6 @@
             <div class="form-group">
                 <label>學員性別<span class="required">*</span></label>
                 <select name="gender" required>
-                    <option value="" disabled selected>請選擇</option>
                     <option value="男">男</option>
                     <option value="女">女</option>
                 </select>
@@ -363,7 +367,6 @@
             <div class="form-group">
                 <label>暑假過後年級<span class="required">*</span></label>
                 <select name="grade" required>
-                    <option value="" disabled selected>請選擇</option>
                     <optgroup label="國小"><option value="一年級">國小一年級</option><option value="二年級">國小二年級</option><option value="三年級">國小三年級</option><option value="四年級">國小四年級</option><option value="五年級">國小五年級</option><option value="六年級">國小六年級</option></optgroup>
                     <optgroup label="國中"><option value="國一">國中一年級</option><option value="國二">國中二年級</option><option value="國三">國中三年級</option></optgroup>
                 </select>
@@ -378,7 +381,6 @@
             <div class="form-group">
                 <label>第幾次報名</label>
                 <select name="frequency">
-                    <option value="" disabled selected>請選擇</option>
                     <option value="第一次">第一次</option>
                     <option value="第二次">第二次</option>
                     <option value="第三次以上">第三次以上</option>
@@ -404,7 +406,6 @@
             <div class="form-group">
                 <label>關係<span class="required">*</span></label>
                 <select name="relationship" required>
-                    <option value="" disabled selected>請選擇</option>
                     <option value="父">父</option>
                     <option value="母">母</option>
                     <option value="祖父母">祖父母</option>
@@ -437,18 +438,21 @@
             </div>
         </div>
 
-        <div class="bank-info"><strong>第一銀行泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499</strong></div>
+        <!-- ✅ 標註繳費資訊 -->
+        <div class="bank-info">
+            第一銀行泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499
+        </div>
+
         <div class="form-group">
             <label>繳費方式<span class="required">*</span></label>
             <select id="paymentMethodSelect" name="paymentStatus" required>
-                <option value="" disabled selected>請選擇</option>
                 <option value="轉帳繳費">銀行轉帳</option>
                 <option value="轉交推薦人">轉交推薦人</option>
                 <option value="其他">其他</option>
             </select>
         </div>
         
-        <!-- ✅ 修正：名稱改為「推薦人」，並確保可填入 -->
+        <!-- ✅ 推薦人填寫區 (原介紹人) -->
         <div id="referralDetailFields" class="sub-field-box" style="display:none;">
             <div class="desktop-row">
                 <div><label>推薦人姓名<span class="required">*</span></label><input type="text" id="referralName" name="referralName" placeholder="請填寫推薦人姓名"></div>
@@ -456,7 +460,7 @@
             </div>
         </div>
 
-        <div id="bankDetailFields" class="sub-field-box" style="display:none;">
+        <div id="bankDetailFields" class="sub-field-box" style="display:block;">
             <div class="desktop-row">
                 <div class="form-group"><label>末五碼 (須精準5位)<span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="12345"></div>
                 <div class="form-group">
@@ -539,7 +543,6 @@
 
         setupPhoneFormatting(document.getElementById('mobileInput'), 'mobile');
         setupPhoneFormatting(document.getElementById('telInput'), 'landline');
-        // ✅ 為推薦人電話也加入格式化
         setupPhoneFormatting(document.getElementById('referralPhone'), 'mobile');
     })();
 
@@ -571,10 +574,8 @@
 
     document.getElementById('paymentMethodSelect').onchange = function() {
         document.getElementById('bankDetailFields').style.display = (this.value === '轉帳繳費') ? 'block' : 'none';
-        // ✅ 修正邏輯：選中「轉交推薦人」時顯示欄位
         document.getElementById('referralDetailFields').style.display = (this.value === '轉交推薦人') ? 'block' : 'none';
         
-        // 設定必填屬性
         document.getElementById('bankLast5').required = (this.value === '轉帳繳費');
         document.getElementById('referralName').required = (this.value === '轉交推薦人');
         document.getElementById('referralPhone').required = (this.value === '轉交推薦人');
@@ -584,7 +585,6 @@
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
         
-        // 末五碼判斷
         if(document.getElementById('paymentMethodSelect').value === '轉帳繳費') {
             const l5 = document.getElementById('bankLast5').value;
             if(l5.length !== 5 || isNaN(l5)) { alert('末五碼必須精準為 5 位數字！'); return; }
@@ -600,7 +600,6 @@
         const formData = new FormData(this);
         const data = Object.fromEntries(formData.entries());
         
-        // 組合推薦來源複選框
         const refs = []; 
         document.querySelectorAll('input[name="referral"]:checked').forEach(c => refs.push(c.value));
         data.referral = refs.join(', ');
