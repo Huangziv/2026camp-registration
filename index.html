@@ -35,11 +35,20 @@
         /* 合併後的通知區塊 */
         .official-notice { 
             background: rgba(0, 229, 255, 0.05); border-radius: 16px; padding: 25px; 
-            margin-bottom: 40px; border: 1px solid rgba(0, 229, 255, 0.3); text-align: center; 
+            margin-bottom: 25px; border: 1px solid rgba(0, 229, 255, 0.3); text-align: center; 
             box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
         }
         .notice-line { margin: 8px 0; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
         
+        /* 粉絲專頁區塊 (現在位於課程資訊與課程亮點之間) */
+        .fanpage-link { text-decoration: none; display: block; margin: 0 0 40px; }
+        .fanpage-box { 
+            background: linear-gradient(90deg, rgba(0, 124, 240, 0.15), rgba(0, 229, 255, 0.05)); 
+            border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px; padding: 20px; text-align: center; 
+            color: #ffffff; transition: 0.3s;
+        }
+        .fanpage-box:hover { background: rgba(0, 229, 255, 0.15); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--neon-glow); }
+
         /* 課程方塊 */
         .course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px; }
         .course-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
@@ -83,15 +92,6 @@
         .submit-btn { background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #050a18; padding: 20px; border: none; border-radius: 16px; cursor: pointer; width: 100%; font-size: 1.4em; font-weight: 800; transition: 0.3s; margin-top: 30px; letter-spacing: 2px; }
         .submit-btn:hover { filter: brightness(1.1); transform: scale(1.01); }
 
-        /* ✅ 粉絲專頁區塊 (移至下方) */
-        .fanpage-link { text-decoration: none; display: block; margin: 40px 0 20px; }
-        .fanpage-box { 
-            background: linear-gradient(90deg, rgba(0, 124, 240, 0.15), rgba(0, 229, 255, 0.05)); 
-            border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px; padding: 20px; text-align: center; 
-            color: #ffffff; transition: 0.3s;
-        }
-        .fanpage-box:hover { background: rgba(0, 229, 255, 0.15); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--neon-glow); }
-
         footer { text-align: center; padding: 20px 0 40px; color: #666; font-size: 0.85em; letter-spacing: 1px; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 9999; }
@@ -118,7 +118,7 @@
     <!-- Banner 區塊 -->
     <div class="banner-container"><img src="banner.jpg" alt="" class="banner-img" onerror="this.style.display='none'"></div>
     
-    <!-- ✅ 合併後的資訊區塊 (📍、✅、🗓️) -->
+    <!-- 合併後的資訊區塊 (📍、✅、🗓️) -->
     <div class="official-notice">
         <div class="notice-line" style="color: var(--primary); font-weight: bold; font-size: 1.15em;">
             📍 地點：慈濟三重園區 (新北市三重區中正北路472號)
@@ -131,6 +131,12 @@
         </div>
     </div>
 
+    <!-- ✅ 粉絲專頁區塊 (已移至課程資訊與課程亮點之間) -->
+    <a href="https://www.facebook.com/TzuChiYouthSanchung/" target="_blank" class="fanpage-link">
+        <div class="fanpage-box">🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>獲取第一手活動動態與精彩照片！ (點擊開啟)</div>
+    </a>
+
+    <!-- 課程亮點區塊 -->
     <div class="course-grid">
         <div class="course-card">
             <span class="course-icon">🚀</span>
@@ -287,11 +293,6 @@
 
         <button type="submit" id="submitBtn" class="submit-btn">立即傳送報名資料</button>
     </form>
-
-    <!-- ✅ 粉絲專頁區塊 (移至下方) -->
-    <a href="https://www.facebook.com/TzuChiYouthSanchung/" target="_blank" class="fanpage-link">
-        <div class="fanpage-box">🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>獲取第一手活動動態與精彩照片！ (點擊開啟)</div>
-    </a>
 
     <footer>© 2026 慈濟三重園區 暑期營隊團隊 版權所有</footer>
 </div>
