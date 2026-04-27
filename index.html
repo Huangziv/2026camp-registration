@@ -48,25 +48,34 @@
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1.05em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* ✅ 修正選單看不到字的問題 (強制顯色) */
+        /* ✅ 恢復科技感深色透明輸入框，並修正選單顯色 */
         select, input, textarea { 
             width: 100%; padding: 18px; 
-            background-color: #ffffff !important; 
-            color: #333333 !important; 
-            border: 1.5px solid rgba(0, 229, 255, 0.4); 
+            background-color: var(--input-bg) !important; 
+            color: #ffffff !important; 
+            border: 1.5px solid rgba(0, 229, 255, 0.3); 
             border-radius: 14px; font-size: 16px; 
             box-sizing: border-box; 
-            color-scheme: light; 
+            transition: 0.3s;
         }
-        
+        input:focus, select:focus, textarea:focus { 
+            outline: none; border-color: var(--primary); 
+            background-color: rgba(0, 229, 255, 0.1) !important;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); 
+        }
+
+        /* 針對選單展開後的選項進行顯色強化，解決看不到字的問題 */
         select option { 
-            background-color: #ffffff !important; 
-            color: #000000 !important; 
+            background-color: #0e1a3a !important; 
+            color: #ffffff !important; 
         }
+        optgroup { background-color: #0e1a3a !important; color: var(--primary) !important; font-weight: bold; }
         
-        #emailPrefix { background-color: #ffffff !important; color: #333 !important; }
-        optgroup { background-color: #f8f9fa !important; color: #007cf0 !important; font-weight: bold; }
-        
+        .flex-row { display: flex; gap: 15px; align-items: center; }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+
         .bank-info { background: rgba(0, 229, 255, 0.05); border: 1.5px solid var(--primary); padding: 25px; border-radius: 18px; color: var(--primary); font-size: 1.3em; margin: 20px 0 40px; text-align: center; font-weight: bold; }
         .sub-field-box { background: rgba(0, 229, 255, 0.05); border-radius: 20px; border: 1px solid rgba(0, 229, 255, 0.2); padding: 25px; margin-top: 15px; }
         .submit-btn { background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #050a18; padding: 25px; border: none; border-radius: 20px; cursor: pointer; width: 100%; font-size: 1.6em; font-weight: 800; transition: 0.4s; margin-top: 40px; }
@@ -147,7 +156,6 @@
                 <label>暑假過後年級<span class="required">*</span></label>
                 <select name="grade" required>
                     <option value="" disabled selected>請選擇</option>
-                    <!-- ✅ 已過濾：僅保留國小 2-6 年級 -->
                     <optgroup label="國小招生範圍">
                         <option value="二年級">國小二年級</option>
                         <option value="三年級">國小三年級</option>
