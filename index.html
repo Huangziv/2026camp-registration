@@ -312,7 +312,7 @@
         <div class="course-card">
             <span class="course-icon">📖</span>
             <span class="course-name">心靈靜思語</span>
-            <div class="course-detail">教聯會 & 團隊老師帶領，在靜心中體悟智慧，建立正向的人生價值觀。</div>
+            <div class="course-detail">教聯會 & 團隊老師帶領，在靜心中體悟智慧，建立正向人生價值觀。</div>
         </div>
         <div class="course-card">
             <span class="course-icon">⚖️</span>
@@ -467,7 +467,8 @@
 
         <div id="bankDetailFields" class="sub-field-box" style="display:none;">
             <div class="desktop-row">
-                <div class="form-group"><label>末五碼 (須精準5位)<span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="12345"></div>
+                <!-- ✅ 修正欄位標籤為「轉帳後五碼」 -->
+                <div class="form-group"><label>轉帳後五碼 <span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="12345"></div>
                 <div class="form-group">
                     <label>轉帳日期時間<span class="required">*</span></label>
                     <div class="flex-row">
@@ -488,7 +489,8 @@
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqF_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
+    // ✅ 已修正您提供的 scriptURL (加入了遺漏的 'h')
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
 
     const taiwanData = {
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
