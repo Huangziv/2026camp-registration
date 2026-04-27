@@ -28,22 +28,19 @@
             border: 1px solid rgba(0, 229, 255, 0.2); box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
         }
 
-        /* ✅ Banner 區塊調整 */
-        .banner-container { width: 100%; margin-bottom: 25px; overflow: hidden; border-radius: 20px; border: 1px solid var(--primary); box-shadow: var(--neon-glow); }
+        /* Banner 區塊 */
+        .banner-container { width: 100%; margin-bottom: 30px; overflow: hidden; border-radius: 20px; border: 1px solid var(--primary); box-shadow: var(--neon-glow); }
         .banner-img { width: 100%; display: block; transform: scale(1.05); transition: 0.5s; }
         
-        /* ✅ 連結化專頁方塊 */
-        .fanpage-link { text-decoration: none; display: block; margin-bottom: 30px; }
-        .fanpage-box { 
-            background: linear-gradient(90deg, rgba(0, 124, 240, 0.2), rgba(0, 229, 255, 0.1)); 
-            border: 1px solid var(--primary); border-radius: 14px; padding: 18px; text-align: center; 
-            color: #ffffff; transition: 0.3s;
+        /* 合併後的通知區塊 */
+        .official-notice { 
+            background: rgba(0, 229, 255, 0.05); border-radius: 16px; padding: 25px; 
+            margin-bottom: 40px; border: 1px solid rgba(0, 229, 255, 0.3); text-align: center; 
+            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
         }
-        .fanpage-box:hover { background: rgba(0, 229, 255, 0.2); transform: translateY(-3px); box-shadow: var(--neon-glow); }
-
-        .official-notice { background: rgba(0, 229, 255, 0.03); border-radius: 16px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(0, 229, 255, 0.15); text-align: center; }
+        .notice-line { margin: 8px 0; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
         
-        /* ✅ 課程方塊 */
+        /* 課程方塊 */
         .course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px; }
         .course-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
         .course-card:hover { border-color: var(--primary); background: rgba(0, 229, 255, 0.08); box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.1); }
@@ -86,13 +83,22 @@
         .submit-btn { background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #050a18; padding: 20px; border: none; border-radius: 16px; cursor: pointer; width: 100%; font-size: 1.4em; font-weight: 800; transition: 0.3s; margin-top: 30px; letter-spacing: 2px; }
         .submit-btn:hover { filter: brightness(1.1); transform: scale(1.01); }
 
-        footer { text-align: center; padding: 40px 0; color: #666; font-size: 0.85em; letter-spacing: 1px; }
+        /* ✅ 粉絲專頁區塊 (移至下方) */
+        .fanpage-link { text-decoration: none; display: block; margin: 40px 0 20px; }
+        .fanpage-box { 
+            background: linear-gradient(90deg, rgba(0, 124, 240, 0.15), rgba(0, 229, 255, 0.05)); 
+            border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px; padding: 20px; text-align: center; 
+            color: #ffffff; transition: 0.3s;
+        }
+        .fanpage-box:hover { background: rgba(0, 229, 255, 0.15); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--neon-glow); }
+
+        footer { text-align: center; padding: 20px 0 40px; color: #666; font-size: 0.85em; letter-spacing: 1px; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 9999; }
         .modal-content { background: #0e1a3a; border: 1px solid var(--primary); border-radius: 24px; padding: 40px; max-width: 420px; width: 90%; text-align: center; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
         .reg-id-box { font-family: 'Orbitron', sans-serif; font-size: 2em; color: var(--error); margin: 20px 0; padding: 12px; border: 1px dashed var(--primary); background: rgba(255, 255, 255, 0.03); }
 
-        @media (max-width: 900px) { .course-grid, .desktop-row { grid-template-columns: 1fr; } .starry-night { grid-column: auto; } .container { padding: 25px; } }
+        @media (max-width: 900px) { .course-grid, .desktop-row { grid-template-columns: 1fr; } .starry-night { grid-column: span 1; } .container { padding: 25px; } }
     </style>
 </head>
 <body>
@@ -109,18 +115,19 @@
 </div>
 
 <div class="container">
+    <!-- Banner 區塊 -->
     <div class="banner-container"><img src="banner.jpg" alt="" class="banner-img" onerror="this.style.display='none'"></div>
     
-    <a href="https://www.facebook.com/TzuChiYouthSanchung/" target="_blank" class="fanpage-link">
-        <div class="fanpage-box">🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>獲取第一手活動動態與精彩照片！ (點擊開啟)</div>
-    </a>
-    
+    <!-- ✅ 合併後的資訊區塊 (📍、✅、🗓️) -->
     <div class="official-notice">
-        <div style="color: var(--primary); font-weight: bold; font-size: 1.1em; margin-bottom: 10px;">📍 地點：慈濟三重園區 (新北市三重區中正北路472號)</div>
-        <div style="color: var(--accent); font-weight: bold; font-size: 1em; margin-bottom: 10px;">✅ 招生對象：國小 2 ~ 6 年級 | 💰 活動費用：1,500 元</div>
-        <div style="display: flex; justify-content: center; gap: 20px; color: var(--primary); font-weight: bold; font-size: 0.95em;">
-            <span>📅 7/17 (五) 07:30-17:00</span>
-            <span>📅 7/18 (六) 07:30-20:15</span>
+        <div class="notice-line" style="color: var(--primary); font-weight: bold; font-size: 1.15em;">
+            📍 地點：慈濟三重園區 (新北市三重區中正北路472號)
+        </div>
+        <div class="notice-line" style="color: var(--accent); font-weight: bold; font-size: 1.05em;">
+            ✅ 招生對象：國小 2 ~ 6 年級 | 💰 活動費用：1,500 元
+        </div>
+        <div class="notice-line" style="color: var(--primary); font-weight: bold; font-size: 1em; opacity: 0.9;">
+            🗓️ 7/17 (五) 07:30-17:00 | 🗓️ 7/18 (六) 07:30-20:15
         </div>
     </div>
 
@@ -167,7 +174,6 @@
                     <option value="custom">手動輸入</option>
                 </select>
             </div>
-            <!-- ✅ 手動輸入域名框 -->
             <input type="text" id="customDomainInput" placeholder="請輸入域名 (如: company.com)" style="display:none; margin-top: 10px;">
             <input type="hidden" name="email" id="finalEmail">
         </div>
@@ -281,6 +287,12 @@
 
         <button type="submit" id="submitBtn" class="submit-btn">立即傳送報名資料</button>
     </form>
+
+    <!-- ✅ 粉絲專頁區塊 (移至下方) -->
+    <a href="https://www.facebook.com/TzuChiYouthSanchung/" target="_blank" class="fanpage-link">
+        <div class="fanpage-box">🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>獲取第一手活動動態與精彩照片！ (點擊開啟)</div>
+    </a>
+
     <footer>© 2026 慈濟三重園區 暑期營隊團隊 版權所有</footer>
 </div>
 
@@ -337,7 +349,6 @@
         setupPhoneFormatting(document.getElementById('telInput'), 'landline');
         setupPhoneFormatting(document.getElementById('referralPhone'), 'mobile');
 
-        // ✅ Email 域名切換邏輯
         document.getElementById('emailDomainSelect').onchange = function() {
             const customInput = document.getElementById('customDomainInput');
             if (this.value === 'custom') {
@@ -390,7 +401,6 @@
         
         btn.disabled = true; btn.innerText = '正在傳送...';
 
-        // ✅ 組合 Email：判斷域名是否為自訂
         const domainSelect = document.getElementById('emailDomainSelect');
         const domainValue = domainSelect.value === 'custom' ? document.getElementById('customDomainInput').value : domainSelect.value;
         document.getElementById('finalEmail').value = document.getElementById('emailPrefix').value + "@" + domainValue;
