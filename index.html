@@ -116,7 +116,7 @@
         }
         .course-icon { font-size: 3.5em; margin-bottom: 15px; display: block; filter: drop-shadow(0 0 15px var(--primary)); }
         .course-name { color: var(--primary); font-weight: bold; font-size: 1.3em; margin-bottom: 15px; display: block; }
-        /* ✅ 修正：說明文字置中 */
+        /* ✅ 說明文字置中 */
         .course-detail { font-size: 0.9em; color: #b0b8c1; text-align: center; }
         
         .starry-night { 
@@ -455,6 +455,8 @@
                 <option value="轉交推薦人">轉交推薦人</option>
                 <option value="其他">其他</option>
             </select>
+            <!-- ✅ 加入「其他」方式的提示文字 -->
+            <div id="paymentOtherHint" style="display:none; color: var(--accent); margin-top: 10px; font-weight: bold; font-size: 0.9em;">💡 請在下方「備註事項」說明您的繳費詳情。</div>
         </div>
         
         <!-- 推薦人填寫區 -->
@@ -481,7 +483,7 @@
             <input type="hidden" name="bankDateTime" id="finalBankDateTime">
         </div>
         
-        <div class="form-group" style="margin-top: 30px;"><label>備註事項</label><textarea name="remark" rows="2"></textarea></div>
+        <div class="form-group" style="margin-top: 30px;"><label id="remarkLabel">備註事項</label><textarea name="remark" id="remarkInput" rows="2" placeholder="如有特殊需求或繳費備註請在此填寫"></textarea></div>
 
         <button type="submit" id="submitBtn" class="submit-btn">立即傳送報名資料</button>
     </form>
@@ -584,8 +586,22 @@
     }
 
     document.getElementById('paymentMethodSelect').onchange = function() {
+        const otherHint = document.getElementById('paymentOtherHint');
+        const remarkInput = document.getElementById('remarkInput');
+        
         document.getElementById('bankDetailFields').style.display = (this.value === '轉帳繳費') ? 'block' : 'none';
         document.getElementById('referralDetailFields').style.display = (this.value === '轉交推薦人') ? 'block' : 'none';
+        
+        // ✅ 邏輯更新：選擇「其他」時顯示提示，並將備註改為必填
+        if (this.value === '其他') {
+            otherHint.style.display = 'block';
+            remarkInput.required = true;
+            remarkInput.placeholder = "⚠️ 繳費方式選擇其他，請務必在此說明繳費詳情";
+        } else {
+            otherHint.style.display = 'none';
+            remarkInput.required = false;
+            remarkInput.placeholder = "如有特殊需求或繳費備註請在此填寫";
+        }
         
         document.getElementById('bankLast5').required = (this.value === '轉帳繳費');
         document.getElementById('referralName').required = (this.value === '轉交推薦人');
