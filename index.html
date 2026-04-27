@@ -49,9 +49,15 @@
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1.05em; }
         .required { color: var(--error); margin-left: 6px; }
 
+        /* ✅ 下拉選單樣式修正：確保選項文字在各種設備上皆可見 */
         input, select, textarea { width: 100%; padding: 18px; background-color: var(--input-bg) !important; color: #ffffff !important; border: 1.5px solid rgba(0, 229, 255, 0.3); border-radius: 14px; font-size: 16px; box-sizing: border-box; transition: 0.3s; }
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
-        select option { background-color: #0e1a3a !important; color: #ffffff !important; }
+        
+        /* 解決截圖中選項文字看不見的問題 (白色背景配白色文字) */
+        select option { 
+            background-color: #ffffff !important; 
+            color: #333333 !important; 
+        }
         
         .flex-row { display: flex; gap: 15px; align-items: center; }
         .flex-row > * { flex: 1; }
@@ -382,10 +388,10 @@
                 document.getElementById('displayRegID').innerText = result.regID; 
                 document.getElementById('resultModal').style.display = 'flex'; 
             } else {
-                alert('伺服器回報錯誤：' + result.message);
+                alert('提交失敗：' + (result.message || '請檢查網路狀態或 ScriptURL 設置。'));
             }
         } catch (error) { 
-            alert('提交失敗，請檢查網路狀態或 ScriptURL 設置。'); 
+            alert('提交失敗，請檢查網路狀態。'); 
         } finally { 
             btn.disabled = false; btn.innerText = '立即傳送報名資料'; 
         }
