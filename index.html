@@ -94,10 +94,10 @@
         .location-info { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-bottom: 12px; }
         .camp-time { display: flex; justify-content: center; gap: 30px; color: var(--primary); font-weight: bold; font-size: 1.2em; font-family: 'Orbitron', sans-serif; }
 
-        /* ✅ 課程資訊卡片排版 (對應 image_1c649e.png) */
+        /* ✅ 課程資訊重新排版 (電腦版為對稱佈局) */
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
             margin-bottom: 40px;
         }
@@ -118,9 +118,11 @@
         .course-name { color: var(--primary); font-weight: bold; font-size: 1.3em; margin-bottom: 15px; display: block; }
         .course-detail { font-size: 0.9em; color: #b0b8c1; text-align: left; }
         
-        /* 特殊寬度處理 */
-        .card-bottom { grid-column: span 1; } /* 法律與防毒 */
-        .starry-night { grid-column: span 3; background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1)); border-color: var(--accent); }
+        .starry-night { 
+            grid-column: span 2; 
+            background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1)); 
+            border-color: var(--accent); 
+        }
         .starry-night .course-detail { text-align: center; font-size: 1em; }
 
         h3 {
@@ -134,7 +136,7 @@
             letter-spacing: 2px;
         }
 
-        /* ✅ 電腦版表單雙欄排版 */
+        /* ✅ 表單雙欄排版 */
         .desktop-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -146,7 +148,6 @@
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1.1em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* 科技感資訊框 */
         input, select, textarea {
             width: 100%; padding: 18px;
             background: var(--input-bg) !important;
@@ -164,7 +165,7 @@
             outline: none;
         }
         
-        /* ✅ 修正下拉選單顯示問題 */
+        /* 修正下拉選單顯示問題 */
         select option { background: #0e1a3a; color: white; padding: 10px; }
 
         .flex-row { display: flex; gap: 18px; align-items: center; }
@@ -176,7 +177,6 @@
             border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .checkbox-item { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 1em; transition: 0.3s; }
-        .checkbox-item:hover { color: var(--primary); }
         input[type="checkbox"] { width: 24px; height: 24px; accent-color: var(--primary); cursor: pointer; }
 
         .bank-info {
@@ -206,10 +206,8 @@
         .submit-btn:hover:not(:disabled) {
             transform: scale(1.02);
             box-shadow: 0 0 45px rgba(0, 229, 255, 0.6);
-            filter: brightness(1.1);
         }
 
-        /* 成功彈窗 */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.88);
@@ -250,16 +248,14 @@
             .course-grid { grid-template-columns: 1fr; }
             .desktop-row { grid-template-columns: 1fr; }
             .full-col { grid-column: auto; }
+            .starry-night { grid-column: auto; }
             .container { padding: 30px 20px; }
             h2 { font-size: 1.8em; }
-            .camp-time { flex-direction: column; align-items: center; gap: 8px; }
-            .starry-night { grid-column: auto; }
         }
     </style>
 </head>
 <body>
 
-<!-- 成功彈窗 -->
 <div class="modal-overlay" id="resultModal">
     <div class="modal-content">
         <span style="font-size: 5em; display: block; margin-bottom: 20px;">🚀</span>
@@ -291,7 +287,7 @@
         </div>
     </div>
 
-    <!-- ✅ 課程資訊區 (對應 image_1c649e.png) -->
+    <!-- ✅ 課程資訊區重排 (2x2 對稱佈局 + 底部長橫幅) -->
     <div class="course-grid">
         <div class="course-card">
             <span class="course-icon">🚀</span>
@@ -308,7 +304,7 @@
             <span class="course-name">心靈靜思語</span>
             <div class="course-detail">教聯會導師群精心帶領，在靜心中體悟智慧，建立正向的人生價值觀。</div>
         </div>
-        <div class="course-card card-bottom">
+        <div class="course-card">
             <span class="course-icon">⚖️</span>
             <span class="course-name">法律與防毒</span>
             <div class="course-detail">律師專業講座，提升法規意識與防毒警覺，教育學員堅定拒絕誘惑。</div>
@@ -316,7 +312,7 @@
         <div class="course-card starry-night">
             <span class="course-icon">🌟</span>
             <span class="course-name">星光人文之夜</span>
-            <div class="course-detail">包含震撼舞龍、粉墨登場、魔法音樂輔療及親子共樂競賽，創造難忘記憶。</div>
+            <div class="course-detail">包含震撼舞龍、粉墨登場、魔法音樂輔療及親子共樂競賽，創造難忘回憶。</div>
         </div>
     </div>
 
@@ -340,21 +336,25 @@
             <input type="hidden" name="email" id="finalEmail">
         </div>
 
-        <div class="desktop-row">
-            <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請輸入姓名"></div>
-            <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required placeholder="請輸入全名"></div>
+        <div class="form-group">
+            <label>填表人姓名<span class="required">*</span></label>
+            <input type="text" name="submitter" required placeholder="請輸入填表人姓名">
         </div>
 
         <h3>一、 學員基本資料</h3>
         <div class="desktop-row">
             <div class="form-group">
+                <label>學員姓名<span class="required">*</span></label>
+                <input type="text" name="studentName" required placeholder="請輸入全名">
+            </div>
+            <div class="form-group">
                 <label>學員性別<span class="required">*</span></label>
                 <select name="gender" required><option value="" disabled selected>請選擇</option><option value="男">男</option><option value="女">女</option></select>
             </div>
-            <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例如：三重國小"></div>
         </div>
         
         <div class="desktop-row">
+            <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例如：三重國小"></div>
             <div class="form-group">
                 <label>暑假過後年級<span class="required">*</span></label>
                 <select name="grade" required>
@@ -363,9 +363,20 @@
                     <optgroup label="國中"><option value="國一">國中一年級</option><option value="國二">國中二年級</option><option value="國三">國中三年級</option></optgroup>
                 </select>
             </div>
+        </div>
+        
+        <div class="desktop-row">
             <div class="form-group">
                 <label>身分證字號 (辦理保險用)<span class="required">*</span></label>
                 <input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="例：F123456789" style="text-transform: uppercase;">
+            </div>
+            <div class="form-group">
+                <label>第幾次報名</label>
+                <select name="frequency">
+                    <option value="第一次">第一次</option>
+                    <option value="第二次">第二次</option>
+                    <option value="第三次以上">第三次以上</option>
+                </select>
             </div>
         </div>
         
@@ -377,15 +388,6 @@
                 <select id="birthDay" required><option value="" disabled selected>日期</option></select>
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
-        </div>
-
-        <div class="form-group">
-            <label>第幾次報名</label>
-            <select name="frequency">
-                <option value="第一次">第一次</option>
-                <option value="第二次">第二次</option>
-                <option value="第三次以上">第三次以上</option>
-            </select>
         </div>
 
         <div class="form-group"><label>學員健康狀況 (無則填無)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="藥物過敏、病史..."></textarea></div>
@@ -472,7 +474,7 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
     
-    // 全台縣市鄉鎮資料 (完整版)
+    // 全台縣市鄉鎮資料
     const taiwanData = {
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
         "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
