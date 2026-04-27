@@ -271,7 +271,6 @@
     <div class="modal-content">
         <span style="font-size: 5em; display: block; margin-bottom: 20px;">🚀</span>
         <div style="font-size: 2em; color: var(--primary); font-weight: bold; margin-bottom: 10px;">報名提交成功</div>
-        <!-- ✅ 修正：改為報名編號 -->
         <div style="color: #b0b8c1;">您的專屬報名編號為：</div>
         <div class="reg-id-box" id="displayRegID">----</div>
         <div style="color: #b0b8c1; margin-bottom: 30px; font-size: 0.95em;">確認信已發送至您的電子信箱。</div>
@@ -335,6 +334,7 @@
                 <input type="text" id="emailPrefix" placeholder="帳號" required>
                 <div style="font-weight:bold; color: var(--primary);">@</div>
                 <select id="emailDomainSelect" required>
+                    <option value="" disabled selected>請選擇</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="yahoo.com.tw">yahoo.com.tw</option>
                     <option value="msa.hinet.net">msa.hinet.net</option>
@@ -356,6 +356,7 @@
             <div class="form-group">
                 <label>學員性別<span class="required">*</span></label>
                 <select name="gender" required>
+                    <option value="" disabled selected>請選擇</option>
                     <option value="男">男</option>
                     <option value="女">女</option>
                 </select>
@@ -367,6 +368,7 @@
             <div class="form-group">
                 <label>暑假過後年級<span class="required">*</span></label>
                 <select name="grade" required>
+                    <option value="" disabled selected>請選擇</option>
                     <optgroup label="國小"><option value="一年級">國小一年級</option><option value="二年級">國小二年級</option><option value="三年級">國小三年級</option><option value="四年級">國小四年級</option><option value="五年級">國小五年級</option><option value="六年級">國小六年級</option></optgroup>
                     <optgroup label="國中"><option value="國一">國中一年級</option><option value="國二">國中二年級</option><option value="國三">國中三年級</option></optgroup>
                 </select>
@@ -381,6 +383,7 @@
             <div class="form-group">
                 <label>第幾次報名</label>
                 <select name="frequency">
+                    <option value="" disabled selected>請選擇</option>
                     <option value="第一次">第一次</option>
                     <option value="第二次">第二次</option>
                     <option value="第三次以上">第三次以上</option>
@@ -406,6 +409,7 @@
             <div class="form-group">
                 <label>關係<span class="required">*</span></label>
                 <select name="relationship" required>
+                    <option value="" disabled selected>請選擇</option>
                     <option value="父">父</option>
                     <option value="母">母</option>
                     <option value="祖父母">祖父母</option>
@@ -438,7 +442,7 @@
             </div>
         </div>
 
-        <!-- ✅ 標註繳費資訊 -->
+        <!-- 標註繳費資訊 -->
         <div class="bank-info">
             第一銀行泰山分行 (007) / 戶名：吳麗玉 / 帳號：230-50-594499
         </div>
@@ -446,13 +450,14 @@
         <div class="form-group">
             <label>繳費方式<span class="required">*</span></label>
             <select id="paymentMethodSelect" name="paymentStatus" required>
+                <option value="" disabled selected>請選擇</option>
                 <option value="轉帳繳費">銀行轉帳</option>
                 <option value="轉交推薦人">轉交推薦人</option>
                 <option value="其他">其他</option>
             </select>
         </div>
         
-        <!-- ✅ 推薦人填寫區 (原介紹人) -->
+        <!-- 推薦人填寫區 -->
         <div id="referralDetailFields" class="sub-field-box" style="display:none;">
             <div class="desktop-row">
                 <div><label>推薦人姓名<span class="required">*</span></label><input type="text" id="referralName" name="referralName" placeholder="請填寫推薦人姓名"></div>
@@ -460,7 +465,7 @@
             </div>
         </div>
 
-        <div id="bankDetailFields" class="sub-field-box" style="display:block;">
+        <div id="bankDetailFields" class="sub-field-box" style="display:none;">
             <div class="desktop-row">
                 <div class="form-group"><label>末五碼 (須精準5位)<span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="12345"></div>
                 <div class="form-group">
@@ -483,7 +488,7 @@
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqF_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
 
     const taiwanData = {
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
