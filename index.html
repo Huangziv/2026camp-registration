@@ -48,27 +48,27 @@
         label { display: block; margin-bottom: 12px; font-weight: bold; color: #ced6e0; font-size: 1.05em; }
         .required { color: var(--error); margin-left: 6px; }
 
-        /* ✅ 修正下拉選單看不到字的問題 */
+        /* ✅ 終極修正選單看不到字的問題 (強制顯色) */
         select, input, textarea { 
             width: 100%; padding: 18px; 
-            background-color: var(--input-bg) !important; 
-            color: #ffffff !important; 
-            border: 1.5px solid rgba(0, 229, 255, 0.3); 
+            background-color: #ffffff !important; /* 強制背景為白色 */
+            color: #333333 !important; /* 強制文字為深灰色 */
+            border: 1.5px solid rgba(0, 229, 255, 0.4); 
             border-radius: 14px; font-size: 16px; 
             box-sizing: border-box; 
-            color-scheme: light; /* 強制選單內元件使用淺色模式渲染 */
+            color-scheme: light; /* 指示瀏覽器以淺色模式渲染 */
         }
         
-        /* 強制選單選項顯色，解決電腦 Chrome 渲染異常 */
+        /* 針對選單選項特別強化 */
         select option { 
             background-color: #ffffff !important; 
             color: #000000 !important; 
         }
-        optgroup {
-            background-color: #f0f0f0 !important;
-            color: #007cf0 !important;
-            font-weight: bold;
-        }
+        
+        /* 針對 Email 帳號輸入框特別修正其與下方背景的對比 */
+        #emailPrefix { background-color: #ffffff !important; color: #333 !important; }
+
+        optgroup { background-color: #f8f9fa !important; color: #007cf0 !important; font-weight: bold; }
         
         .flex-row { display: flex; gap: 15px; align-items: center; }
         .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; }
@@ -145,8 +145,16 @@
         <h3>一、 學員基本資料</h3>
         <div class="desktop-row">
             <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
-            <div class="form-group"><label>學員性別<span class="required">*</span></label><select name="gender" required><option value="" disabled selected>請選擇</option><option value="男">男</option><option value="女">女</option></select></div>
+            <div class="form-group">
+                <label>學員性別<span class="required">*</span></label>
+                <select name="gender" required>
+                    <option value="" disabled selected>請選擇</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
         </div>
+        
         <div class="desktop-row">
             <div class="form-group"><label>目前就讀學校<span class="required">*</span></label><input type="text" name="school" required placeholder="例如：三重國小"></div>
             <div class="form-group">
@@ -158,10 +166,20 @@
                 </select>
             </div>
         </div>
+
         <div class="desktop-row">
             <div class="form-group"><label>身分證字號<span class="required">*</span></label><input type="text" id="idInput" name="idNumber" maxlength="10" required placeholder="保險用，例：A123456789" style="text-transform: uppercase;"></div>
-            <div class="form-group"><label>第幾次報名</label><select name="frequency"><option value="" disabled selected>請選擇</option><option value="第一次">第一次</option><option value="第二次">第二次</option><option value="第三次以上">第三次以上</option></select></div>
+            <div class="form-group">
+                <label>第幾次報名</label>
+                <select name="frequency">
+                    <option value="" disabled selected>請選擇</option>
+                    <option value="第一次">第一次</option>
+                    <option value="第二次">第二次</option>
+                    <option value="第三次以上">第三次以上</option>
+                </select>
+            </div>
         </div>
+
         <div class="form-group">
             <label>出生年月日<span class="required">*</span></label>
             <div class="flex-row">
@@ -171,21 +189,37 @@
             </div>
             <input type="hidden" name="birthday" id="finalBirthday">
         </div>
+
         <div class="form-group"><label>學員健康狀況 (無則填無)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="藥物過敏、病史或特殊飲食需求..."></textarea></div>
 
         <h3>二、 家長聯繫與地址</h3>
         <div class="desktop-row">
             <div class="form-group"><label>家長姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
-            <div class="form-group"><label>與學員關係<span class="required">*</span></label><select name="relationship" required><option value="" disabled selected>請選擇</option><option value="父">父</option><option value="母">母</option><option value="祖父母">祖父母</option><option value="其他">其他</option></select></div>
+            <div class="form-group">
+                <label>與學員關係<span class="required">*</span></label>
+                <select name="relationship" required>
+                    <option value="" disabled selected>請選擇</option>
+                    <option value="父">父</option>
+                    <option value="母">母</option>
+                    <option value="祖父母">祖父母</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
         </div>
+
         <div class="desktop-row">
             <div class="form-group"><label>連絡電話 (市話)</label><input type="tel" id="telInput" name="tel" placeholder="02-XXXX-XXXX"></div>
             <div class="form-group"><label>緊急連絡手機<span class="required">*</span></label><input type="tel" id="mobileInput" name="mobile" required placeholder="09XX-XXX-XXX"></div>
         </div>
+
         <div class="form-group">
             <label>通訊地址<span class="required">*</span></label>
-            <div class="flex-row" style="margin-bottom: 12px;"><select id="citySelect" required><option value="" disabled selected>縣市</option></select><select id="districtSelect" required><option value="" disabled selected>鄉鎮區</option></select></div>
-            <input type="text" id="addressDetail" placeholder="街道、門牌、樓層" required><input type="hidden" name="address" id="finalAddress">
+            <div class="flex-row" style="margin-bottom: 12px;">
+                <select id="citySelect" required><option value="" disabled selected>縣市</option></select>
+                <select id="districtSelect" required><option value="" disabled selected>鄉鎮區</option></select>
+            </div>
+            <input type="text" id="addressDetail" placeholder="街道、門牌、樓層" required>
+            <input type="hidden" name="address" id="finalAddress">
         </div>
 
         <h3>三、 推薦來源與繳費</h3>
@@ -225,7 +259,15 @@
         <div id="bankDetailFields" class="sub-field-box" style="display:none;">
             <div class="desktop-row">
                 <div class="form-group"><label>轉帳後五碼 <span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5"></div>
-                <div class="form-group"><label>轉帳日期時間<span class="required">*</span></label><div class="flex-row"><select id="transMonth"><option value="" disabled selected>月</option></select><select id="transDay"><option value="" disabled selected>日</option></select><select id="transHour"><option value="" disabled selected>時</option></select><select id="transMin"><option value="" disabled selected>分</option></select></div></div>
+                <div class="form-group">
+                    <label>轉帳日期時間<span class="required">*</span></label>
+                    <div class="flex-row">
+                        <select id="transMonth"><option value="" disabled selected>月</option></select>
+                        <select id="transDay"><option value="" disabled selected>日</option></select>
+                        <select id="transHour"><option value="" disabled selected>時</option></select>
+                        <select id="transMin"><option value="" disabled selected>分</option></select>
+                    </div>
+                </div>
             </div>
             <input type="hidden" name="bankDateTime" id="finalBankDateTime">
         </div>
