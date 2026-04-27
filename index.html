@@ -116,14 +116,14 @@
         }
         .course-icon { font-size: 3.5em; margin-bottom: 15px; display: block; filter: drop-shadow(0 0 15px var(--primary)); }
         .course-name { color: var(--primary); font-weight: bold; font-size: 1.3em; margin-bottom: 15px; display: block; }
-        .course-detail { font-size: 0.9em; color: #b0b8c1; text-align: left; }
+        /* ✅ 修正：說明文字置中 */
+        .course-detail { font-size: 0.9em; color: #b0b8c1; text-align: center; }
         
         .starry-night { 
             grid-column: span 2; 
             background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(0, 229, 255, 0.1)); 
             border-color: var(--accent); 
         }
-        .starry-night .course-detail { text-align: center; font-size: 1em; }
 
         h3 {
             border-left: 8px solid var(--primary);
@@ -394,7 +394,7 @@
         <div class="form-group">
             <label>出生年月日<span class="required">*</span></label>
             <div class="flex-row">
-                <select id="birthYear" required><option value="" disabled selected>年份</option></select>
+                <select id="birthYear" required><option value="" disabled selected>請選擇</option></select>
                 <select id="birthMonth" required><option value="" disabled selected>月份</option></select>
                 <select id="birthDay" required><option value="" disabled selected>日期</option></select>
             </div>
@@ -467,7 +467,6 @@
 
         <div id="bankDetailFields" class="sub-field-box" style="display:none;">
             <div class="desktop-row">
-                <!-- ✅ 修正欄位標籤為「轉帳後五碼」 -->
                 <div class="form-group"><label>轉帳後五碼 <span class="required">*</span></label><input type="text" id="bankLast5" name="bankLast5" maxlength="5" placeholder="12345"></div>
                 <div class="form-group">
                     <label>轉帳日期時間<span class="required">*</span></label>
@@ -489,11 +488,11 @@
 </div>
 
 <script>
-    // ✅ 已修正您提供的 scriptURL (加入了遺漏的 'h')
+    // ✅ 已修正您提供的 scriptURL
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyZXIGcFXGB23REPkqFh_WhSxM-754Y8a8o_eVYJm-PL09MV2y3_1jYApio4Cl6YV2I/exec';
 
     const taiwanData = {
-        "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
+        "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖塊區", "七堵區"],
         "臺北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
         "新北市": ["板橋區", "三重區", "新莊區", "中和區", "永和區", "新店區", "土城區", "蘆洲區", "樹林區", "汐止區", "三峽區", "淡水區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區", "瑞芳區", "鶯歌區"],
         "桃園市": ["桃園區", "中壢區", "平鎮區", "八德區", "楊梅區", "蘆竹區", "大溪區", "龍潭區", "龜山區", "大園區", "觀音區", "新屋區", "復興區"],
@@ -531,7 +530,12 @@
 
     (function init() {
         const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
-        for (let i = 2005; i <= 2021; i++) y.add(new Option(`西元 ${i} 年`, i));
+        
+        for (let i = 2005; i <= 2021; i++) {
+            const rocYear = i - 1911;
+            y.add(new Option(`西元 ${i} 年 (民國 ${rocYear} 年)`, i));
+        }
+        
         for (let i = 1; i <= 12; i++) m.add(new Option(i + '月', String(i).padStart(2, '0')));
         for (let i = 1; i <= 31; i++) d.add(new Option(i + '日', String(i).padStart(2, '0')));
         
@@ -621,7 +625,7 @@
                 alert('錯誤：' + result.message);
             }
         } catch (error) { 
-            alert('系統連線異常，請檢查 scriptURL 是否正確設置。');
+            alert('提交失敗，請檢查網路狀態或 ScriptURL 設置。');
         } finally { 
             btn.disabled = false; btn.innerText = '立即傳送報名資料'; 
         }
