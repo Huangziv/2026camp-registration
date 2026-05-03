@@ -29,8 +29,17 @@
         }
 
         /* Banner 區塊 */
-        .banner-container { width: 100%; margin-bottom: 30px; overflow: hidden; border-radius: 20px; border: 1px solid var(--primary); box-shadow: var(--neon-glow); }
+        .banner-container { width: 100%; margin-bottom: 25px; overflow: hidden; border-radius: 20px; border: 1px solid var(--primary); box-shadow: var(--neon-glow); }
         .banner-img { width: 100%; display: block; transform: scale(1.05); transition: 0.5s; }
+
+        /* ✅ 海報區塊樣式 */
+        .poster-container { 
+            width: 100%; max-width: 600px; margin: 0 auto 30px; 
+            border-radius: 16px; border: 1px solid var(--primary); 
+            overflow: hidden; box-shadow: var(--neon-glow);
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .poster-img { width: 100%; display: block; height: auto; }
         
         /* 合併後的通知區塊 */
         .official-notice { 
@@ -40,7 +49,6 @@
         }
         .notice-line { margin: 8px 0; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
         
-        /* 粉絲專頁區塊 (現在位於課程資訊與課程亮點之間) */
         .fanpage-link { text-decoration: none; display: block; margin: 0 0 40px; }
         .fanpage-box { 
             background: linear-gradient(90deg, rgba(0, 124, 240, 0.15), rgba(0, 229, 255, 0.05)); 
@@ -49,7 +57,6 @@
         }
         .fanpage-box:hover { background: rgba(0, 229, 255, 0.15); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--neon-glow); }
 
-        /* 課程方塊 */
         .course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px; }
         .course-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
         .course-card:hover { border-color: var(--primary); background: rgba(0, 229, 255, 0.08); box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.1); }
@@ -57,7 +64,13 @@
         .course-name { color: var(--primary); font-weight: bold; font-size: 1.4em; margin-bottom: 12px; display: block; }
         .course-detail { font-size: 0.95em; color: #b0b8c1; line-height: 1.7; }
         .starry-night { grid-column: span 2; border: 1px solid rgba(255, 159, 67, 0.3); }
-        .starry-night:hover { border-color: var(--accent); }
+
+        /* 注意事項區塊樣式 */
+        .precautions-section { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; margin-bottom: 40px; }
+        .precautions-list { padding-left: 20px; margin: 0; color: #b0b8c1; font-size: 0.95em; }
+        .precautions-list li { margin-bottom: 12px; }
+        .precautions-list b { color: var(--primary); }
+        .refund-highlight { background: rgba(255, 71, 87, 0.1); border-left: 4px solid var(--error); padding: 10px 15px; border-radius: 8px; margin: 10px 0; color: #ffebed; }
 
         h3 { border-left: 6px solid var(--primary); background: linear-gradient(90deg, rgba(0, 229, 255, 0.1), transparent); padding: 12px 20px; margin: 50px 0 25px; color: var(--primary); font-size: 1.4em; border-radius: 0 8px 8px 0; }
         .desktop-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -116,8 +129,13 @@
 
 <div class="container">
     <!-- Banner 區塊 -->
-    <div class="banner-container"><img src="banner.jpg" alt="" class="banner-img" onerror="this.style.display='none'"></div>
+    <div class="banner-container"><img src="banner.jpg" alt="[2026未來之光橫幅]" class="banner-img" onerror="this.style.display='none'"></div>
     
+    <!-- ✅ 海報展示區塊 -->
+    <div class="poster-container">
+        <img src="messageImage_1777172622001.jpg" alt="[2026夏令營活動海報]" class="poster-img" onerror="this.parentElement.style.display='none'">
+    </div>
+
     <!-- 合併後的資訊區塊 (📍、✅、🗓️) -->
     <div class="official-notice">
         <div class="notice-line" style="color: var(--primary); font-weight: bold; font-size: 1.15em;">
@@ -131,12 +149,10 @@
         </div>
     </div>
 
-    <!-- ✅ 粉絲專頁區塊 (已移至課程資訊與課程亮點之間) -->
     <a href="https://www.facebook.com/TzuChiYouthSanchung/" target="_blank" class="fanpage-link">
         <div class="fanpage-box">🚀 <b>歡迎追蹤「三重慈少」粉絲專頁</b><br>獲取第一手活動動態與精彩照片！ (點擊開啟)</div>
     </a>
 
-    <!-- 課程亮點區塊 -->
     <div class="course-grid">
         <div class="course-card">
             <span class="course-icon">🚀</span>
@@ -165,7 +181,31 @@
         </div>
     </div>
 
+    <!-- 注意事項區塊 -->
+    <div class="precautions-section">
+        <div style="color: var(--primary); font-weight: bold; font-size: 1.2em; margin-bottom: 15px; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 10px;">⚠️ 注意事項</div>
+        <ol class="precautions-list">
+            <li>為響應<b>減紙化</b>，歡迎家長多加利用線上報名系統。</li>
+            <li>行前通知將於開營前 10 天寄發電子郵件，請務必留意收信。</li>
+            <li>本活動為期二天，<b>採不住宿形式</b>。全程皆有投保公共意外責任險，請家長放心。</li>
+            <li>營隊期間服裝規範：一律穿著<b>白色上衣、深色長褲、全包式鞋子</b>（以利戶外活動安全）。</li>
+            <li>歡迎臉書搜尋並追蹤粉絲團<b>「三重慈少」</b>，獲取營隊最新活動照片與消息。</li>
+            <li>
+                <b>退費標準說明：</b>
+                <div class="refund-highlight">
+                    • 5/30 (含) 前取消：退還繳費金額 9 折。<br>
+                    • 6/27 (含) 前取消：退還繳費金額 7 折。<br>
+                    • 6/28 (含) 後取消或當天未到：不予退費。<br>
+                    • 病假憑就醫證明：可退費 7 成。<br>
+                    • <small>※ 以上退費皆須扣除匯費。若遇天災等不可抗力因素導致營隊取消，則僅扣除匯費後全數退還。</small>
+                </div>
+            </li>
+            <li>活動期間若發生不可抗力因素，主辦單位保留變更或終止活動內容之權利。</li>
+        </ol>
+    </div>
+
     <form id="enrollmentForm">
+        <h3>一、 聯繫資訊</h3>
         <div class="form-group">
             <label>電子郵件 (Email)<span class="required">*</span></label>
             <div class="flex-row">
@@ -186,7 +226,7 @@
 
         <div class="form-group"><label>填表人姓名<span class="required">*</span></label><input type="text" name="submitter" required placeholder="請填寫填表人姓名"></div>
 
-        <h3>一、 學員基本資料</h3>
+        <h3>二、 學員基本資料</h3>
         <div class="desktop-row">
             <div class="form-group"><label>學員姓名<span class="required">*</span></label><input type="text" name="studentName" required></div>
             <div class="form-group"><label>學員性別<span class="required">*</span></label><select name="gender" required><option value="" disabled selected>請選擇</option><option value="男">男</option><option value="女">女</option></select></div>
@@ -224,7 +264,7 @@
 
         <div class="form-group"><label>學員健康狀況 (無則填無)<span class="required">*</span></label><textarea name="healthStatus" rows="2" required placeholder="藥物過敏、病史或特殊飲食需求..."></textarea></div>
 
-        <h3>二、 家長聯繫與地址</h3>
+        <h3>三、 家長聯繫與地址</h3>
         <div class="desktop-row">
             <div class="form-group"><label>家長姓名<span class="required">*</span></label><input type="text" name="parentName" required></div>
             <div class="form-group"><label>與學員關係<span class="required">*</span></label><select name="relationship" required><option value="" disabled selected>請選擇</option><option value="父">父</option><option value="母">母</option><option value="祖父母">祖父母</option><option value="其他">其他</option></select></div>
@@ -239,7 +279,7 @@
             <input type="text" id="addressDetail" placeholder="街道、門牌、樓層" required><input type="hidden" name="address" id="finalAddress">
         </div>
 
-        <h3>三、 推薦來源與繳費</h3>
+        <h3>四、 推薦來源與繳費</h3>
         <div class="form-group">
             <label>推薦報名來源 (可複選)<span class="required">*</span></label>
             <div class="checkbox-group">
